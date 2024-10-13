@@ -13,11 +13,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
-        <wildfly.version>33.0.2.Final</wildfly.version>
+        <version.wildfly>33.0.2.Final</version.wildfly>
         <junit.version>5.11.2</junit.version>
         <surefire.plugin.version>3.5.0</surefire.plugin.version>
         <compiler.plugin.version>3.11.0</compiler.plugin.version>
-        <wildfly.bootable.plugin.version>11.0.2.Final</wildfly.bootable.plugin.version>
+        <version.bootable.jar>11.0.2.Final</version.bootable.jar>
+		<plugin.fork.embedded>true</plugin.fork.embedded>
     </properties>
 
     <dependencyManagement>
@@ -25,7 +26,7 @@
             <dependency>
                 <groupId>org.wildfly.bom</groupId>
                 <artifactId>wildfly-ee-with-tools</artifactId>
-                <version>${wildfly.version}</version>
+                <version>${version.wildfly}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -74,13 +75,10 @@
 
     <build>
         <plugins>
-            <!-- Maven Surefire Plugin for running tests -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
             </plugin>
-
-            <!-- Maven Compiler Plugin -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler.plugin.version}</version>
@@ -93,18 +91,31 @@
     </build>
 
     <profiles>
-        <profile>
+		<profile>
             <id>wildfly-bootable-jar</id>
-            <build>
-                <plugins>
-                    <!-- WildFly Bootable JAR Plugin -->
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-bootable-maven-plugin</artifactId>
-                        <version>${wildfly.bootable.plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
+			<build>
+				<finalName>${project.artifactId}</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-jar-maven-plugin</artifactId>
+						<version>${version.bootable.jar}</version>
+						 <configuration>
+							<feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
+							<plugin-options>
+								<jboss-fork-embedded>${plugin.fork.embedded}</jboss-fork-embedded>
+							</plugin-options>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>package</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
         </profile>
     </profiles>
 </project>
