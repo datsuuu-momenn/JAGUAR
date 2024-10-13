@@ -12,6 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+		<wildfly.version>33.0.2.Final</wildfly.version>
 	</properties>
 
 
@@ -20,7 +21,7 @@
 			<dependency>
 				<groupId>org.wildfly.bom</groupId>
 				<artifactId>wildfly-ee-with-tools</artifactId>
-				<version>33.0.2.Final</version>
+				<version>${wildfly.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -72,6 +73,14 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.0</version>
 			</plugin>
+			<plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
