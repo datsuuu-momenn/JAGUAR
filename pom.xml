@@ -18,7 +18,6 @@
         <surefire.plugin.version>3.5.0</surefire.plugin.version>
         <compiler.plugin.version>3.11.0</compiler.plugin.version>
         <version.bootable.jar>11.0.2.Final</version.bootable.jar>
-		<plugin.fork.embedded>true</plugin.fork.embedded>
     </properties>
 
     <dependencyManagement>
@@ -46,11 +45,20 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+		</dependency>
         <dependency>
             <groupId>jakarta.ejb</groupId>
             <artifactId>jakarta.ejb-api</artifactId>
             <scope>provided</scope>
         </dependency>
+		<dependency>
+			<groupId>jakarta.faces</groupId>
+			<artifactId>jakarta.faces-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
         <dependency>
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
@@ -61,6 +69,12 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
+			<scope>provided</scope>
+		</dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -102,8 +116,14 @@
 						<version>${version.bootable.jar}</version>
 						 <configuration>
 							<feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
+							<layers>
+								<layer>ejb-lite</layer>
+								<layer>jpa</layer>
+								<layer>jsf</layer>
+								<layer>h2-driver</layer>
+							</layers>
 							<plugin-options>
-								<jboss-fork-embedded>${plugin.fork.embedded}</jboss-fork-embedded>
+								<jboss-fork-embedded>true</jboss-fork-embedded>
 							</plugin-options>
 						</configuration>
 						<executions>
