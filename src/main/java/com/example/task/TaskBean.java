@@ -9,6 +9,8 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @ViewScoped
@@ -16,32 +18,24 @@ public class TaskBean implements Serializable {
 
     private List<Task> allTasks;
 
-    @Inject
     private TaskController controller;
 
+    @Getter
+    @Setter
     private String title;
     
+    @Getter
+    @Setter
     private String id;
 
     @PostConstruct
-    private void postConstruct() {
+    public void postConstruct() {
         refresh();
     }
 
-    public String getTitle() {
-        return title;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    @Inject
+    public TaskBean(TaskController controller){
+        this.controller = controller;
     }
 
     public void delete() {
@@ -74,7 +68,7 @@ public class TaskBean implements Serializable {
         }
     }
 
-    private void refresh() {
+    public void refresh() {
         this.allTasks = controller.loadAll();
     }
 

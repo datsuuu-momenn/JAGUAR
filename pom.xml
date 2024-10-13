@@ -18,6 +18,8 @@
         <surefire.plugin.version>3.5.0</surefire.plugin.version>
         <compiler.plugin.version>3.11.0</compiler.plugin.version>
         <version.bootable.jar>11.0.2.Final</version.bootable.jar>
+		<version.database.rider>1.44.0</version.database.rider>
+		<mockito.version>5.14.1</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -80,6 +82,34 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+		<!-- Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- DatabaseRider -->
+		<dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-junit5</artifactId>
+			<version>${version.database.rider}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-core</artifactId>
+			<version>${version.database.rider}</version>
+			<scope>test</scope>
+		</dependency>
+
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
