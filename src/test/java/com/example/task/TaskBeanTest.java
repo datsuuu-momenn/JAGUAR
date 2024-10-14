@@ -1,16 +1,21 @@
 package com.example.task;
 
 import com.example.util.MockFacesContext;
+import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.junit5.DBUnitExtension;
 import com.github.database.rider.junit5.api.DBRider;
+import com.github.database.rider.junit5.util.EntityManagerProvider;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
@@ -20,15 +25,18 @@ import static org.mockito.Mockito.*;
  * TaskBean クラスの単体テスト。
  * JUnit 5 と DatabaseRider を使用。
  */
-@DBRider
+@ExtendWith(DBUnitExtension.class)
+@DataSet(cleanBefore = true)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ExtendWith(MockitoExtension.class) 
 class TaskBeanTest {
 
     @Mock
     private TaskController controller;
 
     private FacesContext facesContext;
+
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
 
     @InjectMocks
     private TaskBean taskBean;
@@ -41,6 +49,24 @@ class TaskBeanTest {
         // MockitoExtension によって @Mock と @InjectMocks が自動的に初期化される
         // FacesContext のモックを作成
         facesContext = MockFacesContext.mockFacesContext();
+
+        // データベース接続の初期化
+        entityManagerFactory = Persistence.createEntityManagerFactory("test-PU");
+        entityManager = entityManagerFactory.createEntityManager();
+        initializeDatabase();
+    }
+
+    /**
+     * データベースの初期化メソッド。
+     */
+    private void initializeDatabase() {
+        entityManager.getTransaction().begin();
+        // テーブル作成などのスクリプトをここに追加できます
+        entityManager.createNativeQuery("CREATE TABLE IF NOT EXISTS tasks (\r\n" + //
+                        "    id BIGINT AUTO_INCREMENT PRIMARY KEY,\r\n" + //
+                        "    task VARCHAR(255) NOT NULL\r\n" + //
+                        ");").executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     /**
@@ -54,7 +80,7 @@ class TaskBeanTest {
     /**
      * TaskBean の add() メソッドをテストする。
      */
-    @Test
+    @DBRider
     @DataSet("datasets/empty-tasks.yml") // テスト前に tasks テーブルを空にする
     void testAddTask() {
         // Arrange
@@ -81,7 +107,7 @@ class TaskBeanTest {
     /**
      * TaskBean の delete() メソッドをテストする。
      */
-    @Test
+    @DBRider
     @DataSet("datasets/existing-tasks.yml") // テスト前に既存のタスクをロード
     void testDeleteTask() {
         // Arrange
@@ -108,7 +134,7 @@ class TaskBeanTest {
     /**
      * TaskBean の update() メソッドをテストする。
      */
-    @Test
+    @DBRider
     @DataSet("datasets/existing-tasks.yml") // テスト前に既存のタスクをロード
     void testUpdateTask() {
         // Arrange

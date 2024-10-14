@@ -1,0 +1,16 @@
+cacheConnection: true
+cacheTableNames: true
+leakHunter: false
+properties:
+  batchedStatements:  false
+  qualifiedTableNames: false
+  caseSensitiveTableNames: false
+  batchSize: 100
+  fetchSize: 100
+  allowEmptyFields: false
+  escapePattern:
+connectionConfig:
+  driver: org.h2.Driver
+  url: jdbc:h2:mem:testdb
+  user: sa
+  password: 

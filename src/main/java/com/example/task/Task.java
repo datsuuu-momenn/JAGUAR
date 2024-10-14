@@ -4,7 +4,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -19,6 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Task {
+
     public static final String FIND_ALL = "demo.jsf.Task.ALL";
 
     @Id
