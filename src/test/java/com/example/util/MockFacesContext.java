@@ -15,9 +15,14 @@ import jakarta.faces.context.ResponseWriter;
 import jakarta.faces.lifecycle.Lifecycle;
 import jakarta.faces.render.RenderKit;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MockFacesContext extends FacesContext {
 
     private ExternalContext externalContext;
+
+    private final Map<String, FacesMessage> messages = new HashMap<>();
 
     public MockFacesContext() {
         externalContext = Mockito.mock(ExternalContext.class);
@@ -58,10 +63,10 @@ public class MockFacesContext extends FacesContext {
         throw new UnsupportedOperationException("Unimplemented method 'getMaximumSeverity'");
     }
 
+    // 追加するメッセージを保存するメソッド
     @Override
-    public Iterator<FacesMessage> getMessages() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMessages'");
+    public void addMessage(String clientId, FacesMessage message) {
+        messages.put(clientId, message);
     }
 
     @Override
@@ -125,16 +130,9 @@ public class MockFacesContext extends FacesContext {
     }
 
     @Override
-    public void addMessage(String clientId, FacesMessage message) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addMessage'");
-    }
-
-    @Override
-    public void release() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'release'");
-    }
+public void release() {
+    // 何も処理しない
+}
 
     @Override
     public void renderResponse() {
@@ -146,5 +144,11 @@ public class MockFacesContext extends FacesContext {
     public void responseComplete() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'responseComplete'");
+    }
+
+    @Override
+    public Iterator<FacesMessage> getMessages() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMessages'");
     }
 }

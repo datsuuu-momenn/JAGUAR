@@ -83,6 +83,11 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>4.1.1</version>
+        </dependency>
 
         <!-- Junit5 -->
         <dependency>
