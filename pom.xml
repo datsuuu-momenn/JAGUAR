@@ -13,13 +13,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
-        <version.wildfly>33.0.2.Final</version.wildfly>
-        <junit.version>5.11.2</junit.version>
-        <surefire.plugin.version>3.5.0</surefire.plugin.version>
-        <compiler.plugin.version>3.11.0</compiler.plugin.version>
+
         <version.bootable.jar>11.0.2.Final</version.bootable.jar>
+        <version.compiler.plugin>3.11.0</version.compiler.plugin>
 		<version.database.rider>1.44.0</version.database.rider>
-		<mockito.version>5.14.1</mockito.version>
+        <version.junit>5.11.2</version.junit>
+        <version.lombok>1.18.34</version.lombok>
+		<version.mockito>5.14.1</version.mockito>
+        <version.surefire.plugin>3.5.0</version.surefire.plugin>
+        <version.wildfly>33.0.2.Final</version.wildfly>
+
     </properties>
 
     <dependencyManagement>
@@ -34,7 +37,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>${junit.version}</version>
+                <version>${version.junit}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -71,28 +74,36 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.34</version>
-			<scope>provided</scope>
-		</dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${version.lombok}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Mockito -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>${mockito.version}</version>
+			<version>${version.mockito}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>${mockito.version}</version>
+			<version>${version.mockito}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -109,23 +120,24 @@
 			<version>${version.database.rider}</version>
 			<scope>test</scope>
 		</dependency>
-
         <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <scope>compile</scope>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-cdi</artifactId>
+            <version>${version.database.rider}</version>
+            <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.plugin.version}</version>
+                <version>${version.surefire.plugin}</version>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler.plugin.version}</version>
+                <version>${version.compiler.plugin}</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.source}</target>
