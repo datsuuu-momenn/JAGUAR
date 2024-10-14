@@ -25,16 +25,6 @@ public class MockFacesContext extends FacesContext {
         externalContext = Mockito.mock(ExternalContext.class);
     }
 
-    private static final Release RELEASE = new Release();
-
-    private static class Release implements Answer<Void> {
-        @Override
-        public Void answer(InvocationOnMock invocation) throws Throwable {
-            setCurrentInstance(null);
-            return null;
-        }
-    }
-
     public static FacesContext mockFacesContext() {
         MockFacesContext context = new MockFacesContext();
         setCurrentInstance(context);
