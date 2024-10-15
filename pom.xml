@@ -22,6 +22,7 @@
 		<version.mockito>5.14.1</version.mockito>
         <version.surefire.plugin>3.5.0</version.surefire.plugin>
         <version.wildfly>33.0.2.Final</version.wildfly>
+        <version.deltaspike>2.0.0</version.deltaspike>
 
     </properties>
 
@@ -135,6 +136,41 @@
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-junit5</artifactId>
             <version>4.0.3.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-test-control-module-api</artifactId>
+            <version>${version.deltaspike}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <version>${version.deltaspike}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-test-control-module-impl</artifactId>
+            <version>${version.deltaspike}</version>
+            <scope>test</scope>
+        </dependency>
+
+         <dependency>
+            <groupId>org.apache.deltaspike.cdictrl</groupId>
+            <artifactId>deltaspike-cdictrl-owb</artifactId>
+            <version>${version.deltaspike}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.openwebbeans</groupId>
+            <artifactId>openwebbeans-impl</artifactId>
+            <version>4.0.2</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

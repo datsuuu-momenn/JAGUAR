@@ -54,6 +54,8 @@ public class TaskBean implements Serializable {
             refresh();
             addMessage("Task with title " + title + " created");
         } catch (Exception e) {
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuu");
+            System.out.println(e.getMessage());
             addMessage("Error adding a new Task. " + e.getLocalizedMessage());
         }
     }
