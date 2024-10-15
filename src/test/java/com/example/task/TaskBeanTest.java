@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,7 +52,7 @@ class TaskBeanTest {
      */
     @BeforeEach
     void setUp() {
-        
+
         // FacesContext のモックを作成
         facesContext = MockFacesContext.mock();
 
@@ -97,8 +98,11 @@ class TaskBeanTest {
 
         // Assert
         verify(controller, times(1)).add(taskTitle);
+        
+        // Verify message in FacesContext
         verify(facesContext).addMessage(eq(null), argThat(message -> 
-            message.getSummary().equals("Task with title " + taskTitle + " created")));
+            message.getSummary().equals("Task with title " + taskTitle + " created")
+        ));
     }
 
     /**
@@ -110,12 +114,17 @@ class TaskBeanTest {
         // Arrange
         String taskId = "1";
         taskBean.setId(taskId);
-
+    
         // Act
         taskBean.delete();
-
+    
         // Assert
         verify(controller, times(1)).delete(1L);
+    
+        // Verify FacesContext message
+        verify(facesContext).addMessage(eq(null), argThat(message -> 
+            message.getSummary().equals("Task " + taskId + " deleted")
+        ));
     }
 
     /**
@@ -129,12 +138,17 @@ class TaskBeanTest {
         String updatedTitle = "更新されたタスクタイトル";
         taskBean.setId(taskId);
         taskBean.setTitle(updatedTitle);
-
+    
         // Act
         taskBean.update();
-
+    
         // Assert
-        verify(controller, times(1)).update(1L, taskBean.getTitle());
+        verify(controller, times(1)).update(1L, updatedTitle);
+    
+        // Verify FacesContext message
+        verify(facesContext).addMessage(eq(null), argThat(message -> 
+            message.getSummary().equals("Task " + taskId + " updated")
+        ));
     }
 }
 
