@@ -51,10 +51,9 @@ class TaskBeanTest {
      */
     @BeforeEach
     void setUp() {
-
-        // MockitoExtension によって @Mock と @InjectMocks が自動的に初期化される
+        
         // FacesContext のモックを作成
-        facesContext = MockFacesContext.mockFacesContext();
+        facesContext = MockFacesContext.mock();
 
         // データベース接続の初期化
         entityManagerFactory = Persistence.createEntityManagerFactory("test-PU");
@@ -80,10 +79,7 @@ class TaskBeanTest {
      */
     @AfterEach
     void tearDown() {
-        // FacesContextのreleaseメソッドを呼び出す際にエラーが出ないように修正
-        if (facesContext instanceof MockFacesContext) {
-            ((MockFacesContext) facesContext).release();
-        }
+        facesContext.release();
     }
 
     /**

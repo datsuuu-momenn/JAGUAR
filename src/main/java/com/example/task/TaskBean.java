@@ -42,9 +42,9 @@ public class TaskBean implements Serializable {
         try {
             controller.delete(Long.valueOf(id));
             refresh();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task " + id + " deleted"));
+            addMessage("Task " + id + " deleted");
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error deleting the Task by Id. " + e.getLocalizedMessage()));
+            addMessage("Error deleting the Task by Id. " + e.getLocalizedMessage());
         }
     }
 
@@ -52,9 +52,9 @@ public class TaskBean implements Serializable {
         try {
             controller.add(title);
             refresh();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task with title " + title + " created"));
+            addMessage("Task with title " + title + " created");
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error adding a new Task. " + e.getLocalizedMessage()));
+            addMessage("Error adding a new Task. " + e.getLocalizedMessage());
         }
     }
 
@@ -62,9 +62,9 @@ public class TaskBean implements Serializable {
         try {
             controller.update(Long.valueOf(id), title);
             refresh();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Task " + id + " updated"));
+            addMessage("Task " + id + " updated");
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error updating the Task by Id. " + e.getLocalizedMessage()));
+            addMessage("Error updating the Task by Id. " + e.getLocalizedMessage());
         }
     }
 
@@ -74,5 +74,9 @@ public class TaskBean implements Serializable {
 
     public List<Task> getAllTasks() {
         return allTasks;
+    }
+
+    private void addMessage(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
     }
 }
