@@ -125,52 +125,12 @@
 			<version>${version.database.rider}</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.github.database-rider</groupId>
-            <artifactId>rider-cdi</artifactId>
-            <version>${version.database.rider}</version>
-            <scope>test</scope>
-        </dependency>
 
+        <!-- weld-testing -->
         <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-junit5</artifactId>
             <version>4.0.3.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-test-control-module-api</artifactId>
-            <version>${version.deltaspike}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-impl</artifactId>
-            <version>${version.deltaspike}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-test-control-module-impl</artifactId>
-            <version>${version.deltaspike}</version>
-            <scope>test</scope>
-        </dependency>
-
-         <dependency>
-            <groupId>org.apache.deltaspike.cdictrl</groupId>
-            <artifactId>deltaspike-cdictrl-owb</artifactId>
-            <version>${version.deltaspike}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.openwebbeans</groupId>
-            <artifactId>openwebbeans-impl</artifactId>
-            <version>4.0.2</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>

@@ -13,6 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import org.jboss.weld.junit5.WeldInitiator;
 import org.jboss.weld.junit5.WeldJunit5Extension;
@@ -30,7 +31,7 @@ import static org.mockito.Mockito.*;
  * TaskBean の単体テストクラス.
  */
 @ExtendWith({WeldJunit5Extension.class, DBUnitExtension.class})
-@DataSet(cleanBefore = true)
+@DataSet(cleanBefore = true, transactional = true)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TaskBeanWithRealControllerTest {
     

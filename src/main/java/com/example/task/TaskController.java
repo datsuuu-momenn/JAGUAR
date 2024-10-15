@@ -10,7 +10,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @RequestScoped
-@Transactional
 public class TaskController {
 
     @PersistenceContext
