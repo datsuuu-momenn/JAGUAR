@@ -8,6 +8,8 @@
 
 * [weld-testing(Junit5)](https://github.com/weld/weld-testing/tree/master/junit5)
 
+* [Transaction管理](https://in.relation.to/2019/01/23/testing-cdi-beans-and-persistence-layer-under-java-se/)
+
 ## 環境
 
 <pre>
