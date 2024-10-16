@@ -46,7 +46,7 @@ class TaskBeanTest {
     // WeldInitiatorを使ってCDIコンテナを初期化
     @WeldSetup
     public WeldInitiator weld = WeldInitiator.from(TaskBean.class, TaskController.class)
-             .activate(RequestScoped.class).setPersistenceContextFactory(getPCFactory()).build();
+             .activate(RequestScoped.class).setPersistenceContextFactory(getPUFactory()).build();
     
     @PersistenceContext
     private EntityManager entityManager;
@@ -153,7 +153,7 @@ class TaskBeanTest {
     /**
      * @return EntityManager を生成するファクトリ関数.
      */
-    static Function<InjectionPoint, Object> getPCFactory() {
+    static Function<InjectionPoint, Object> getPUFactory() {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("test-PU");
         
