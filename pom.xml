@@ -23,6 +23,9 @@
         <version.surefire.plugin>3.5.0</version.surefire.plugin>
         <version.wildfly>33.0.2.Final</version.wildfly>
         <version.deltaspike>2.0.0</version.deltaspike>
+        <version.weld>5.0.0.Beta1</version.weld>
+        <version.narayana>7.0.2.Final</version.narayana>
+
 
     </properties>
 
@@ -51,7 +54,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime,test</scope>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- JakartaEE -->
@@ -75,19 +78,24 @@
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+        </dependency>
 
         <!-- Junit5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
+
 
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <scope>compile,test</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Lombok -->
@@ -117,20 +125,50 @@
 			<groupId>com.github.database-rider</groupId>
 			<artifactId>rider-junit5</artifactId>
 			<version>${version.database.rider}</version>
+            <classifier>jakarta</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.database-rider</groupId>
 			<artifactId>rider-core</artifactId>
 			<version>${version.database.rider}</version>
+            <classifier>jakarta</classifier>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-cdi</artifactId>
+			<version>${version.database.rider}</version>
+            <classifier>jakarta</classifier>
 			<scope>test</scope>
 		</dependency>
 
         <!-- weld-testing -->
         <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>${version.weld}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-junit5</artifactId>
-            <version>4.0.3.Final</version>
+            <version>${version.weld}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- narayana -->
+        <dependency>
+            <groupId>org.jboss.narayana.jta</groupId>
+            <artifactId>cdi</artifactId>
+            <version>${version.narayana}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.narayana.jta</groupId>
+            <artifactId>narayana-jta</artifactId>
+            <version>${version.narayana}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

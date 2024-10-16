@@ -10,6 +10,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @RequestScoped
+@Transactional
 public class TaskController {
 
     @PersistenceContext
@@ -25,33 +26,31 @@ public class TaskController {
     public Task add(String title) {
         final Task newTask = new Task();
         newTask.setTitle(title);
-        
-        // トランザクション開始
-        em.getTransaction().begin();
+
+        try{
         
         this.em.persist(newTask);
         this.em.flush(); // 確実にデータベースに書き込み
         this.em.refresh(newTask); // 最新の状態を取得
-        
-        em.getTransaction().commit(); // トランザクションコミット
+
+        }catch(Exception e){
+            System.out.println("aaa");
+            System.out.println(e.getMessage());
+        }
         
         return newTask;
     }
 
     public Task delete(Long id) {
 
-        em.getTransaction().begin();
-
         // IDが存在するか確認
         Task task = em.find(Task.class, id);
         if (task == null) {
-            em.getTransaction().rollback();
             throw new EJBException("指定されたIDのタスクが見つかりません: " + id);
         }
         
         Task ref = this.em.getReference(Task.class, id);
         this.em.remove(ref);
-        em.getTransaction().commit(); // トランザクションコミット
 
         return ref;
         

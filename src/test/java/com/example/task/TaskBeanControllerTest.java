@@ -1,9 +1,12 @@
 package com.example.task;
 
 import com.example.util.MockFacesContext;
+import com.github.database.rider.cdi.DBUnitInterceptorImpl;
+import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.DBUnitExtension;
 import com.github.database.rider.junit5.api.DBRider;
+import com.github.database.rider.junit5.util.EntityManagerProvider;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.InjectionPoint;
@@ -13,11 +16,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 
 import org.jboss.weld.junit5.WeldInitiator;
 import org.jboss.weld.junit5.WeldJunit5Extension;
 import org.jboss.weld.junit5.WeldSetup;
+import org.jboss.weld.junit5.auto.AddEnabledInterceptors;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -25,15 +28,25 @@ import java.util.List;
 import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 /**
  * TaskBean の単体テストクラス.
  */
-@ExtendWith({WeldJunit5Extension.class, DBUnitExtension.class})
-@DataSet(cleanBefore = true, transactional = true)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class TaskBeanWithRealControllerTest {
+@ExtendWith({DBUnitExtension.class, WeldJunit5Extension.class})
+@AddEnabledInterceptors(DBUnitInterceptorImpl.class)
+class TaskBeanControllerTest {
+
+    @SuppressWarnings({ "static-access", "unused" })
+    private ConnectionHolder connectionHolder = () -> 
+            EntityManagerProvider.instance("test-PU").clear().connection();
+
+    // WeldInitiatorを使ってCDIコンテナを初期化
+    @WeldSetup
+    public WeldInitiator weld = WeldInitiator.from(TaskBean.class, TaskController.class)
+             .activate(RequestScoped.class).setPersistenceContextFactory(getPCFactory()).build();
     
     @PersistenceContext
     private EntityManager entityManager;
@@ -44,10 +57,6 @@ class TaskBeanWithRealControllerTest {
     private FacesContext facesContext;
 
     private TaskBean taskBean;
-
-    // WeldInitiatorを使ってCDIコンテナを初期化
-    @WeldSetup
-    public WeldInitiator weld = WeldInitiator.from(TaskController.class, TaskBean.class).activate(RequestScoped.class).setPersistenceContextFactory(getPCFactory()).build();
 
     @BeforeEach
     void setUp() {
@@ -61,6 +70,7 @@ class TaskBeanWithRealControllerTest {
 
     @AfterEach
     void tearDown() {
+
         facesContext.release();
     }
 
@@ -68,7 +78,7 @@ class TaskBeanWithRealControllerTest {
      * TaskBean の add() メソッドのテスト.
      */
     @DBRider
-    @DataSet("datasets/empty-tasks.yml") // テスト前に tasks テーブルを空にする
+    @DataSet(value = "datasets/empty-tasks.yml", transactional = true) // テスト前に tasks テーブルを空にする
     void testAddTask() {
 
         // Arrange
@@ -90,10 +100,10 @@ class TaskBeanWithRealControllerTest {
     }
 
     /**
-     * TaskBean の delete() メソッドのテスト.
+     * TaskBean の delete() メソッドのテスト. 
      */
     @DBRider
-    @DataSet("datasets/existing-tasks.yml") // テスト前に既存のタスクをロード
+    @DataSet(value = "datasets/existing-tasks.yml", transactional = true) // テスト前に既存のタスクをロード
     void testDeleteTask() {
         // Arrange
         String taskId = "1";
@@ -118,7 +128,7 @@ class TaskBeanWithRealControllerTest {
      * TaskBean の update() メソッドのテスト.
      */
     @DBRider
-    @DataSet("datasets/existing-tasks.yml") // テスト前に既存のタスクをロード
+    @DataSet(value = "datasets/existing-tasks.yml", transactional = true)
     void testUpdateTask() {
         // Arrange
         String taskId = "1";
@@ -149,6 +159,7 @@ class TaskBeanWithRealControllerTest {
         
         return ip -> {
             EntityManager em = emf.createEntityManager();
+            
             return em; 
         };
     }
