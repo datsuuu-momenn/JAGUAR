@@ -33,11 +33,11 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 /**
- * TaskBean の単体テストクラス.
+ * TaskBean のテストクラス.
  */
 @ExtendWith({DBUnitExtension.class, WeldJunit5Extension.class})
 @AddEnabledInterceptors(DBUnitInterceptorImpl.class)
-class TaskBeanControllerTest {
+class TaskBeanTest {
 
     @SuppressWarnings({ "static-access", "unused" })
     private ConnectionHolder connectionHolder = () -> 

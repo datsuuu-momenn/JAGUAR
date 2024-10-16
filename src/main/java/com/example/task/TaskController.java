@@ -26,17 +26,10 @@ public class TaskController {
     public Task add(String title) {
         final Task newTask = new Task();
         newTask.setTitle(title);
-
-        try{
         
         this.em.persist(newTask);
-        this.em.flush(); // 確実にデータベースに書き込み
-        this.em.refresh(newTask); // 最新の状態を取得
-
-        }catch(Exception e){
-            System.out.println("aaa");
-            System.out.println(e.getMessage());
-        }
+        this.em.flush();
+        this.em.refresh(newTask);
         
         return newTask;
     }

@@ -9,17 +9,6 @@ import jakarta.transaction.UserTransaction;
 import org.jboss.logging.Logger;
 import org.jboss.weld.transaction.spi.TransactionServices;
 
-/**
- * SPI extension point of the Weld for integrate with transaction manager.
- * If the interface is implemented by the deployment the Weld stops to show
- * info message:
- * <p>
- * <code>
- *  WELD-000101: Transactional services not available. Injection of @Inject UserTransaction not available.
- *    Transactional observers will be invoked synchronously.
- * </code>
- * </p>
- */
 public class CDITransactionServices implements TransactionServices {
     private static final Logger LOG = Logger.getLogger(CDITransactionServices.class);
 

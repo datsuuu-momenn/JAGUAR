@@ -8,7 +8,9 @@
 
 * [weld-testing(Junit5)](https://github.com/weld/weld-testing/tree/master/junit5)
 
-* [Transaction管理](https://in.relation.to/2019/01/23/testing-cdi-beans-and-persistence-layer-under-java-se/)
+* [Transaction管理1](https://in.relation.to/2019/01/23/testing-cdi-beans-and-persistence-layer-under-java-se/)
+
+* [Transaction管理2](https://stackoverflow.com/questions/59776325/weld-and-junit-no-transactionmanager)
 
 ## 環境
 
