@@ -88,13 +88,12 @@ class TaskBeanTest {
         // Act
         taskBean.add();
 
-        // Assert: Check if the task was correctly added to the database
+        // Assert
         List<Task> allTasks = taskBean.getAllTasks();
         assertNotNull(allTasks);
         assertEquals(1, allTasks.size());
         assertEquals(taskTitle, allTasks.get(0).getTitle());
 
-        // Verify FacesContext message
         verify(facesContext).addMessage(eq(null), argThat(message ->
                 message.getSummary().equals("Task with title " + taskTitle + " created")));
     }
@@ -105,6 +104,7 @@ class TaskBeanTest {
     @DBRider
     @DataSet(value = "datasets/existing-tasks.yml", transactional = true) // テスト前に既存のタスクをロード
     void testDeleteTask() {
+
         // Arrange
         String taskId = "1";
         taskBean.setId(taskId);
@@ -112,14 +112,13 @@ class TaskBeanTest {
         // Act
         taskBean.delete();
 
-        // Assert: Check if the task was correctly deleted from the database
+        // Assert
         List<Task> allTasks = taskBean.getAllTasks();
         
         assertNotNull(allTasks);
         assertEquals(1, allTasks.size());
         assertEquals("初期タスク2", allTasks.get(0).getTitle());
 
-        // Verify FacesContext message
         verify(facesContext).addMessage(eq(null), argThat(message ->
                 message.getSummary().equals("Task " + taskId + " deleted")));
     }
@@ -139,13 +138,12 @@ class TaskBeanTest {
         // Act
         taskBean.update();
 
-        // Assert: Check if the task was correctly updated in the database
+        // Assert
         List<Task> allTasks = taskBean.getAllTasks();
         assertNotNull(allTasks);
         assertEquals(2, allTasks.size());
         assertEquals(updatedTitle, allTasks.get(0).getTitle());
 
-        // Verify FacesContext message
         verify(facesContext).addMessage(eq(null), argThat(message ->
                 message.getSummary().equals("Task " + taskId + " updated")));
     }
