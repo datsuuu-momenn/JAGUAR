@@ -15,7 +15,7 @@
         <maven.compiler.source>17</maven.compiler.source>
 
         <version.bootable.jar>11.0.2.Final</version.bootable.jar>
-        <version.compiler.plugin>3.11.0</version.compiler.plugin>
+        <version.compiler.plugin>3.10.1</version.compiler.plugin>
 		<version.database.rider>1.44.0</version.database.rider>
         <version.junit>5.11.2</version.junit>
         <version.lombok>1.18.34</version.lombok>
@@ -187,6 +187,26 @@
                     <target>${maven.compiler.source}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>4.2.2.Final</version>
+                <configuration>
+                    <jboss-home>E:\wildfly-33.0.2.Final</jboss-home>
+                    <runtime-name>ROOT.war</runtime-name>
+                    <webExtensions>
+                        <webExtension>.properties</webExtension>
+                    </webExtensions>
+                    <add-user>
+                            <users>
+                                <user>
+                                    <username>admin</username>
+                                    <password>admin</password>
+                                </user>
+                            </users>
+                            </add-user>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -202,7 +222,7 @@
 						<version>${version.bootable.jar}</version>
 						 <configuration>
 							<feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
-							<layers>
+                            <layers>
 								<layer>ejb-lite</layer>
 								<layer>jpa</layer>
 								<layer>jsf</layer>

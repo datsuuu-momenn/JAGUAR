@@ -7,56 +7,192 @@
 <h:head>
     <title>JSF Bootable Jar example</title>
     <h:outputStylesheet library="css" name="styles.css"/>
+    <h:outputScript library="js" name="script.js"/>
 </h:head>
 <h:body>
     <div class="main">
+        <h1><h:outputText value="任务管理系统plus"/></h1>
+        
         <h:form id="form">
-            <div>
-                <h:outputLabel value="Title: "/>
-                <h:inputText id="inputTitle" value="#{taskBean.title}"/>
-                <h:commandButton id="add" value="Add">
-                    <f:ajax execute="inputTitle" render="outputGroup" listener="#{taskBean.add}"/>
-                </h:commandButton>
-            </div>
-            <div>
-                <h:outputLabel value="Task Id: "/>
-                <h:inputText id="delTitle" value="#{taskBean.id}">
-                    <f:validateLongRange minimum="1" maximum="99"/>
-                </h:inputText>
-                <h:commandButton id="del" value="Delete">
-                    <f:ajax execute="delTitle" render="outputGroup" listener="#{taskBean.delete}"/>
-                </h:commandButton>
-            </div>
-            <div>
-                <h:outputLabel value="Task Id: "/>
-                <h:inputText id="updateId" value="#{taskBean.id}">
-                    <f:validateLongRange minimum="1" maximum="99"/>
-                </h:inputText>
-                <br/>
-                <h:outputLabel value="Title: "/>
-                <h:inputText id="updateTitle" value="#{taskBean.title}"/>
-                <h:commandButton id="update" value="Update">
-                    <f:ajax execute="updateId updateTitle" render="outputGroup"
-                            listener="#{taskBean.update}"/>
-                </h:commandButton>
-            </div>
+            <!-- 添加任务部分 -->
+            <h:panelGroup layout="block" styleClass="form-section">
+                <h2><h:outputText value="添加新任务"/></h2>
+                <div>
+                    <h:outputLabel for="inputTitle" value="标题: " styleClass="form-label"/>
+                    <h:inputText id="inputTitle" value="#{taskBean.title}" 
+                               required="true" 
+                               requiredMessage="请输入标题"
+                               validatorMessage="标题长度必须在3-50个字符之间">
+                        <f:validateLength minimum="3" maximum="50"/>
+                    </h:inputText>
+                    <h:message for="inputTitle" styleClass="error-message"/>
+                    
+                    <h:commandButton id="add" value="添加">
+                        <f:ajax execute="inputTitle" render="outputGroup messages" listener="#{taskBean.add}"/>
+                    </h:commandButton>
+                </div>
+            </h:panelGroup>
+
+            <!-- 删除任务部分 -->
+            <h:panelGroup layout="block" styleClass="form-section">
+                <h2><h:outputText value="删除任务"/></h2>
+                <div>
+                    <h:outputLabel for="delTitle" value="任务ID: " styleClass="form-label"/>
+                    <h:inputText id="delTitle" value="#{taskBean.id}">
+                        <f:validateLongRange minimum="1" maximum="99"/>
+                    </h:inputText>
+                    <h:message for="delTitle" styleClass="error-message"/>
+                    
+                    <h:commandButton id="del" value="删除">
+                        <f:ajax execute="delTitle" render="outputGroup messages" listener="#{taskBean.delete}"/>
+                    </h:commandButton>
+                </div>
+            </h:panelGroup>
+
+            <!-- 更新任务部分 -->
+            <h:panelGroup layout="block" styleClass="form-section">
+                <h2><h:outputText value="更新任务"/></h2>
+                <div>
+                    <h:outputLabel for="updateId" value="任务ID: " styleClass="form-label"/>
+                    <h:inputText id="updateId" value="#{taskBean.id}">
+                        <f:validateLongRange minimum="1" maximum="99"/>
+                    </h:inputText>
+                    <h:message for="updateId" styleClass="error-message"/>
+                    <br/>
+                    
+                    <h:outputLabel for="updateTitle" value="新标题: " styleClass="form-label"/>
+                    <h:inputText id="updateTitle" value="#{taskBean.title}"
+                               required="true"
+                               requiredMessage="请输入新标题">
+                        <f:validateLength minimum="3" maximum="50"/>
+                    </h:inputText>
+                    <h:message for="updateTitle" styleClass="error-message"/>
+                    
+                    <h:commandButton id="update" value="更新">
+                        <f:ajax execute="updateId updateTitle" render="outputGroup messages"
+                                listener="#{taskBean.update}"/>
+                    </h:commandButton>
+                </div>
+            </h:panelGroup>
         </h:form>
 
+        <!-- 任务列表显示部分 -->
         <h:panelGroup id="outputGroup" layout="block">
-            <h:dataTable id="taskTable" value="#{taskBean.allTasks}" var="row" title="Task List" styleClass="results">
+            <h2><h:outputText value="任务列表"/></h2>
+            <h:dataTable id="taskTable" value="#{taskBean.allTasks}" var="row" 
+                        title="任务列表" styleClass="results">
                 <h:column>
-                    <f:facet name="header">ID</f:facet>
-                    #{row.id}
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{row.id}"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Title</f:facet>
-                    #{row.title}
+                    <f:facet name="header">
+                        <h:outputText value="标题"/>
+                    </f:facet>
+                    <h:outputText value="#{row.title}"/>
                 </h:column>
             </h:dataTable>
 
-            <h:messages id="messages"/>
+            <h:messages id="messages" globalOnly="true" styleClass="messages"/>
         </h:panelGroup>
+    </div>
+        
+    
+    <div class="seleniumMain">
+    <!-- seleniumテスト用ページ-->
+        <h:form id="seleniumForm">
+            <table id="seleniumTable">
+                <tbody id="seleniumTableBody">
+                    <tr>
+                        <td>
+                            <h1>seleniumテスト用ページ</h1>
+                        </td>
+                        <td>
+                            <h2>開発作業支援システム</h2>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <!-- 下拉按钮，鼠标变为默认指针 -->
+                                <div id="myDropdown" class="dropbtn" style="cursor: default;" 
+                                onclick="ClickDropdownFuction()" 
+                                onmousemove="hoverDropdownFunction()">【下拉按钮】鼠标变为默认指针 </div><br/>
+                                <!-- 下拉内容容器，鼠标变为手型指针 -->
+                                <div class="dropdown-content" style="cursor: pointer;">【下拉内容容器】鼠标变为手型指针<br/>  
+                                    <!-- 下拉内容 -->
+                                    <a id="dropOption1" onclick="ClickLink1()">点击触发ClickLink1()函数</a><br/>
+                                    <a id="dropOption2" onclick="ClickLink2()">点击触发ClickLink2()函数</a><br/>
+                                    <a id="dropOption3" onclick="ClickLink3()">点击触发ClickLink3()函数</a><br/>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <!-- 「Automation Practice」は、自動化の実践や演習 -->
+                            <h3>オートメーションプラクティス</h3>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td>Text input Field:</td>
+                        <td>
+                            <!-- 输入事件处理示例 -->
+                            <div class="input-section">
+                                <label for="myTextInput">【输入事件处理器】</label>
+                                <input type="text" 
+                                       id="myTextInput" 
+                                       oninput="handleInputChange(this)" 
+                                       placeholder="请输入文字..."/>
+                                <span class="description">
+                                    ・当用户在输入框中输入文字时，会触发oninput事件并调用handleInputChange()函数
+                                </span>
+                            </div>
+                        </td>
+                        <td>Textarea:</td>
+                        <td>
+                            <!-- 可调整大小的文本区域 -->
+                            <div class="textarea-section">
+                                <label for="myTextInput">【可调整大小的文本区域】</label>
+                                <textarea id="myTextarea" 
+                                         name="textareaName" 
+                                         class="textareaClass area1" 
+                                         rows="2" 
+                                         cols="28" 
+                                         placeholder="可调整大小的文本区域..."></textarea>
+                                <span class="description">
+                                    ・可通过拖动右下角调整文本区域大小
+                                </span>
+                                <span class="description">
+                                    ・可通过placeholder属性，可以在文本框内容为空时显示提示信息。
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pre-Filled Text Field:</td>
+                        <td>
+                            <!-- 预填充文本字段 -->
+                            <div class="pre-filled-input-section">
+                                <input type="text" 
+                                       value="Text....." 
+                                       id="myTextInput2" 
+                                       name="pre-filledTest2"/>
+                                <span class="description">
+                                    ・可通过value属性预填充文本内容
+                                </span>
+                            </div>
+                        </td>
+                        <td>button</td>
+                        <td>
+                            <button onclick="buttonFuction1()" 
+                                    id="myButton" 
+                                    type="button"
+                                    style="color: rgb(44, 85, 48);">click me (change color to red)</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </h:form>
     </div>
 </h:body>
 </html>
