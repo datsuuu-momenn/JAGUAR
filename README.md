@@ -28,3 +28,8 @@ OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
 1. mvn clean package -P wildfly-bootable-jar
 1. java -jar  target/jaguar-bootable.jar
 1. http://127.0.0.1:8080/
+
+### OR
+
+1. mvn clean install package wildfly:dev
+2. http://127.0.0.1:8080/
