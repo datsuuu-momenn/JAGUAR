@@ -142,7 +142,7 @@
                                 <input type="text" 
                                        id="myTextInput" 
                                        oninput="handleInputChange(this)" 
-                                       placeholder="请输入文字..."/>
+                                       placeholder="请输入文字来触发函数..."/>
                                 <span class="description">
                                     ・当用户在输入框中输入文字时，会触发oninput事件并调用handleInputChange()函数
                                 </span>
@@ -161,9 +161,6 @@
                                          placeholder="可调整大小的文本区域..."></textarea>
                                 <span class="description">
                                     ・可通过拖动右下角调整文本区域大小
-                                </span>
-                                <span class="description">
-                                    ・可通过placeholder属性，可以在文本框内容为空时显示提示信息。
                                 </span>
                             </div>
                         </td>
@@ -190,9 +187,29 @@
                                     style="color: rgb(44, 85, 48);">click me (change color to red)</button>
                         </td>
                     </tr>
+                    <tr>
+                        <td>placeholder Text Field:</td>
+                        <td>
+                            <input type="text"
+                                   placeholder="请输入文字..."
+                                   id="placeholderTextInput"/>
+                            <span class="description">
+                                ・可通过placeholder属性，可以在文本框内容为空时显示提示信息。
+                            </span>
+                        </td>
+                        <td>Read-Only Text Field:</td>
+                        <td>
+                            <input type="text"
+                                value="当前文字内容是只读状态"
+                                   readonly="readonly"/>
+                                <span class="description">
+                                    ・可通过readonly属性，使文本框内容无法被修改
+                                </span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </h:form>
     </div>
 </h:body>
-</html>
+</html> 
