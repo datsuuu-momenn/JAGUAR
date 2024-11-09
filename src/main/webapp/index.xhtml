@@ -126,6 +126,11 @@
                                     <a id="dropOption2" onclick="ClickLink2()">点击触发ClickLink2()函数</a><br/>
                                     <a id="dropOption3" onclick="ClickLink3()">点击触发ClickLink3()函数</a><br/>
                                 </div>
+                                <span class="description">
+                                    ・下拉按钮和下拉内容容器，鼠标变为默认指针和手型指针<br/>
+                                    ・可通过onclick事件，触发script.js中的ClickDropdownFuction()函数<br/>
+                                    ・可通过onmousemove事件，触发script.js中的hoverDropdownFunction()函数<br/>
+                                </span>
                             </div>
                         </td>
                         <td>
@@ -144,7 +149,7 @@
                                        oninput="handleInputChange(this)" 
                                        placeholder="请输入文字来触发函数..."/>
                                 <span class="description">
-                                    ・当用户在输入框中输入文字时，会触发oninput事件并调用handleInputChange()函数
+                                    ・当用户在输入框中输入文字时，会触发oninput事件并调用script.js中的handleInputChange()函数
                                 </span>
                             </div>
                         </td>
@@ -185,26 +190,84 @@
                                     id="myButton" 
                                     type="button"
                                     style="color: rgb(44, 85, 48);">click me (change color to red)</button>
+                            <span class="description">
+                                ・可通过onclick事件，触发script.js中的buttonFuction1()函数
+                            </span>
                         </td>
                     </tr>
                     <tr>
                         <td>placeholder Text Field:</td>
                         <td>
-                            <input type="text"
-                                   placeholder="请输入文字..."
-                                   id="placeholderTextInput"/>
-                            <span class="description">
-                                ・可通过placeholder属性，可以在文本框内容为空时显示提示信息。
-                            </span>
+                            <!-- placeholder文本输入示例 -->
+                            <div class="input-section">
+                                <label for="placeholderTextInput">【占位符输入框】</label>
+                                <input type="text"
+                                       id="placeholderTextInput"
+                                       placeholder="请输入文字..."/>
+                                <span class="description">
+                                    ・可通过placeholder属性，在文本框内容为空时显示提示信息
+                                </span>
+                            </div>
                         </td>
                         <td>Read-Only Text Field:</td>
                         <td>
-                            <input type="text"
-                                value="当前文字内容是只读状态"
-                                   readonly="readonly"/>
+                            <!-- 只读文本输入示例 -->
+                            <div class="input-section">
+                                <label for="readOnlyInput">【只读输入框】</label>
+                                <input type="text"
+                                       id="readOnlyInput"
+                                       value="当前文字内容是只读状态"
+                                       readonly="readonly"/>
                                 <span class="description">
                                     ・可通过readonly属性，使文本框内容无法被修改
                                 </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>HTML SVG with rect:</td>
+                        <td>
+                            <!-- SVG动画示例 -->
+                            <div class="svg-section">
+                                <svg id="mySVG" width="100" height="100" name="svgNmae" onclick="handleSVGClick()">
+                                    <rect id="svgRect" width="100" height="100" 
+                                          stroke="teal" 
+                                          fill="rgb(44, 85, 48)" 
+                                          stroke-width="4">
+                                        <!-- 鼠标悬停时的动画 -->
+                                        <animate id="hoverAnimation"
+                                                 attributeName="fill"
+                                                 from="rgb(44, 85, 48)"
+                                                 to="rgb(230, 57, 70)"
+                                                 dur="0.5s"
+                                                 begin="mouseover"
+                                                 fill="freeze"/>
+                                        <!-- 鼠标移出时的动画 -->
+                                        <animate id="outAnimation"
+                                                 attributeName="fill"
+                                                 from="rgb(230, 57, 70)"
+                                                 to="rgb(44, 85, 48)"
+                                                 dur="0.5s"
+                                                 begin="mouseout"
+                                                 fill="freeze"/>
+                                        <!-- 点击时的动画 -->
+                                        <animate id="clickAnimation"
+                                                 attributeName="stroke-width"
+                                                 from="4"
+                                                 to="8"
+                                                 dur="0.3s"
+                                                 begin="click"
+                                                 fill="freeze"/>
+                                    </rect>
+                                </svg>
+                                <span class="description">
+                                    ・SVG矩形元素支持多种动画触发方式：<br/>
+                                    1. mouseover: 鼠标悬停时改变填充颜色<br/>
+                                    2. mouseout: 鼠标移出时恢复原色<br/>
+                                    3. click: （初次）点击时增加边框宽度<br/>
+                                    4. JavaScript控制: （点击触发）可通过handleSVGClick()函数改变颜色
+                                </span>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

@@ -64,4 +64,36 @@ function buttonFuction1() {
     // 输出日志
     console.log('Current color:', colors[currentIndex].name);
     console.log('Next color will be:', colors[nextIndex].name);
+}
+
+// SVG交互函数
+function handleSVGClick() {
+    const rect = document.getElementById('svgRect');
+    const colors = [
+        'rgb(44, 85, 48)',    // 深绿色
+        'rgb(230, 57, 70)',   // 红色
+        'rgb(29, 53, 87)',    // 深蓝色
+        'rgb(255, 183, 3)',   // 黄色
+        'rgb(155, 93, 229)'   // 紫色
+    ];
+    
+    let currentIndex = parseInt(rect.getAttribute('data-color-index') || '0');
+    currentIndex = (currentIndex + 1) % colors.length;
+    
+    // 创建新的动画元素
+    const newAnimation = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+    newAnimation.setAttribute("attributeName", "fill");
+    newAnimation.setAttribute("from", rect.style.fill || colors[currentIndex]);
+    newAnimation.setAttribute("to", colors[currentIndex]);
+    newAnimation.setAttribute("dur", "0.5s");
+    newAnimation.setAttribute("fill", "freeze");
+    
+    // 添加并立即开始动画
+    rect.appendChild(newAnimation);
+    newAnimation.beginElement();
+    
+    // 更新颜色索引
+    rect.setAttribute('data-color-index', currentIndex);
+    
+    console.log('SVG color changed to:', colors[currentIndex]);
 } 
