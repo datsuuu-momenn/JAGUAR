@@ -384,6 +384,52 @@
                             </span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>RadioButton</td>
+                        <td>RadioButton 1:<input type="radio" id="radioButton1" name="radioGroup1" class="radioClass1" style="width: 30px;" /></td>
+                        <td>RadioButton 2:<input type="radio" id="radioButton2" name="radioGroup1" class="radioClass1" style="width: 30px;"/></td>
+                        <td>RadioButton 3:<input type="radio" id="radioButton3" name="radioGroup1" class="radioClass1" style="width: 30px;"/>
+                        <span class="description">
+                            ・radio标签：单选按钮<br/>
+                            ・name属性：要确定单选按钮(radio buttons)属于同一个组，关键是使用相同的name属性值<br/>
+                        </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px;">
+                            CheckBoxes:</td>
+                            <td>
+                            <input type="checkbox" id="checkBox1" name="checkBoxGroup2" class="checkBoxClassB" value="cat" />cat
+                            <input type="checkbox" id="checkBox2" name="checkBoxGroup2" class="checkBoxClassB" value="dog" />dog
+                            <input type="checkbox" id="checkBox3" name="checkBoxGroup2" class="checkBoxClassB" value="goldfish" />goldfish
+                            <span class="description">
+                                ・checkbox标签：复选框<br/>
+                                ・name属性：要确定复选框(checkboxes)属于同一个组，关键是使用相同的name属性值<br/>
+                            </span>
+                        </td>
+                        <td style="padding: 3px 3px 7px 9px; height: 38px;" >
+                            CheckBox in iFrame:&nbsp;&nbsp;</td>
+                        <td>
+                            <iframe style="padding: 0px;"
+                                    id="myIframe4" 
+                                    name="frameName4" 
+                                    class="frameClass4" 
+                                    scrolling="no"
+                                    src="data:text/html,
+                                         %3Chtml%3E
+                                             %3Cbody%3E
+                                                 %3Cinput type='checkbox' id='frameCheckbox'%3E 
+                                                 %3Clabel for='frameCheckbox'%3ECheckBox in iFrame%3C/label%3E
+                                             %3C/body%3E
+                                         %3C/html%3E">
+                            </iframe>
+                            <span class="description">
+                                ・在iframe中嵌入复选框<br/>
+                                ・使用data:text/html直接嵌入HTML内容<br/>
+                                ・scrolling='no'禁用滚动条<br/>
+                            </span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </h:form>
