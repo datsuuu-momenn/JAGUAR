@@ -263,11 +263,125 @@
                                 <span class="description">
                                     ・SVG矩形元素支持多种动画触发方式：<br/>
                                     1. mouseover: 鼠标悬停时改变填充颜色<br/>
-                                    2. mouseout: 鼠标移出时恢复原色<br/>
+                                    2. mouseout: 鼠标移出恢复原色<br/>
                                     3. click: （初次）点击时增加边框宽度<br/>
                                     4. JavaScript控制: （点击触发）可通过handleSVGClick()函数改变颜色
                                 </span>
                             </div>
+                        </td>
+                        <td><p>Paragraph with Text</p></td>
+                        <td>
+                            <p id="pText" style="color: rgb(44, 85, 48); font-size: 16px;">This Text is Green</p>
+                            <span class="description">
+                                ・p标签:添加文本内容<br/>
+                                ・style属性:改变文本颜色、字体大小等
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Input Slider Control:</td>
+                        <td>
+                        <input type="range" min="0" max="100" step="10"
+                        id="mySlider" name="sliderName" value="50"
+                        style="width: 88%;" class="slider"
+                        oninput="sliderInputFuction()"
+                        onclick="sliderClickFuction()"
+                        onchange="sliderChangeFuction()"
+                        onmousemove="sliderMouseMoveFuction()"
+                        onmouseover="sliderMouseOverFuction()"
+                        onmouseout="sliderMouseOutFuction()"
+                        onfocus="sliderFocusFuction()"
+                        onblur="sliderBlurFuction()" ></input>
+                            <span class="description">
+                                ・oninput:拖动滑块时实时触发sliderInputFuction()<br/>
+                                ・onclick:点击触发sliderClickFuction()<br/>
+                                ・onchange:滑块值发生变化且用户完成交互时触发sliderChangeFuction()<br/>
+                                ・onmousemove:鼠标在滑块上移动时实时触发sliderMouseMoveFuction()实时显示当前值的浮动提示框<br/>
+                                ・onmouseover:悬停触发sliderMouseOverFuction()增加滑块的不透明度<br/>
+                                ・onmouseout:移出触发sliderMouseOutFuction()移除值显示元素并降低滑块不透明度<br/>
+                                ・onfocus:点击聚焦圆点触发sliderFocusFuction()圆点变为深绿色<br/>
+                                ・onblur:点击失焦圆点触发sliderBlurFuction()圆点恢复默认颜色<br/> 
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label id="progressLabel" for="progressBar">Progress Bar: (50%)</label></td>
+                        <td>
+                            <progress id="progressBar" value="50" style="width: 94%;" max="100" />
+                            <span class="description">
+                                ・progress标签:进度条<br/>
+                                ・value属性:设置进度条的当前值为50%<br/>
+                                ・max属性:设置进度条的最大值为100<br/>
+                                ・style属性:设置进度条的宽度<br/>
+                            </span>
+                        </td>
+                        <td>Select Dropdown</td>
+                        <td>
+                            <select id="mySelect" name="selectName"
+                            class="selectClass"
+                            onchange="selectChangeFuction1()"
+                            style="width: 94%; font-size: 14px;">
+                                <option value="25%">Option 1:set to 25%</option>
+                                <option value="50%">Option 2:set to 50%</option>
+                                <option value="75%">Option 3:set to 75%</option>
+                                <option value="100%">Option 4:set to 100%</option>
+                            </select>
+                            <span class="description">
+                                ・当前Select的功能：选择不同选项来更新进度条的值<br/>
+                                ・select标签：下拉菜单<br/>
+                                ・onchange事件：选择不同选项时触发selectChangeFuction1()更新进度条的值<br/>
+                            </span>
+                        </td>   
+                    </tr>
+                    <tr>
+                        <td><label id="meterLabel" for="meterBar">HTML Meter: (25%)</label></td>
+                        <td>
+                            <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
+                            <span class="description">
+                                ・meter标签：进度条<br/>
+                                ・value属性：设置进度条的当前值为25%<br/>
+                                ・style属性：设置进度条的宽度<br/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><div style="color: rgb(44, 85, 48);">Image in iFrame</div></td>
+                        <td style="padding: 4px 4px 3px 4px;">
+                            <!-- Text iframe -->
+                            <iframe id="myIframe2" 
+                                    name="iframeName2" 
+                                    class="iframeClass2" 
+                                    scrolling="no" 
+                                    src="data:text/html,&lt;body style='background-color:%23F2F6F8;'&gt;&lt;h4&gt;iFrame Text&lt;/h4&gt;&lt;/body&gt;">
+                            </iframe>
+                            <span class="description">
+                                ・iframe标签：内嵌框架<br/>
+                                ・scrolling属性：设置框架的滚动方式为no<br/>
+                                ・src属性：设置框架的源地址<br/>
+                            </span>
+                           
+                        </td>
+                        <td style="padding: 4px 4px 3px 4px;">
+                            <iframe id="myIframe1" 
+                                    name="iframeName1" 
+                                    class="iframeClass1" 
+                                    scrolling="no" 
+                                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="></iframe>
+                            <span class="description">
+                                ・添加了base64编码的图片数据<br/>   
+                            </span>
+                        </td>
+                        <td style="padding: 4px 4px 3px 4px;">
+                            <iframe id="myIframe3" 
+                            name="iframeName3" 
+                            class="iframeClass3" 
+                            scrolling="no"
+                            src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </iframe>
+                            <span class="description">
+                                ・iframe标签：嵌入Google logo图片<br/>
+                                ・src属性：设置图片URL地址<br/>
+                            </span>
                         </td>
                     </tr>
                 </tbody>

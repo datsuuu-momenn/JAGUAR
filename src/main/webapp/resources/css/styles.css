@@ -372,3 +372,42 @@ body::before {
 #svgRect {
     transition: all 0.3s ease;
 }
+
+/* 滑块样式 */
+input[type="range"] {
+    -webkit-appearance: none;  /* 移除默认样式 */
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* 滑块轨道样式 */
+input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--forest-light);
+    height: 4px;
+    border-radius: 2px;
+}
+
+/* 滑块圆点样式 */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -6px;  /* 调整圆点垂直位置 */
+    background-color: white;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--forest-medium);
+    transition: all 0.3s ease;
+}
+
+/* 滑块圆点悬停样式 */
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: var(--forest-pale);
+}
+
+/* 滑块获得焦点时的圆点样式 */
+input[type="range"]:focus::-webkit-slider-thumb {
+    background-color: var(--forest-dark);
+    border-color: var(--forest-dark);
+}
