@@ -1,78 +1,78 @@
 function handleInputChange(element) {
-    // 获取输入的值
+    // 入力された値を取得
     const inputValue = element.value;
     console.log('Input value changed:', inputValue);
     
-    // 这里可以添加其他处理逻辑
-    // 例如：验证输入、更新其他元素等
+    // ここに他の処理ロジックを追加できます
+    // 例：入力の検証、他の要素の更新など
 }
 
-// Selenium测试相关的其他函数
+// Seleniumテスト関連の他の関数
 function ClickDropdownFuction() {
     console.log('Dropdown clicked');
-    // 处理下拉点击事件
+    // ドロップダウンクリックイベントの処理
 }
 
 function hoverDropdownFunction() {
     console.log('Dropdown hovered');
-    // 处理下拉悬停事件
+    // ドロップダウンホバーイベントの処理
 }
 
 function ClickLink1() {
     console.log('Link 1 clicked');
-    // 处理链接1点击事件
+    // リンク1クリックイベントの処理
 }
 
 function ClickLink2() {
     console.log('Link 2 clicked');
-    // 处理链接2点击事件
+    // リンク2クリックイベントの処理
 }
 
 function ClickLink3() {
     console.log('Link 3 clicked');
-    // 处理链接3点击事件
+    // リンク3クリックイベントの処理
 }
 
-// 使用RGB颜色值的按钮点击事件处理函数
+// 使用RGB色のボタンクリックイベント処理関数
 function buttonFuction1() {
     const button = document.getElementById('myButton');
     const colors = [
-        { value: 'rgb(44, 85, 48)', name: '深绿色' },
-        { value: 'rgb(230, 57, 70)', name: '鲜红色' },
+        { value: 'rgb(44, 85, 48)', name: '深緑色' },
+        { value: 'rgb(230, 57, 70)', name: '鮮红色' },
         { value: 'rgb(29, 53, 87)', name: '深蓝色' },
         { value: 'rgb(255, 183, 3)', name: '明黄色' },
         { value: 'rgb(155, 93, 229)', name: '紫色' }
     ];
     
-    // 获取当前颜色索引
+    // 現在の色インデックスを取得
     let currentIndex = parseInt(button.getAttribute('data-color-index') || '0');
     
-    // 切换到下一个颜色
+    // 次の色に切り替え
     currentIndex = (currentIndex + 1) % colors.length;
     
-    // 获取下一个颜色的索引
+    // 次の色のインデックスを取得
     const nextIndex = (currentIndex + 1) % colors.length;
     
-    // 应用当前颜色并显示下一个颜色的名称
+    // 現在の色を適用して次の色の名前を表示
     button.style.color = colors[currentIndex].value;
     button.style.borderColor = colors[currentIndex].value;
-    button.textContent = `点击变为${colors[nextIndex].name}`;
+    button.textContent = `クリックで${colors[nextIndex].name}に変更`;
     
-    // 保存当前颜色索引
+    // 現在の色インデックスを保存
     button.setAttribute('data-color-index', currentIndex);
     
-    // 输出日志
+    // ログ出力
     console.log('Current color:', colors[currentIndex].name);
     console.log('Next color will be:', colors[nextIndex].name);
 }
 
-// SVG交互函数
+// SVGインタラクション関数
 function handleSVGClick() {
     const rect = document.getElementById('svgRect');
     const colors = [
-        'rgb(44, 85, 48)',    // 深绿色
-        'rgb(230, 57, 70)',   // 红色
-        'rgb(29, 53, 87)',    // 深蓝色
+        'rgb(44, 85, 48)',    // 深緑色
+        'rgb(230, 57, 70)',   // 赤色
+        'rgb(29, 53, 87)',    // 紺色
         'rgb(255, 183, 3)',   // 黄色
         'rgb(155, 93, 229)'   // 紫色
     ];
@@ -80,7 +80,7 @@ function handleSVGClick() {
     let currentIndex = parseInt(rect.getAttribute('data-color-index') || '0');
     currentIndex = (currentIndex + 1) % colors.length;
     
-    // 创建新的动画元素
+    // 新しいアニメーション要素を作成
     const newAnimation = document.createElementNS("http://www.w3.org/2000/svg", "animate");
     newAnimation.setAttribute("attributeName", "fill");
     newAnimation.setAttribute("from", rect.style.fill || colors[currentIndex]);
@@ -88,21 +88,21 @@ function handleSVGClick() {
     newAnimation.setAttribute("dur", "0.5s");
     newAnimation.setAttribute("fill", "freeze");
     
-    // 添加并立即开始动画
+    // アニメーションを追加して即時開始
     rect.appendChild(newAnimation);
     newAnimation.beginElement();
     
-    // 更新颜色索引
+    // カラーインデックスを更新
     rect.setAttribute('data-color-index', currentIndex);
     
     console.log('SVG color changed to:', colors[currentIndex]);
 }
 
-// Slider（滑块）相关的事件处理函数
+// Slider（スライダー）関連のイベント処理関数
 
 /**
- * 处理滑块输入事件
- * 当用户拖动滑块时实时触发
+ * スライダーの入力イベントを処理
+ * ユーザーがスライダーをドラッグする時にリアルタイムで発火
  */
 function sliderInputFuction() {
     const slider = document.getElementById('mySlider');
@@ -110,8 +110,8 @@ function sliderInputFuction() {
 }
 
 /**
- * 处理滑块点击事件
- * 当用户点击滑块或滑道时触发
+ * スライダーのクリックイベントを処理
+ * ユーザーがスライダーまたはトラックをクリックした時に発火
  */
 function sliderClickFuction() {
     const slider = document.getElementById('mySlider');
@@ -119,8 +119,8 @@ function sliderClickFuction() {
 }
 
 /**
- * 处理滑块值改变事件
- * 当滑块值发生变化且用户完成交互时触发
+ * スライダーの値変更イベントを処理
+ * スライダーの値が変更され、ユーザーの操作が完了した時に発火
  */
 function sliderChangeFuction() {
     const slider = document.getElementById('mySlider');
@@ -128,113 +128,109 @@ function sliderChangeFuction() {
 }
 
 /**
- * 处理鼠标在滑块上移动的事件
- * 实时显示当前值的浮动提示框
+ * スライダー上のマウス移動イベントを処理
+ * 現在値のフローティングツールチップを表示
  */
 function sliderMouseMoveFuction() {
     const slider = document.getElementById('mySlider');
     const value = slider.value;
     
-    // 创建或获取用于显示值的浮动div元素
+    // 値表示用のフローティングdiv要素を作成または取得
     let valueDisplay = document.getElementById('sliderValueDisplay');
     if (!valueDisplay) {
-        // 如果显示元素不存在，则创建一个新的
+        // 表示要素が存在しない場合、新規作成
         valueDisplay = document.createElement('div');
         valueDisplay.id = 'sliderValueDisplay';
-        // 设置显示元素的样式
-        valueDisplay.style.position = 'fixed';            // 使用fixed定位
-        valueDisplay.style.backgroundColor = 'rgba(44, 85, 48, 0.9)';  // 使用主题深绿色
-        valueDisplay.style.color = 'white';              // 白色文字
-        valueDisplay.style.padding = '4px 8px';          // 内边距
-        valueDisplay.style.borderRadius = '4px';         // 圆角边框
-        valueDisplay.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';  // 阴影效果
-        valueDisplay.style.fontSize = '14px';            // 字体大小
-        valueDisplay.style.zIndex = '1000';             // 确保显示在最上层
-        valueDisplay.style.pointerEvents = 'none';      // 防止干扰鼠标事件
-        // 将显示元素添加到body中
+        // 表示要素のスタイルを設定
+        valueDisplay.style.position = 'fixed';            // 固定位置
+        valueDisplay.style.backgroundColor = 'rgba(44, 85, 48, 0.9)';  // テーマの深緑色
+        valueDisplay.style.color = 'white';              // 白文字
+        valueDisplay.style.padding = '4px 8px';          // 内部余白
+        valueDisplay.style.borderRadius = '4px';         // 角丸
+        valueDisplay.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';  // 影効果
+        valueDisplay.style.fontSize = '14px';            // フォントサイズ
+        valueDisplay.style.zIndex = '1000';             // 最前面に表示
+        valueDisplay.style.pointerEvents = 'none';      // マウスイベントを妨げない
+        // 表示要素をbodyに追加
         document.body.appendChild(valueDisplay);
     }
     
-    // 获取鼠标事件
+    // マウスイベントを取得
     const mouseEvent = window.event;
     
-    // 更新显示值的位置和内容
-    valueDisplay.style.left = `${mouseEvent.clientX + 10}px`;  // 鼠标位置右侧10px
-    valueDisplay.style.top = `${mouseEvent.clientY - 35}px`;   // 鼠标位置上方35px
-    valueDisplay.textContent = `当前输入值: ${value}`;             // 显示当前值
+    // 値表示の位置とコンテンツを更新
+    valueDisplay.style.left = `${mouseEvent.clientX + 10}px`;  // マウス位置の右10px
+    valueDisplay.style.top = `${mouseEvent.clientY - 35}px`;   // マウス位置の上35px
+    valueDisplay.textContent = `現在値: ${value}`;             // 現在値を表示
     
     console.log('Mouse moved over slider at value:', value);
 }
 
 /**
- * 处理鼠标进入滑块区域的事件
- * 增加滑块的不透明度
+ * スライダーにマウスが入った時のイベントを処理
+ * スライダーの不透明度を上げる
  */
 function sliderMouseOverFuction() {
     const slider = document.getElementById('mySlider');
     console.log('Mouse entered slider area');
-    slider.style.opacity = '1';  // 设置完全不透明
+    slider.style.opacity = '1';  // 完全な不透明度に設定
 }
 
 /**
- * 处理鼠标离开滑块区域的事件
- * 移除值显示元素并降低滑块不透明度
+ * スライダーからマウスが出た時のイベントを処理
+ * 値表示要素を削除しスライダーの不透明度を下げる
  */
 function sliderMouseOutFuction() {
     const slider = document.getElementById('mySlider');
-    // 移除值显示元素
+    // 値表示要素を削除
     const valueDisplay = document.getElementById('sliderValueDisplay');
     if (valueDisplay) {
         valueDisplay.remove();
     }
     console.log('Mouse left slider area');
-    slider.style.opacity = '0.7';  // 降低不透明度
+    slider.style.opacity = '0.7';  // 不透明度を下げる
 }
 
 /**
- * 处理滑块获得焦点的事件
- * 将滑块圆点变为主题色
+ * スライダーがフォーカスを得た時のイベントを処理
+ * スライダーの丸いつまみをテーマカラーに変更
  */
 function sliderFocusFuction() {
     const slider = document.getElementById('mySlider');
     console.log('Slider gained focus');
-    
-    // 添加自定义样式类来改变滑块圆点的颜色
-    slider.style.accentColor = 'var(--forest-dark)';  // 使用主题深绿色
-    slider.style.outline = 'none';  // 移除默认的焦点轮廓
+    slider.style.accentColor = 'var(--forest-dark)';  // テーマの深緑色を使用
+    slider.style.outline = 'none';  // デフォルトのフォーカス枠を削除
 }
 
 /**
- * 处理滑块失去焦点的事件
- * 恢复滑块圆点的默认颜色
+ * スライダーがフォーカスを失った時のイベントを処理
+ * スライダーの丸いつまみをデフォルト色に戻す
  */
 function sliderBlurFuction() {
     const slider = document.getElementById('mySlider');
     console.log('Slider lost focus');
-    
-    // 移除自定义样式，恢复默认颜色
-    slider.style.accentColor = '';
+    slider.style.accentColor = '';  // カスタムスタイルを削除
 }
 
 /**
- * 处理下拉菜单值改变事件
- * 根据选择的选项更新进度条的值和标签文本
+ * セレクトメニューの値変更イベントを処理
+ * 選択されたオプションに基づいてプログレスバーの値とラベルテキストを更新
  */
 function selectChangeFuction1() {
-    // 获取相关元素
+    // 関連要素を取得
     const select = document.getElementById('mySelect');
     const progressBar = document.getElementById('progressBar');
     const progressLabel = document.getElementById('progressLabel');
     
-    // 获取选中的值（去掉百分号）
+    // 選択された値からパーセント記号を除去
     const selectedValue = parseInt(select.value.replace('%', ''));
     
-    // 更新进度条的值
+    // プログレスバーの値を更新
     progressBar.value = selectedValue;
     
-    // 更新进度条标签文本
+    // プログレスバーのラベルテキストを更新
     progressLabel.textContent = `Progress Bar: (${selectedValue}%)`;
     
-    // 输出日志
+    // ログ出力
     console.log('Select changed to:', selectedValue + '%');
 } 

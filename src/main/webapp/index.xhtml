@@ -11,59 +11,59 @@
 </h:head>
 <h:body>
     <div class="main">
-        <h1><h:outputText value="任务管理系统plus"/></h1>
+        <h1><h:outputText value="タスク管理システムplus"/></h1>
         
         <h:form id="form">
-            <!-- 添加任务部分 -->
+            <!-- タスク追加部分 -->
             <h:panelGroup layout="block" styleClass="form-section">
-                <h2><h:outputText value="添加新任务"/></h2>
+                <h2><h:outputText value="新規タスク追加"/></h2>
                 <div>
-                    <h:outputLabel for="inputTitle" value="标题: " styleClass="form-label"/>
+                    <h:outputLabel for="inputTitle" value="タイトル: " styleClass="form-label"/>
                     <h:inputText id="inputTitle" value="#{taskBean.title}" 
                                required="true" 
-                               requiredMessage="请输入标题"
-                               validatorMessage="标题长度必须在3-50个字符之间">
+                               requiredMessage="タイトルを入力してください"
+                               validatorMessage="タイトルは3-50文字で入力してください">
                         <f:validateLength minimum="3" maximum="50"/>
                     </h:inputText>
                     <h:message for="inputTitle" styleClass="error-message"/>
                     
-                    <h:commandButton id="add" value="添加">
+                    <h:commandButton id="add" value="追加">
                         <f:ajax execute="inputTitle" render="outputGroup messages" listener="#{taskBean.add}"/>
                     </h:commandButton>
                 </div>
             </h:panelGroup>
 
-            <!-- 删除任务部分 -->
+            <!-- タスク削除部分 -->
             <h:panelGroup layout="block" styleClass="form-section">
-                <h2><h:outputText value="删除任务"/></h2>
+                <h2><h:outputText value="タスク削除"/></h2>
                 <div>
-                    <h:outputLabel for="delTitle" value="任务ID: " styleClass="form-label"/>
+                    <h:outputLabel for="delTitle" value="タスクID: " styleClass="form-label"/>
                     <h:inputText id="delTitle" value="#{taskBean.id}">
                         <f:validateLongRange minimum="1" maximum="99"/>
                     </h:inputText>
                     <h:message for="delTitle" styleClass="error-message"/>
                     
-                    <h:commandButton id="del" value="删除">
+                    <h:commandButton id="del" value="削除">
                         <f:ajax execute="delTitle" render="outputGroup messages" listener="#{taskBean.delete}"/>
                     </h:commandButton>
                 </div>
             </h:panelGroup>
 
-            <!-- 更新任务部分 -->
+            <!-- タスク更新部分 -->
             <h:panelGroup layout="block" styleClass="form-section">
-                <h2><h:outputText value="更新任务"/></h2>
+                <h2><h:outputText value="タスク更新"/></h2>
                 <div>
-                    <h:outputLabel for="updateId" value="任务ID: " styleClass="form-label"/>
+                    <h:outputLabel for="updateId" value="タスクID: " styleClass="form-label"/>
                     <h:inputText id="updateId" value="#{taskBean.id}">
                         <f:validateLongRange minimum="1" maximum="99"/>
                     </h:inputText>
                     <h:message for="updateId" styleClass="error-message"/>
                     <br/>
                     
-                    <h:outputLabel for="updateTitle" value="新标题: " styleClass="form-label"/>
+                    <h:outputLabel for="updateTitle" value="新タイトル: " styleClass="form-label"/>
                     <h:inputText id="updateTitle" value="#{taskBean.title}"
                                required="true"
-                               requiredMessage="请输入新标题">
+                               requiredMessage="新タイトルを入力してください">
                         <f:validateLength minimum="3" maximum="50"/>
                     </h:inputText>
                     <h:message for="updateTitle" styleClass="error-message"/>
@@ -76,11 +76,11 @@
             </h:panelGroup>
         </h:form>
 
-        <!-- 任务列表显示部分 -->
+        <!-- タスクリスト表示部分 -->
         <h:panelGroup id="outputGroup" layout="block">
-            <h2><h:outputText value="任务列表"/></h2>
+            <h2><h:outputText value="タスクリスト"/></h2>
             <h:dataTable id="taskTable" value="#{taskBean.allTasks}" var="row" 
-                        title="任务列表" styleClass="results">
+                        title="タスクリスト" styleClass="results">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="ID"/>
@@ -90,7 +90,7 @@
 
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="标题"/>
+                        <h:outputText value="タイトル"/>
                     </f:facet>
                     <h:outputText value="#{row.title}"/>
                 </h:column>
@@ -115,21 +115,21 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <!-- 下拉按钮，鼠标变为默认指针 -->
+                                <!-- ドロップダウンボタン関連 -->
                                 <div id="myDropdown" class="dropbtn" style="cursor: default;" 
-                                onclick="ClickDropdownFuction()" 
-                                onmousemove="hoverDropdownFunction()">【下拉按钮】鼠标变为默认指针 </div><br/>
-                                <!-- 下拉内容容器，鼠标变为手型指针 -->
-                                <div class="dropdown-content" style="cursor: pointer;">【下拉内容容器】鼠标变为手型指针<br/>  
-                                    <!-- 下拉内容 -->
-                                    <a id="dropOption1" onclick="ClickLink1()">点击触发ClickLink1()函数</a><br/>
-                                    <a id="dropOption2" onclick="ClickLink2()">点击触发ClickLink2()函数</a><br/>
-                                    <a id="dropOption3" onclick="ClickLink3()">点击触发ClickLink3()函数</a><br/>
+                                     onclick="ClickDropdownFuction()" 
+                                     onmousemove="hoverDropdownFunction()">【ドロップダウンボタン】マウスポインターがデフォルトに変更</div>
+                                <!-- ドロップダウンコンテンツ、マウスポインターを手型に変更 -->
+                                <div class="dropdown-content" style="cursor: pointer;">【ドロップダウンコンテンツ】マウスポインターが手型に変更<br/>  
+                                    <!-- ドロップダウン内容 -->
+                                    <a id="dropOption1" onclick="ClickLink1()">クリックでClickLink1()関数を呼び出し</a><br/>
+                                    <a id="dropOption2" onclick="ClickLink2()">クリックでClickLink2()関数を呼び出し</a><br/>
+                                    <a id="dropOption3" onclick="ClickLink3()">クリックでClickLink3()関数を呼び出し</a><br/>
                                 </div>
                                 <span class="description">
-                                    ・下拉按钮和下拉内容容器，鼠标变为默认指针和手型指针<br/>
-                                    ・可通过onclick事件，触发script.js中的ClickDropdownFuction()函数<br/>
-                                    ・可通过onmousemove事件，触发script.js中的hoverDropdownFunction()函数<br/>
+                                    ・ドロップダウンボタンとコンテンツ、マウスポインターがデフォルトと手型に変更<br/>
+                                    ・onclickイベントでscript.jsのClickDropdownFuction()関数を呼び出し<br/>
+                                    ・onmousemoveイベントでscript.jsのhoverDropdownFunction()関数を呼び出し<br/>
                                 </span>
                             </div>
                         </td>
@@ -141,31 +141,29 @@
                     <tr>
                         <td>Text input Field:</td>
                         <td>
-                            <!-- 输入事件处理示例 -->
                             <div class="input-section">
-                                <label for="myTextInput">【输入事件处理器】</label>
+                                <label for="myTextInput">【入力イベントハンドラー】</label>
                                 <input type="text" 
                                        id="myTextInput" 
                                        oninput="handleInputChange(this)" 
-                                       placeholder="请输入文字来触发函数..."/>
+                                       placeholder="テキストを入力して関数を呼び出す..."/>
                                 <span class="description">
-                                    ・当用户在输入框中输入文字时，会触发oninput事件并调用script.js中的handleInputChange()函数
+                                    ・テキスト入力時にoninputイベントが発生し、script.jsのhandleInputChange()関数を呼び出し
                                 </span>
                             </div>
                         </td>
                         <td>Textarea:</td>
                         <td>
-                            <!-- 可调整大小的文本区域 -->
                             <div class="textarea-section">
-                                <label for="myTextInput">【可调整大小的文本区域】</label>
+                                <label for="myTextInput">【サイズ調整可能なテキストエリア】</label>
                                 <textarea id="myTextarea" 
                                          name="textareaName" 
                                          class="textareaClass area1" 
                                          rows="2" 
                                          cols="28" 
-                                         placeholder="可调整大小的文本区域..."></textarea>
+                                         placeholder="サイズ調整可能なテキストエリア..."></textarea>
                                 <span class="description">
-                                    ・可通过拖动右下角调整文本区域大小
+                                    ・右下のハンドルでテキストエリアのサイズを調整可能
                                 </span>
                             </div>
                         </td>
@@ -173,14 +171,13 @@
                     <tr>
                         <td>Pre-Filled Text Field:</td>
                         <td>
-                            <!-- 预填充文本字段 -->
                             <div class="pre-filled-input-section">
                                 <input type="text" 
                                        value="Text....." 
                                        id="myTextInput2" 
                                        name="pre-filledTest2"/>
                                 <span class="description">
-                                    ・可通过value属性预填充文本内容
+                                    ・value属性で事前にテキストを設定可能
                                 </span>
                             </div>
                         </td>
@@ -191,50 +188,48 @@
                                     type="button"
                                     style="color: rgb(44, 85, 48);">click me (change color to red)</button>
                             <span class="description">
-                                ・可通过onclick事件，触发script.js中的buttonFuction1()函数
+                                ・onclickイベントでscript.jsのbuttonFuction1()関数を呼び出し
                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td>placeholder Text Field:</td>
                         <td>
-                            <!-- placeholder文本输入示例 -->
                             <div class="input-section">
-                                <label for="placeholderTextInput">【占位符输入框】</label>
+                                <label for="placeholderTextInput">【プレースホルダー入力欄】</label>
                                 <input type="text"
                                        id="placeholderTextInput"
-                                       placeholder="请输入文字..."/>
+                                       placeholder="テキストを入力してください..."/>
                                 <span class="description">
-                                    ・可通过placeholder属性，在文本框内容为空时显示提示信息
+                                    ・placeholder属性で、テキストが空の時にヒントを表示
                                 </span>
                             </div>
                         </td>
                         <td>Read-Only Text Field:</td>
                         <td>
-                            <!-- 只读文本输入示例 -->
                             <div class="input-section">
-                                <label for="readOnlyInput">【只读输入框】</label>
+                                <label for="readOnlyInput">【読み取り専用入力欄】</label>
                                 <input type="text"
                                        id="readOnlyInput"
-                                       value="当前文字内容是只读状态"
+                                       value="この文字列は読み取り専用です"
                                        readonly="readonly"/>
                                 <span class="description">
-                                    ・可通过readonly属性，使文本框内容无法被修改
+                                    ・readonly属性で、テキストの変更を禁止
                                 </span>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>HTML SVG with rect:</td>
+                        <td>SVGアニメーション例</td>
                         <td>
-                            <!-- SVG动画示例 -->
+                            <!-- SVGアニメーション例 -->
                             <div class="svg-section">
                                 <svg id="mySVG" width="100" height="100" name="svgNmae" onclick="handleSVGClick()">
                                     <rect id="svgRect" width="100" height="100" 
                                           stroke="teal" 
                                           fill="rgb(44, 85, 48)" 
                                           stroke-width="4">
-                                        <!-- 鼠标悬停时的动画 -->
+                                        <!-- マウスホバー時のアニメーション -->
                                         <animate id="hoverAnimation"
                                                  attributeName="fill"
                                                  from="rgb(44, 85, 48)"
@@ -242,7 +237,7 @@
                                                  dur="0.5s"
                                                  begin="mouseover"
                                                  fill="freeze"/>
-                                        <!-- 鼠标移出时的动画 -->
+                                        <!-- マウスアウト時のアニメーション -->
                                         <animate id="outAnimation"
                                                  attributeName="fill"
                                                  from="rgb(230, 57, 70)"
@@ -250,7 +245,7 @@
                                                  dur="0.5s"
                                                  begin="mouseout"
                                                  fill="freeze"/>
-                                        <!-- 点击时的动画 -->
+                                        <!-- クリック時のアニメーション -->
                                         <animate id="clickAnimation"
                                                  attributeName="stroke-width"
                                                  from="4"
@@ -261,11 +256,11 @@
                                     </rect>
                                 </svg>
                                 <span class="description">
-                                    ・SVG矩形元素支持多种动画触发方式：<br/>
-                                    1. mouseover: 鼠标悬停时改变填充颜色<br/>
-                                    2. mouseout: 鼠标移出恢复原色<br/>
-                                    3. click: （初次）点击时增加边框宽度<br/>
-                                    4. JavaScript控制: （点击触发）可通过handleSVGClick()函数改变颜色
+                                    ・SVG四角形要素は複数のアニメーショントリガーをサポート：<br/>
+                                    1. mouseover: マウスホバーで塗りつぶし色を変更<br/>
+                                    2. mouseout: マウスアウトで元の色に戻る<br/>
+                                    3. click: （初回）クリックで枠線の太さを増加<br/>
+                                    4. JavaScript制御: （クリックで）handleSVGClick()関数で色を変更可能
                                 </span>
                             </div>
                         </td>
@@ -273,8 +268,8 @@
                         <td>
                             <p id="pText" style="color: rgb(44, 85, 48); font-size: 16px;">This Text is Green</p>
                             <span class="description">
-                                ・p标签:添加文本内容<br/>
-                                ・style属性:改变文本颜色、字体大小等
+                                ・p要素：テキストコンテンツを追加<br/>
+                                ・style属性：テキストの色やフォントサイズなどを変更
                             </span>
                         </td>
                     </tr>
@@ -293,14 +288,14 @@
                         onfocus="sliderFocusFuction()"
                         onblur="sliderBlurFuction()" ></input>
                             <span class="description">
-                                ・oninput:拖动滑块时实时触发sliderInputFuction()<br/>
-                                ・onclick:点击触发sliderClickFuction()<br/>
-                                ・onchange:滑块值发生变化且用户完成交互时触发sliderChangeFuction()<br/>
-                                ・onmousemove:鼠标在滑块上移动时实时触发sliderMouseMoveFuction()实时显示当前值的浮动提示框<br/>
-                                ・onmouseover:悬停触发sliderMouseOverFuction()增加滑块的不透明度<br/>
-                                ・onmouseout:移出触发sliderMouseOutFuction()移除值显示元素并降低滑块不透明度<br/>
-                                ・onfocus:点击聚焦圆点触发sliderFocusFuction()圆点变为深绿色<br/>
-                                ・onblur:点击失焦圆点触发sliderBlurFuction()圆点恢复默认颜色<br/> 
+                                ・oninput: スライダーのドラッグでsliderInputFuction()をリアルタイム呼び出し<br/>
+                                ・onclick: クリックでsliderClickFuction()を呼び出し<br/>
+                                ・onchange: 値が変更され、ユーザーの操作が完了した時にsliderChangeFuction()を呼び出し<br/>
+                                ・onmousemove: マウス移動でsliderMouseMoveFuction()を呼び出し、現在値をポップアップ表示<br/>
+                                ・onmouseover: ホバーでsliderMouseOverFuction()を呼び出し、不透明度を上げる<br/>
+                                ・onmouseout: マウスアウトでsliderMouseOutFuction()を呼び出し、値表示を削除し不透明度を下げる<br/>
+                                ・onfocus: 円をクリックでsliderFocusFuction()を呼び出し、深緑色に変更<br/>
+                                ・onblur: フーカスを失うとsliderBlurFuction()を呼び出し、デフォルト色に戻す<br/> 
                             </span>
                         </td>
                     </tr>
@@ -309,10 +304,10 @@
                         <td>
                             <progress id="progressBar" value="50" style="width: 94%;" max="100" />
                             <span class="description">
-                                ・progress标签:进度条<br/>
-                                ・value属性:设置进度条的当前值为50%<br/>
-                                ・max属性:设置进度条的最大值为100<br/>
-                                ・style属性:设置进度条的宽度<br/>
+                                ・progress要素: プログレスバー<br/>
+                                ・value属性: 現在値を50%に設定<br/>
+                                ・max属性: 最大値を100に設定<br/>
+                                ・style属性: プログレスバーの幅を設定<br/>
                             </span>
                         </td>
                         <td>Select Dropdown</td>
@@ -327,9 +322,9 @@
                                 <option value="100%">Option 4:set to 100%</option>
                             </select>
                             <span class="description">
-                                ・当前Select的功能：选择不同选项来更新进度条的值<br/>
-                                ・select标签：下拉菜单<br/>
-                                ・onchange事件：选择不同选项时触发selectChangeFuction1()更新进度条的值<br/>
+                                ・現在のSelect機能：異なるオプションを選択してプログレスバーの値を更新<br/>
+                                ・select要素：ドロップダウンメニュー<br/>
+                                ・onchangeイベント：オプション選択時にselectChangeFuction1()を呼び出してプログレスバーを更新<br/>
                             </span>
                         </td>   
                     </tr>
@@ -338,9 +333,9 @@
                         <td>
                             <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
                             <span class="description">
-                                ・meter标签：进度条<br/>
-                                ・value属性：设置进度条的当前值为25%<br/>
-                                ・style属性：设置进度条的宽度<br/>
+                                ・meter要素：進捗バー<br/>
+                                ・value属性：進捗バーの現在値を25%に設定<br/>
+                                ・style属性：進捗バーの幅を設定<br/>
                             </span>
                         </td>
                     </tr>
@@ -355,9 +350,9 @@
                                     src="data:text/html,&lt;body style='background-color:%23F2F6F8;'&gt;&lt;h4&gt;iFrame Text&lt;/h4&gt;&lt;/body&gt;">
                             </iframe>
                             <span class="description">
-                                ・iframe标签：内嵌框架<br/>
-                                ・scrolling属性：设置框架的滚动方式为no<br/>
-                                ・src属性：设置框架的源地址<br/>
+                                ・iframe要素：埋め込みフレーム<br/>
+                                ・scrolling属性：スクロールを無効化<br/>
+                                ・src属性：フレームのソースURLを設定<br/>
                             </span>
                            
                         </td>
@@ -368,7 +363,7 @@
                                     scrolling="no" 
                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="></iframe>
                             <span class="description">
-                                ・添加了base64编码的图片数据<br/>   
+                                ・base64エンコードされた画像データを追加<br/>   
                             </span>
                         </td>
                         <td style="padding: 4px 4px 3px 4px;">
@@ -379,8 +374,8 @@
                             src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
                             </iframe>
                             <span class="description">
-                                ・iframe标签：嵌入Google logo图片<br/>
-                                ・src属性：设置图片URL地址<br/>
+                                ・iframe要素：埋め込みGoogleロゴ画像<br/>
+                                ・src属性：画像のURLを設定<br/>
                             </span>
                         </td>
                     </tr>
@@ -390,8 +385,8 @@
                         <td>RadioButton 2:<input type="radio" id="radioButton2" name="radioGroup1" class="radioClass1" style="width: 30px;"/></td>
                         <td>RadioButton 3:<input type="radio" id="radioButton3" name="radioGroup1" class="radioClass1" style="width: 30px;"/>
                         <span class="description">
-                            ・radio标签：单选按钮<br/>
-                            ・name属性：要确定单选按钮(radio buttons)属于同一个组，关键是使用相同的name属性值<br/>
+                            ・radio要素：ラジオボタン<br/>
+                            ・name属性：同じname属性値で同一グループのラジオボタンを定義<br/>
                         </span>
                         </td>
                     </tr>
@@ -403,8 +398,8 @@
                             <input type="checkbox" id="checkBox2" name="checkBoxGroup2" class="checkBoxClassB" value="dog" />dog
                             <input type="checkbox" id="checkBox3" name="checkBoxGroup2" class="checkBoxClassB" value="goldfish" />goldfish
                             <span class="description">
-                                ・checkbox标签：复选框<br/>
-                                ・name属性：要确定复选框(checkboxes)属于同一个组，关键是使用相同的name属性值<br/>
+                                ・checkbox要素：チェックボックス<br/>
+                                ・name属性：同じname属性値で同一グループのチェックボックスを定義<br/>
                             </span>
                         </td>
                         <td style="padding: 3px 3px 7px 9px; height: 38px;" >
@@ -424,9 +419,9 @@
                                          %3C/html%3E">
                             </iframe>
                             <span class="description">
-                                ・在iframe中嵌入复选框<br/>
-                                ・使用data:text/html直接嵌入HTML内容<br/>
-                                ・scrolling='no'禁用滚动条<br/>
+                                ・iframeにチェックボックスを埋め込み<br/>
+                                ・data:text/htmlで直接HTMLコンテンツを埋め込み<br/>
+                                ・scrolling='no'でスクロールバーを無効化<br/>
                             </span>
                         </td>
                     </tr>
