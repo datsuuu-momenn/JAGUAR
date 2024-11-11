@@ -411,3 +411,29 @@ input[type="range"]:focus::-webkit-slider-thumb {
     background-color: var(--forest-dark);
     border-color: var(--forest-dark);
 }
+
+/* 元の色 #8FBC94 (RGB: 143, 188, 148) をより薄い色に変更 */
+#seleniumTable td[bgcolor="#8FBC94"] {
+    background-color: rgba(143, 188, 148, 0.2);  /* 透明度を上げて薄く */
+    border-left: 3px solid var(--forest-light); /* 左側のアクセント */
+}
+
+/* または、より明るい緑色の値を直接指定する場合 */
+#seleniumTable td[bgcolor="#B8D8BA"] {  /* より明るい緑色 (RGB: 184, 216, 186) */
+    background-color: #B8D8BA;
+    border-left: 3px solid var(--forest-light);
+}
+
+.function-show1 {
+    background-color: rgba(201, 225, 203, 0.4);  /* 透明度を0.4に設定してさらに淡く */
+}
+.function-show2 {
+    background-color: rgba(192, 246, 196, 0.4);  /* 透明度を0.4に設定してさらに淡く */
+}
+.function-show3 {
+    background-color: rgba(201, 225, 203, 0.4);  /* 透明度を0.4に設定してさらに淡く */
+}
+.function-show4 {
+    background-color: rgba(192, 246, 196, 0.4);  /* 透明度を0.4に設定してさらに淡く */
+}
+
