@@ -1,27 +1,42 @@
 function handleInputChange(element) {
+
     const inputValue = element.value;
     console.log('Input value changed:', inputValue);
 }
 
 function ClickDropdownFuction() {
     console.log('Dropdown clicked');
+
 }
 
 function hoverDropdownFunction() {
     console.log('Dropdown hovered');
+
+    // ドロップダウンホバーイベントの処理
+
 }
 
 function ClickLink1() {
     console.log('Link 1 clicked');
+
+    // リンク1クリックイベントの処理
+
 }
 
 function ClickLink2() {
     console.log('Link 2 clicked');
+
+    // リンク2クリックイベントの処理
+
 }
 
 function ClickLink3() {
     console.log('Link 3 clicked');
+
+    // リンク3クリックイベントの処理
 }
+
+// 使用RGB色のボタンクリックイベント処理関数
 
 function buttonFuction1() {
     const button = document.getElementById('myButton');
@@ -29,6 +44,7 @@ function buttonFuction1() {
     const pText = document.getElementById('pText');
     
     const colors = [
+
         { value: 'rgb(76, 175, 80)', name: '明るい緑' },
         { value: 'rgb(230, 57, 70)', name: '赤色' },   
         { value: 'rgb(33, 150, 243)', name: '明るい青' },
@@ -53,6 +69,9 @@ function buttonFuction1() {
     console.log('Next color will be:', colors[nextIndex].name);
 }
 
+
+// SVGインタラクション関数
+
 function handleSVGClick() {
     const rect = document.getElementById('svgRect');
     const colors = [
@@ -66,6 +85,8 @@ function handleSVGClick() {
     let currentIndex = parseInt(rect.getAttribute('data-color-index') || '0');
     currentIndex = (currentIndex + 1) % colors.length;
     
+
+    // 新しいアニメーション要素を作成
     const newAnimation = document.createElementNS("http://www.w3.org/2000/svg", "animate");
     newAnimation.setAttribute("attributeName", "fill");
     newAnimation.setAttribute("from", rect.style.fill || colors[currentIndex]);
@@ -73,6 +94,7 @@ function handleSVGClick() {
     newAnimation.setAttribute("dur", "0.5s");
     newAnimation.setAttribute("fill", "freeze");
     
+
     rect.appendChild(newAnimation);
     newAnimation.beginElement();
     
@@ -80,6 +102,14 @@ function handleSVGClick() {
     
     console.log('SVG color changed to:', colors[currentIndex]);
 }
+
+
+// Slider（スライダー）関連のイベント処理関数
+
+/**
+ * スライダーの入力イベントを処理
+ * ユーザーがスライダーをドラッグする時にリアルタイムで発火
+ */
 
 function sliderInputFuction() {
     const slider = document.getElementById('mySlider');
@@ -94,6 +124,12 @@ function sliderInputFuction() {
     console.log('Slider input value:', value);
 }
 
+
+/**
+ * スライダーのクリックイベントを処理
+ * ユーザーがスライダーまたはトラックをクリックした時に発火
+ */
+
 function sliderClickFuction() {
     const slider = document.getElementById('mySlider');
     const value = slider.value;
@@ -107,11 +143,22 @@ function sliderClickFuction() {
     console.log('Slider clicked at value:', value);
 }
 
+
+/**
+ * スライダーの値変更イベントを処理
+ * スライダーの値が変更され、ユーザーの操作が完了した時に発火
+ */
+
 function sliderChangeFuction() {
     const slider = document.getElementById('mySlider');
     console.log('Slider value changed to:', slider.value);
 }
 
+
+/**
+ * スライダー上のマウス移動イベントを処理
+ * 現在値のフローティングツールチップを表示
+ */
 function sliderMouseMoveFuction() {
     const slider = document.getElementById('mySlider');
     const value = slider.value;
@@ -137,6 +184,7 @@ function sliderMouseMoveFuction() {
     valueDisplay.style.left = `${mouseEvent.clientX + 10}px`;
     valueDisplay.style.top = `${mouseEvent.clientY - 35}px`;
     valueDisplay.textContent = `現在の入力値: ${value}`;
+
     
     console.log('Mouse moved over slider at value:', value);
 }
@@ -149,11 +197,13 @@ function sliderMouseOverFuction() {
 
 function sliderMouseOutFuction() {
     const slider = document.getElementById('mySlider');
+
     const valueDisplay = document.getElementById('sliderValueDisplay');
     if (valueDisplay) {
         valueDisplay.remove();
     }
     console.log('Mouse left slider area');
+
     slider.style.opacity = '0.7';
 }
 
@@ -173,6 +223,7 @@ function sliderBlurFuction() {
 }
 
 function selectChangeFuction1() {
+
     const select = document.getElementById('mySelect');
     const meterBar = document.getElementById('meterBar');
     const meterLabel = document.getElementById('meterLabel');
@@ -183,5 +234,6 @@ function selectChangeFuction1() {
     
     meterLabel.textContent = `HTML Meter: (${selectedValue}%)`;
     
+
     console.log('Select changed to:', selectedValue + '%');
 } 
