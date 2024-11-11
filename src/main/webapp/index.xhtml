@@ -184,7 +184,7 @@
                                 </span>
                             </div>
                         </td>
-                        <td>button</td>
+                        <td>button　⇓</td>
                         <td>
                             <button onclick="buttonFuction1()" 
                                     id="myButton" 
@@ -209,7 +209,7 @@
                                 </span>
                             </div>
                         </td>
-                        <td>Read-Only Text Field:</td>
+                        <td>Read-Only Text Field:　⇑</td>
                         <td>
                             <!-- 只读文本输入示例 -->
                             <div class="input-section">
@@ -219,13 +219,14 @@
                                        value="当前文字内容是只读状态"
                                        readonly="readonly"/>
                                 <span class="description">
-                                    ・可通过readonly属性，使文本框内容无法被修改
+                                    ・可通过readonly属性，使文本框内容无法被修改<br/>
+                                    ・可通过script.js中的上方的按钮的buttonFuction1()函数，改变文本颜色
                                 </span>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>HTML SVG with rect:</td>
+                        <td>HTML SVG with rect:　⇒</td>
                         <td>
                             <!-- SVG动画示例 -->
                             <div class="svg-section">
@@ -269,17 +270,29 @@
                                 </span>
                             </div>
                         </td>
-                        <td><p>Paragraph with Text</p></td>
+                        <td><p>Paragraph with Text:　⇑</p></td>
                         <td>
                             <p id="pText" style="color: rgb(44, 85, 48); font-size: 16px;">This Text is Green</p>
                             <span class="description">
                                 ・p标签:添加文本内容<br/>
-                                ・style属性:改变文本颜色、字体大小等
+                                ・style属性:改变文本颜色、字体大小等<br/>
+                                ・可通过script.js中的上方的按钮的buttonFuction1()函数，改变文本颜色
                             </span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Input Slider Control:</td>
+                        <td><label id="progressLabel" for="progressBar">Progress Bar: (50%)　⇒</label></td>
+                        <td>
+                            <progress id="progressBar" value="50" style="width: 94%;" max="100" />
+                            <span class="description">
+                                ・progress标签:进度条<br/>
+                                ・value属性:设置进度条的初始值为50%<br/>
+                                ・max属性:设置进度条的最大值为100<br/>
+                                ・style属性:设置进度条的宽度<br/>
+                                ・通过后方的slider标签的oninput和onclick事件，实时更新进度条的值<br/>
+                            </span>
+                        </td>
+                        <td>⇐　Input Slider Control:</td>
                         <td>
                         <input type="range" min="0" max="100" step="10"
                         id="mySlider" name="sliderName" value="50"
@@ -305,17 +318,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label id="progressLabel" for="progressBar">Progress Bar: (50%)</label></td>
+                        <td><label id="meterLabel" for="meterBar">HTML Meter: (25%)　⇒</label></td>
                         <td>
-                            <progress id="progressBar" value="50" style="width: 94%;" max="100" />
+                            <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
                             <span class="description">
-                                ・progress标签:进度条<br/>
-                                ・value属性:设置进度条的当前值为50%<br/>
-                                ・max属性:设置进度条的最大值为100<br/>
-                                ・style属性:设置进度条的宽度<br/>
+                                ・meter标签：进度条<br/>
+                                ・value属性：设置进度条的当前值为25%<br/>
+                                ・style属性：设置进度条的宽度<br/>
+                                ・通过后方的select标签的onchange事件，实时更新meter进度条的值<br/>
                             </span>
                         </td>
-                        <td>Select Dropdown</td>
+                        <td>⇐　Select Dropdown</td>
                         <td>
                             <select id="mySelect" name="selectName"
                             class="selectClass"
@@ -327,22 +340,11 @@
                                 <option value="100%">Option 4:set to 100%</option>
                             </select>
                             <span class="description">
-                                ・当前Select的功能：选择不同选项来更新进度条的值<br/>
+                                ・当前Select的功能：选择不同选项来更新前方的meter进度条的值<br/>
                                 ・select标签：下拉菜单<br/>
-                                ・onchange事件：选择不同选项时触发selectChangeFuction1()更新进度条的值<br/>
+                                ・onchange事件：选择不同选项时触发selectChangeFuction1()更新meter进度条的值<br/>
                             </span>
                         </td>   
-                    </tr>
-                    <tr>
-                        <td><label id="meterLabel" for="meterBar">HTML Meter: (25%)</label></td>
-                        <td>
-                            <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
-                            <span class="description">
-                                ・meter标签：进度条<br/>
-                                ・value属性：设置进度条的当前值为25%<br/>
-                                ・style属性：设置进度条的宽度<br/>
-                            </span>
-                        </td>
                     </tr>
                     <tr>
                         <td><div style="color: rgb(44, 85, 48);">Image in iFrame</div></td>

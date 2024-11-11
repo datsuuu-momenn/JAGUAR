@@ -36,12 +36,16 @@ function ClickLink3() {
 // 使用RGB颜色值的按钮点击事件处理函数
 function buttonFuction1() {
     const button = document.getElementById('myButton');
+    const readOnlyInput = document.getElementById('readOnlyInput');
+    const pText = document.getElementById('pText');
+    
+    // 修改为更亮的绿色
     const colors = [
-        { value: 'rgb(44, 85, 48)', name: '深绿色' },
-        { value: 'rgb(230, 57, 70)', name: '鲜红色' },
-        { value: 'rgb(29, 53, 87)', name: '深蓝色' },
-        { value: 'rgb(255, 183, 3)', name: '明黄色' },
-        { value: 'rgb(155, 93, 229)', name: '紫色' }
+        { value: 'rgb(76, 175, 80)', name: '亮绿色' },  // 更亮的绿色
+        { value: 'rgb(230, 57, 70)', name: '红色' },   
+        { value: 'rgb(33, 150, 243)', name: '亮蓝色' },  // 更亮的蓝色
+        { value: 'rgb(255, 183, 3)', name: '黄色' },   
+        { value: 'rgb(155, 93, 229)', name: '紫色' }   
     ];
     
     // 获取当前颜色索引
@@ -53,9 +57,13 @@ function buttonFuction1() {
     // 获取下一个颜色的索引
     const nextIndex = (currentIndex + 1) % colors.length;
     
-    // 应用当前颜色并显示下一个颜色的名称
+    // 应用当前颜色到所有元素
     button.style.color = colors[currentIndex].value;
     button.style.borderColor = colors[currentIndex].value;
+    readOnlyInput.style.color = colors[currentIndex].value;
+    pText.style.color = colors[currentIndex].value;
+    
+    // 更新按钮文本
     button.textContent = `点击变为${colors[nextIndex].name}`;
     
     // 保存当前颜色索引
@@ -106,7 +114,17 @@ function handleSVGClick() {
  */
 function sliderInputFuction() {
     const slider = document.getElementById('mySlider');
-    console.log('Slider input value:', slider.value);
+    const value = slider.value;
+
+    // 更新进度条
+    const progressBar = document.getElementById('progressBar');
+    progressBar.value = value;
+
+    // 更新进度条标签
+    const progressLabel = document.getElementById('progressLabel');
+    progressLabel.textContent = `Progress Bar: (${value}%)`;
+
+    console.log('Slider input value:', value);
 }
 
 /**
@@ -115,7 +133,17 @@ function sliderInputFuction() {
  */
 function sliderClickFuction() {
     const slider = document.getElementById('mySlider');
-    console.log('Slider clicked at value:', slider.value);
+    const value = slider.value;
+
+    // 更新进度条
+    const progressBar = document.getElementById('progressBar');
+    progressBar.value = value;
+
+    // 更新进度条标签
+    const progressLabel = document.getElementById('progressLabel');
+    progressLabel.textContent = `Progress Bar: (${value}%)`;
+
+    console.log('Slider clicked at value:', value);
 }
 
 /**
@@ -218,22 +246,22 @@ function sliderBlurFuction() {
 
 /**
  * 处理下拉菜单值改变事件
- * 根据选择的选项更新进度条的值和标签文本
+ * 根据选择的选项更新meter的值和标签文本
  */
 function selectChangeFuction1() {
     // 获取相关元素
     const select = document.getElementById('mySelect');
-    const progressBar = document.getElementById('progressBar');
-    const progressLabel = document.getElementById('progressLabel');
+    const meterBar = document.getElementById('meterBar');
+    const meterLabel = document.getElementById('meterLabel');
     
     // 获取选中的值（去掉百分号）
     const selectedValue = parseInt(select.value.replace('%', ''));
     
-    // 更新进度条的值
-    progressBar.value = selectedValue;
+    // 更新meter的值（转换为0-1之间的小数）
+    meterBar.value = selectedValue / 100;
     
-    // 更新进度条标签文本
-    progressLabel.textContent = `Progress Bar: (${selectedValue}%)`;
+    // 更新meter标签文本
+    meterLabel.textContent = `HTML Meter: (${selectedValue}%)`;
     
     // 输出日志
     console.log('Select changed to:', selectedValue + '%');
