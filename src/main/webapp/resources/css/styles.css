@@ -215,7 +215,7 @@ body::before {
 
 /* Selenium测试表单样式 */
 #seleniumForm {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 8px;
     padding: 20px;
     margin-top: 30px;
@@ -224,8 +224,17 @@ body::before {
 
 #seleniumTable {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#seleniumTable td {
+    padding: 15px;
+    border: 1px solid var(--forest-light);
+    vertical-align: top;
 }
 
 #seleniumTableBody td {
@@ -241,6 +250,36 @@ body::before {
     margin: 0 0 10px 0;
     padding-bottom: 5px;
     border-bottom: 2px solid var(--forest-light);
+}
+
+/* 左端の列に二重線を追加 */
+#seleniumTable td:first-child {
+    border-left: 3px double var(--forest-light);
+}
+
+/* 中央の縦線を二重線に（重複を避ける） */
+#seleniumTable td:nth-child(2) {
+    border-right: none;  /* 右側の線を削除 */
+}
+
+#seleniumTable td:nth-child(3) {
+    border-left: 3px double var(--forest-light);  /* 左側だけに二重線 */
+}
+
+/* 右端の列に二重線を追加 */
+#seleniumTable td:last-child {
+    border-right: 3px double var(--forest-light);
+}
+
+/* 横線を二重線に変更（重複を避ける） */
+#seleniumTable tr td {
+    border-bottom: none;  /* 下側の線を削除 */
+    border-top: 3px double var(--forest-light);  /* 上側だけに二重線 */
+}
+
+/* 最後の行の下の線を二重線に */
+#seleniumTable tr:last-child td {
+    border-bottom: 3px double var(--forest-light);
 }
 
 /* 下拉菜单样式 */
@@ -425,15 +464,24 @@ input[type="range"]:focus::-webkit-slider-thumb {
 }
 
 .function-show1 {
-    background-color: rgba(201, 225, 203, 0.4);  /* 透明度を0.4に設定してさらに淡く */
+    background-color: rgba(175, 197, 177, 0.4);  /* 透明度を0.4に設定してさらに淡く */
 }
 .function-show2 {
     background-color: rgba(192, 246, 196, 0.4);  /* 透明度を0.4に設定してさらに淡く */
 }
 .function-show3 {
-    background-color: rgba(201, 225, 203, 0.4);  /* 透明度を0.4に設定してさらに淡く */
+    background-color: rgba(186, 209, 188, 0.4);  /* 透明度を0.4に設定してさらに淡く */
 }
 .function-show4 {
     background-color: rgba(192, 246, 196, 0.4);  /* 透明度を0.4に設定してさらに淡く */
 }
+
+/* 表の第1行のスタイル */
+#seleniumTable tr:first-child td {
+    text-align: center;      /* 水平方向の中央揃え */
+    vertical-align: middle;  /* 垂直方向の中央揃え */
+    padding: 15px;
+}
+
+
 

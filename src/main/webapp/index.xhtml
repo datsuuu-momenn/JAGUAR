@@ -22,7 +22,7 @@
                     <h:outputLabel for="inputTitle" value="タイトル: " styleClass="form-label"/>
                     <h:inputText id="inputTitle" value="#{taskBean.title}" 
                                required="true" 
-                               requiredMessage="タイトルを入力してください"
+                               requiredMessage="タイトルを入力し��ください"
                                validatorMessage="タイトルは3-50文字で入力してください">
                         <f:validateLength minimum="3" maximum="50"/>
                     </h:inputText>
@@ -107,8 +107,7 @@
         <h:form id="seleniumForm">
             <h1>seleniumテスト用ページ</h1>
             <h2>開発作業支援システム</h2>
-            <!-- 「Automation Practice」は、自動化の実践や演習 -->
-            <h3>オートメーションプラクティス</h3>
+            <p style="text-align: right;text-decoration: underline;font-weight: bold;">point:相互作用するモジュールは同じ色で表示される</p>
             <table>
                 <tbody>
                     <tr>
@@ -125,7 +124,7 @@
                                     <a id="dropOption2" onclick="ClickLink2()">クリックでClickLink2()関数を呼び出し</a><br/>
                                     <a id="dropOption3" onclick="ClickLink3()">クリックでClickLink3()関数を呼び出し</a><br/>
                                 </div>
-                        <td class="function-show1">
+                        <td >
                             <span class="description">
                                 ・ドロップダウンボタンとコンテンツ、マウスポインターがデフォルトと手型に変更<br/>
                                 ・onclickイベントでscript.jsのClickDropdownFuction()関数を呼び出し<br/>
@@ -139,6 +138,20 @@
             </table>
             <table id="seleniumTable">
                 <tbody id="seleniumTableBody">
+                    <tr>
+                        <td>
+                            <h3>要素名</h3>
+                        </td>
+                        <td>
+                            <h3>使用例</h3>
+                        </td>
+                        <td>
+                            <h3>要素名</h3>
+                        </td>
+                        <td>
+                            <h3>使用例</h3>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Text input Field:</td>
                         <td>
