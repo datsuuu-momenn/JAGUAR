@@ -16,6 +16,7 @@
         <h:form id="form">
             <!-- タスク追加部分 -->
             <h:panelGroup layout="block" styleClass="form-section">
+
                 <h2><h:outputText value="新規タスク追加"/></h2>
                 <div>
                     <h:outputLabel for="inputTitle" value="タイトル: " styleClass="form-label"/>
@@ -141,6 +142,7 @@
                     <tr>
                         <td>Text input Field:</td>
                         <td>
+
                             <div class="input-section">
                                 <label for="myTextInput">【入力イベントハンドラー】</label>
                                 <input type="text" 
@@ -148,12 +150,14 @@
                                        oninput="handleInputChange(this)" 
                                        placeholder="テキストを入力して関数を呼び出す..."/>
                                 <span class="description">
-                                    ・テキスト入力時にoninputイベントが発生し、script.jsのhandleInputChange()関数を呼び出し
+                                    ・ユーザーが入力フィールドに文字を入力すると、oninputイベントがトリガーされ、script.jsのhandleInputChange()関数が呼び出される
                                 </span>
                             </div>
                         </td>
                         <td>Textarea:</td>
                         <td>
+
+                            <!-- サイズ調整可能なテキストエリア -->
                             <div class="textarea-section">
                                 <label for="myTextInput">【サイズ調整可能なテキストエリア】</label>
                                 <textarea id="myTextarea" 
@@ -163,6 +167,7 @@
                                          cols="28" 
                                          placeholder="サイズ調整可能なテキストエリア..."></textarea>
                                 <span class="description">
+
                                     ・右下のハンドルでテキストエリアのサイズを調整可能
                                 </span>
                             </div>
@@ -171,6 +176,8 @@
                     <tr>
                         <td>Pre-Filled Text Field:</td>
                         <td>
+
+                            <!-- 事前入力テキストフィールド -->
                             <div class="pre-filled-input-section">
                                 <input type="text" 
                                        value="Text....." 
@@ -181,7 +188,7 @@
                                 </span>
                             </div>
                         </td>
-                        <td>button</td>
+                        <td>button　⇓</td>
                         <td>
                             <button onclick="buttonFuction1()" 
                                     id="myButton" 
@@ -195,6 +202,7 @@
                     <tr>
                         <td>placeholder Text Field:</td>
                         <td>
+
                             <div class="input-section">
                                 <label for="placeholderTextInput">【プレースホルダー入力欄】</label>
                                 <input type="text"
@@ -205,22 +213,26 @@
                                 </span>
                             </div>
                         </td>
-                        <td>Read-Only Text Field:</td>
+                        <td>Read-Only Text Field:　⇑</td>
                         <td>
+                          
+                            <!-- 読み取り専用テキスト入力例 -->
                             <div class="input-section">
                                 <label for="readOnlyInput">【読み取り専用入力欄】</label>
                                 <input type="text"
                                        id="readOnlyInput"
-                                       value="この文字列は読み取り専用です"
+                                       value="このテキストは読み取り専用です"
                                        readonly="readonly"/>
                                 <span class="description">
-                                    ・readonly属性で、テキストの変更を禁止
+                                    ・readonly属性を使用して、テキストボックスの内容を変更できないようにする<br/>
+                                    ・script.jsの上部のボタンのbuttonFuction1()関数を使用してテキストの色を変更
                                 </span>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>SVGアニメーション例</td>
+
+                        <td>HTML SVG with rect:　⇒</td>
                         <td>
                             <!-- SVGアニメーション例 -->
                             <div class="svg-section">
@@ -256,25 +268,38 @@
                                     </rect>
                                 </svg>
                                 <span class="description">
-                                    ・SVG四角形要素は複数のアニメーショントリガーをサポート：<br/>
-                                    1. mouseover: マウスホバーで塗りつぶし色を変更<br/>
-                                    2. mouseout: マウスアウトで元の色に戻る<br/>
-                                    3. click: （初回）クリックで枠線の太さを増加<br/>
-                                    4. JavaScript制御: （クリックで）handleSVGClick()関数で色を変更可能
+
+                                    ・SVG矩形要素のアニメーショントリガー：<br/>
+                                    1. mouseover: マウスが矩形要素上に重なった時に色を変更<br/>
+                                    2. mouseout: マウスが矩形要素から離れた時に色を元に戻す<br/>
+                                    3. click: （初回）クリック時に枠線の幅を増加<br/>
+                                    4. JavaScript制御: （クリックトリガー）handleSVGClick()関数を使用して色を変更
                                 </span>
                             </div>
                         </td>
-                        <td><p>Paragraph with Text</p></td>
+                        <td><p>Paragraph with Text:　⇑</p></td>
                         <td>
                             <p id="pText" style="color: rgb(44, 85, 48); font-size: 16px;">This Text is Green</p>
                             <span class="description">
-                                ・p要素：テキストコンテンツを追加<br/>
-                                ・style属性：テキストの色やフォントサイズなどを変更
+                                ・p要素:テキストを追加<br/>
+                                ・style属性:テキストの色、フォントサイズなどを変更<br/>
+                                ・script.jsの上部のボタンのbuttonFuction1()関数を使用してテキストの色を変更
                             </span>
                         </td>
                     </tr>
                     <tr>
-                        <td>Input Slider Control:</td>
+                        <td><label id="progressLabel" for="progressBar">Progress Bar: (50%)　⇒</label></td>
+                        <td>
+                            <progress id="progressBar" value="50" style="width: 94%;" max="100" />
+                            <span class="description">
+                                ・progress要素:進捗バー<br/>
+                                ・value属性:進捗バーの初期値を50%に設定<br/>
+                                ・max属性:進捗バーの最大値を100に設定<br/>
+                                ・style属性:進捗バーの幅を設定<br/>
+                                ・script.jsの後方のslider要素のoninputとonclickイベントを使用して、進捗バーの値をリアルタイムで更新<br/>
+                            </span>
+                        </td>
+                        <td>⇐　Input Slider Control:</td>
                         <td>
                         <input type="range" min="0" max="100" step="10"
                         id="mySlider" name="sliderName" value="50"
@@ -288,29 +313,32 @@
                         onfocus="sliderFocusFuction()"
                         onblur="sliderBlurFuction()" ></input>
                             <span class="description">
-                                ・oninput: スライダーのドラッグでsliderInputFuction()をリアルタイム呼び出し<br/>
+
+                                ・oninput: スライダーをドラッグ時にsliderInputFuction()をリアルタイムで呼び出し<br/>
+
                                 ・onclick: クリックでsliderClickFuction()を呼び出し<br/>
                                 ・onchange: 値が変更され、ユーザーの操作が完了した時にsliderChangeFuction()を呼び出し<br/>
                                 ・onmousemove: マウス移動でsliderMouseMoveFuction()を呼び出し、現在値をポップアップ表示<br/>
                                 ・onmouseover: ホバーでsliderMouseOverFuction()を呼び出し、不透明度を上げる<br/>
                                 ・onmouseout: マウスアウトでsliderMouseOutFuction()を呼び出し、値表示を削除し不透明度を下げる<br/>
-                                ・onfocus: 円をクリックでsliderFocusFuction()を呼び出し、深緑色に変更<br/>
-                                ・onblur: フーカスを失うとsliderBlurFuction()を呼び出し、デフォルト色に戻す<br/> 
+
+                                ・onfocus: つまみをクリックでsliderFocusFuction()を呼び出し、深緑色に変更<br/>
+                                ・onblur: フォーカスを失うとsliderBlurFuction()を呼び出し、デフォルト色に戻す<br/>
                             </span>
                         </td>
                     </tr>
                     <tr>
-                        <td><label id="progressLabel" for="progressBar">Progress Bar: (50%)</label></td>
+                        <td><label id="meterLabel" for="meterBar">HTML Meter: (25%)　⇒</label></td>
                         <td>
-                            <progress id="progressBar" value="50" style="width: 94%;" max="100" />
+                            <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
                             <span class="description">
-                                ・progress要素: プログレスバー<br/>
-                                ・value属性: 現在値を50%に設定<br/>
-                                ・max属性: 最大値を100に設定<br/>
-                                ・style属性: プログレスバーの幅を設定<br/>
+                                ・meter要素：メーター<br/>
+                                ・value属性：メーターの初期値を0.25に設定<br/>
+                                ・style属性：メーターの幅を設定<br/>
+                                ・後方のselect要素のonchangeイベントを使用して、メーターの値をリアルタイムで更新<br/>
                             </span>
                         </td>
-                        <td>Select Dropdown</td>
+                        <td>⇐　Select Dropdown</td>
                         <td>
                             <select id="mySelect" name="selectName"
                             class="selectClass"
@@ -322,27 +350,17 @@
                                 <option value="100%">Option 4:set to 100%</option>
                             </select>
                             <span class="description">
-                                ・現在のSelect機能：異なるオプションを選択してプログレスバーの値を更新<br/>
+                                ・現在のSelect機能：異なるオプションを選択して前方のメーターの値を更新<br/>
                                 ・select要素：ドロップダウンメニュー<br/>
-                                ・onchangeイベント：オプション選択時にselectChangeFuction1()を呼び出してプログレスバーを更新<br/>
+                                ・onchangeイベント：異なるオプションを選択時にselectChangeFuction1()を呼び出してメーターを更新<br/>
                             </span>
                         </td>   
-                    </tr>
-                    <tr>
-                        <td><label id="meterLabel" for="meterBar">HTML Meter: (25%)</label></td>
-                        <td>
-                            <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
-                            <span class="description">
-                                ・meter要素：進捗バー<br/>
-                                ・value属性：進捗バーの現在値を25%に設定<br/>
-                                ・style属性：進捗バーの幅を設定<br/>
-                            </span>
-                        </td>
                     </tr>
                     <tr>
                         <td><div style="color: rgb(44, 85, 48);">Image in iFrame</div></td>
                         <td style="padding: 4px 4px 3px 4px;">
                             <!-- Text iframe -->
+                            <!-- テキストiframe -->
                             <iframe id="myIframe2" 
                                     name="iframeName2" 
                                     class="iframeClass2" 
@@ -351,7 +369,7 @@
                             </iframe>
                             <span class="description">
                                 ・iframe要素：埋め込みフレーム<br/>
-                                ・scrolling属性：スクロールを無効化<br/>
+                                ・scrolling属性：スクロール方式を無効に設定<br/>
                                 ・src属性：フレームのソースURLを設定<br/>
                             </span>
                            
@@ -374,8 +392,8 @@
                             src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
                             </iframe>
                             <span class="description">
-                                ・iframe要素：埋め込みGoogleロゴ画像<br/>
-                                ・src属性：画像のURLを設定<br/>
+                                ・iframe要素：Googleロゴ画像を埋め込む<br/>
+                                ・src属性：画像のURLアドレスを設定<br/>
                             </span>
                         </td>
                     </tr>
@@ -386,7 +404,7 @@
                         <td>RadioButton 3:<input type="radio" id="radioButton3" name="radioGroup1" class="radioClass1" style="width: 30px;"/>
                         <span class="description">
                             ・radio要素：ラジオボタン<br/>
-                            ・name属性：同じname属性値で同一グループのラジオボタンを定義<br/>
+                            ・name属性：同じグループのラジオボタンを定義するには、同じname属性値を使用する<br/>
                         </span>
                         </td>
                     </tr>
@@ -394,12 +412,12 @@
                         <td style="width: 150px;">
                             CheckBoxes:</td>
                             <td>
-                            <input type="checkbox" id="checkBox1" name="checkBoxGroup2" class="checkBoxClassB" value="cat" />cat
-                            <input type="checkbox" id="checkBox2" name="checkBoxGroup2" class="checkBoxClassB" value="dog" />dog
-                            <input type="checkbox" id="checkBox3" name="checkBoxGroup2" class="checkBoxClassB" value="goldfish" />goldfish
+                            <input type="checkbox" id="checkBox1" name="checkBoxGroup2" class="checkBoxClassB" value="猫" />猫
+                            <input type="checkbox" id="checkBox2" name="checkBoxGroup2" class="checkBoxClassB" value="犬" />犬
+                            <input type="checkbox" id="checkBox3" name="checkBoxGroup2" class="checkBoxClassB" value="金魚" />金魚
                             <span class="description">
                                 ・checkbox要素：チェックボックス<br/>
-                                ・name属性：同じname属性値で同一グループのチェックボックスを定義<br/>
+                                ・name属性：同じグループのチェックボックスを定義するには、同じname属性値を使用する<br/>
                             </span>
                         </td>
                         <td style="padding: 3px 3px 7px 9px; height: 38px;" >
@@ -414,13 +432,13 @@
                                          %3Chtml%3E
                                              %3Cbody%3E
                                                  %3Cinput type='checkbox' id='frameCheckbox'%3E 
-                                                 %3Clabel for='frameCheckbox'%3ECheckBox in iFrame%3C/label%3E
+                                                 %3Clabel for='frameCheckbox'%3EiFrame内のチェックボックス%3C/label%3E
                                              %3C/body%3E
                                          %3C/html%3E">
                             </iframe>
                             <span class="description">
-                                ・iframeにチェックボックスを埋め込み<br/>
-                                ・data:text/htmlで直接HTMLコンテンツを埋め込み<br/>
+                                ・iframeにチェックボックスを埋め込む<br/>
+                                ・data:text/htmlで直接HTMLコンテンツを埋め込む<br/>
                                 ・scrolling='no'でスクロールバーを無効化<br/>
                             </span>
                         </td>
