@@ -22,7 +22,7 @@
                     <h:outputLabel for="inputTitle" value="タイトル: " styleClass="form-label"/>
                     <h:inputText id="inputTitle" value="#{taskBean.title}" 
                                required="true" 
-                               requiredMessage="タイトルを入力し��ください"
+                               requiredMessage="タイトルを入力しください"
                                validatorMessage="タイトルは3-50文字で入力してください">
                         <f:validateLength minimum="3" maximum="50"/>
                     </h:inputText>
@@ -124,7 +124,7 @@
                                     <a id="dropOption2" onclick="ClickLink2()">クリックでClickLink2()関数を呼び出し</a><br/>
                                     <a id="dropOption3" onclick="ClickLink3()">クリックでClickLink3()関数を呼び出し</a><br/>
                                 </div>
-                        <td >
+                        <td>
                             <span class="description">
                                 ・ドロップダウンボタンとコンテンツ、マウスポインターがデフォルトと手型に変更<br/>
                                 ・onclickイベントでscript.jsのClickDropdownFuction()関数を呼び出し<br/>
@@ -136,6 +136,7 @@
                     </tr>
                 </tbody>
             </table>
+            
             <table id="seleniumTable">
                 <tbody id="seleniumTableBody">
                     <tr>
@@ -151,46 +152,116 @@
                         <td>
                             <h3>使用例</h3>
                         </td>
+                        <td>
+                            <h3>DBテスト結果</h3>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Text input Field:</td>
+                        <td>Text input Field:<br/>
+                            <label for="myTextInput" class="form-label">【新規ユーザ名を設定】</label>
+                        </td>
                         <td>
 
                             <div class="input-section">
-                                <label for="myTextInput">【入力イベントハンドラー】</label>
+                                <p for="myTextInput">【入力イベントハンドラー】</p>
                                 <input type="text" 
                                        id="myTextInput" 
+                                       value="#{userBean.username}"
                                        oninput="handleInputChange(this)" 
-                                       placeholder="テキストを入力して関数を呼び出す..."/>
+                                       placeholder="テキストを入力して関数を呼び出す..."
+                                       required="true"
+                                       requiredMessage="ユーザー名を入力してください">
+                                </input>
                                 <span class="description">
                                     ・ユーザーが入力フィールドに文字を入力すると、oninputイベントがトリガーされ、script.jsのhandleInputChange()関数が呼び出される
                                 </span>
                             </div>
                         </td>
-                        <td>Textarea:</td>
+                        <td>Textarea:<br/>
+                            <label for="myTextarea" class="form-label">【パスワードを設定】</label>
+                        </td>
                         <td>
 
                             <!-- サイズ調整可能なテキストエリア -->
                             <div class="textarea-section">
-                                <label for="myTextInput">【サイズ調整可能なテキストエリア】</label>
+                                <p for="myTextarea">【サイズ調整可能なテキストエリア】</p>
                                 <textarea id="myTextarea" 
                                          name="textareaName" 
                                          class="textareaClass area1" 
                                          rows="2" 
                                          cols="28" 
-                                         placeholder="サイズ調整可能なテキストエリア..."></textarea>
+                                         placeholder="サイズ調整可能なテキストエリア..."
+                                         value="#{userBean.password}"
+                                         required="true"
+                                         requiredMessage="パスワードを入力してください"></textarea>
                                 <span class="description">
-
                                     ・右下のハンドルでテキストエリアのサイズを調整可能
                                 </span>
                             </div>
+                            
+                            
+                                <!-- <div class="input-section">
+                                    <h:outputLabel for="username" value="ユーザー名:" styleClass="form-label"/>
+                                    <h:inputText id="username" 
+                                                value="#{userBean.username}"
+                                                required="true"
+                                                requiredMessage="ユーザー名を入力してください"
+                                                validatorMessage="ユーザー名は3-50文字で入力してください">
+                                        <f:validateLength minimum="3" maximum="50"/>
+                                    </h:inputText>
+                                    <h:message for="username" styleClass="error-message"/>
+                                </div>
+
+                                <div class="textarea-section">
+                                    <h:outputLabel for="password" value="パスワード:" styleClass="form-label"/>
+                                    <h:inputSecret id="password"
+                                                  value="#{userBean.password}"
+                                                  required="true"
+                                                  requiredMessage="パスワードを入力してください"
+                                                  validatorMessage="パスワードは6-100文字で入力してください">
+                                        <f:validateLength minimum="6" maximum="100"/>
+                                    </h:inputSecret>
+                                    <h:message for="password" styleClass="error-message"/>
+                                </div> -->
+
+                            <!-- 注册按钮和结果显示区域 -->
+                            <h:form id="signupForm">
+                                
+                                
+                                <!-- 注册按钮 -->
+                                <h:commandButton value="新規ユーザー追加" id="signupButton">
+                                    <f:ajax execute="@form" 
+                                            render="resultSection"
+                                            listener="#{userBean.signup}"/>
+                                </h:commandButton>
+                                
+                                <!-- 结果显示区域 -->
+                                <h:panelGroup id="resultSection">
+                                    <!-- 消息显示 -->
+                                    <h:messages id="signupMessages" 
+                                            globalOnly="true" 
+                                            styleClass="messages"/>
+                                    
+                                    <!-- 用户信息显示 -->
+                                    <h:panelGroup rendered="#{userBean.newUser != null}" 
+                                                styleClass="user-info">
+                                        <h4>登録完了</h4>
+                                        <p>ユーザー情報：</p>
+                                        <div class="user-details">
+                                            <p>ID: <h:outputText value="#{userBean.newUser.id}" /></p>
+                                            <p>ユーザー名: <h:outputText value="#{userBean.newUser.username}" /></p>
+                                        </div>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </h:form>
                         </td>
                     </tr>
                     <tr>
-                        <td>Pre-Filled Text Field:</td>
+                        <td>Pre-Filled Text Field:<br/>
+                            <p for="myTextInput2">【事前入力テキストフィールド】</p>
+                        </td>
                         <td>
-
-                            <!-- 事前入力テキストフィールド -->
+                            <!-- 事前入力テキストフールド -->
                             <div class="pre-filled-input-section">
                                 <input type="text" 
                                        value="Text....." 
@@ -217,7 +288,7 @@
                         <td>
 
                             <div class="input-section">
-                                <label for="placeholderTextInput">【プレースホルダー入力欄】</label>
+                                <p for="placeholderTextInput">【プレースホルダー入力欄】</p>
                                 <input type="text"
                                        id="placeholderTextInput"
                                        placeholder="テキストを入力してください..."/>
@@ -231,7 +302,7 @@
                           
                             <!-- 読み取り専用テキスト入力例 -->
                             <div class="input-section">
-                                <label for="readOnlyInput">【読み取り専用入力欄】</label>
+                                <p for="readOnlyInput">【読み取り専用入力欄】</p>
                                 <input type="text"
                                        id="readOnlyInput"
                                        value="このテキストは読み取り専用です"
@@ -296,9 +367,10 @@
                             <span class="description">
                                 ・p要素:テキストを追加<br/>
                                 ・style属性:テキストの色、フォントサイズなどを変更<br/>
-                                ・script.jsの上部のボタンのbuttonFuction1()関数を使用してテキストの色を変更
+                                ・script.jsの上部のボタンのbuttonFuction1()関数を使用してキストの色を変更
                             </span>
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td class="function-show2"><label id="progressLabel" for="progressBar">Progress Bar: (50%)　⇒</label></td>
@@ -330,7 +402,7 @@
                                 ・oninput: スライダーをドラッグ時にsliderInputFuction()をリアルタイムで呼び出し<br/>
 
                                 ・onclick: クリックでsliderClickFuction()を呼び出し<br/>
-                                ・onchange: 値が変更され、ユーザーの操作が完了した時にsliderChangeFuction()を呼び出し<br/>
+                                ・onchange: 値が変され、ユーザーの作が完了した時にsliderChangeFuction()を呼び出し<br/>
                                 ・onmousemove: マウス移動でsliderMouseMoveFuction()を呼び出し、現在値をポップアップ表示<br/>
                                 ・onmouseover: ホバーでsliderMouseOverFuction()を呼び出し、不透明度を上げる<br/>
                                 ・onmouseout: マウスアウトでsliderMouseOutFuction()を呼び出し、値表示を削除し不透明度を下げる<br/>

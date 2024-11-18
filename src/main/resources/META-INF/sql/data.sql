@@ -3,3 +3,6 @@ INSERT INTO tasks (title) VALUES ('This is the task-2');
 INSERT INTO tasks (title) VALUES ('This is the task-3');
 INSERT INTO tasks (title) VALUES ('This is the task-4');
 INSERT INTO tasks (title) VALUES ('This is the task-5');
+
+
+INSERT INTO users (username, password) VALUES ('admin', 'admin123');

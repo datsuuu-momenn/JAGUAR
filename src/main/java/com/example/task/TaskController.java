@@ -31,9 +31,10 @@ public class TaskController {
         this.em.flush();
         this.em.refresh(newTask);
         
+        
         return newTask;
     }
-
+    
     public Task delete(Long id) {
 
         // IDが存在するか確認

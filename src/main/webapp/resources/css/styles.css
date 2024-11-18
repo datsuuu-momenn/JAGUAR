@@ -129,9 +129,14 @@ div.main {
 
 .form-label {
     display: inline-block;
-    width: 100px;
-    margin-right: 10px;
-    color: var(--forest-dark);
+    padding: 6px 12px;
+    background-color: #a2c0a0;
+    border-radius: 4px;
+    border-left: 4px solid #2c5530;  /* 深绿色边框 */
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .error-message {
@@ -376,7 +381,7 @@ body::before {
     }
 }
 
-/* 按钮样式 */
+/* 按样式 */
 #myButton {
     padding: 8px 15px;
     border: 2px solid #2C5530;
@@ -481,6 +486,57 @@ input[type="range"]:focus::-webkit-slider-thumb {
     text-align: center;      /* 水平方向の中央揃え */
     vertical-align: middle;  /* 垂直方向の中央揃え */
     padding: 15px;
+}
+
+/* ラベルのスタイル */
+.input-section label {
+    display: inline-block;
+    background-color: var(--forest-medium);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* ラベルの右側の三角形 */
+.input-section label:after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 8px solid var(--forest-medium);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+/* ホバー時のエフェクト */
+.input-section label:hover {
+    background-color: var(--forest-dark);
+}
+
+.input-section label:hover:after {
+    border-left-color: var(--forest-dark);
+}
+
+/* フォーカス時のスタイル */
+.input-section input:focus + label {
+    background-color: var(--forest-dark);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.input-section input:focus + label:after {
+    border-left-color: var(--forest-dark);
+}
+
+/* 悬停效果 */
+.form-label:hover {
+    background-color: #e8e8e8;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
 }
 
 
