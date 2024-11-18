@@ -100,112 +100,7 @@
             <h:messages id="messages" globalOnly="true" styleClass="messages"/>
         </h:panelGroup>
     </div>
-
-    <div class="userMain">
-        <h:form id="signupForm">
-                        <!-- <td>Text input Field:<br/>
-                            <label for="myTextInput" class="form-label">【新規ユーザ名を設定】</label>
-                        </td>
-                        <td>
-
-                            <div class="input-section">
-                                <p for="myTextInput">【入力イベントハンドラー】</p>
-                                <h:inputText id="myTextInput" 
-                                       value="#{userBean.username}"
-                                       oninput="handleInputChange(this)" 
-                                       placeholder="テキストを入力して関数を呼び出す..."
-                                       required="true"
-                                       requiredMessage="ユーザー名を入力してください">
-                                </h:inputText>
-                                <span class="description">
-                                    ・ユーザーが入力フィールドに文字を入力すると、oninputイベントがトリガーされ、script.jsのhandleInputChange()関数が呼び出される
-                                </span>
-                            </div>
-                        </td>
-                        <td>Textarea:<br/>
-                            <label for="myTextarea" class="form-label">【パスワードを設定】</label>
-                        </td>
-                        <td>
-                        -->
-
-                            <!-- サイズ調整可能なテキストエリア -->
-                            <!-- <div class="textarea-section">
-                                <p for="myTextarea">【サイズ調整可能なテキストエリア】</p>
-                                <h:inputTextarea id="myTextarea" 
-                                         value="#{userBean.password}"
-                                         name="textareaName" 
-                                         class="textareaClass area1" 
-                                         rows="2" 
-                                         cols="28" 
-                                         placeholder="サイズ調整可能なテキストエリア..."
-                                         required="true"
-                                         requiredMessage="パスワードを入力してください"></h:inputTextarea>
-                                <span class="description">
-                                    ・右下のハンドルでテキストエリアのサイズを調整可能
-                                </span>
-                            </div>  -->
-            <h:panelGroup id="inputSection" layout="block">
-            
-                <div class="input-section">
-                    <h:outputLabel for="username" value="ユーザー名:" styleClass="form-label"/>
-                    <h:inputText id="username" 
-                                value="#{userBean.username}"
-                                required="true"
-                                requiredMessage="ユーザー名を入力してください"
-                                validatorMessage="ユーザー名は3-50文字で入力してください">
-                        <f:validateLength minimum="3" maximum="50"/>
-                    </h:inputText>
-                    <h:message for="username" styleClass="error-message"/>
-                </div>
-
-                <div class="textarea-section">
-                    <h:outputLabel for="password" value="パスワード:" styleClass="form-label"/>
-                    <h:inputSecret id="password"
-                                    value="#{userBean.password}"
-                                    required="true"
-                                    requiredMessage="パスワードを入力してください"
-                                    validatorMessage="パスワードは6-100文字で入力してください">
-                        <f:validateLength minimum="6" maximum="100"/>
-                    </h:inputSecret>
-                    <h:message for="password" styleClass="error-message"/>
-                </div>
-
-                
-                <!-- 注册按钮 -->
-                <h:commandButton value="新規ユーザー追加" id="signupButton">
-                    <f:ajax execute="username password" 
-                            render="resultSection userListSection"
-                            listener="#{userBean.signup}"/>
-                </h:commandButton>
-            
-            </h:panelGroup>
-        </h:form>
-
-    <h:panelGroup id="resultSection" layout="block">
-        <h2><h:outputText value="ユーザーリスト"/></h2>
-        <h:dataTable id="userTable" value="#{userBean.allUsers}" var="row" 
-                    title="ユーザーリスト" styleClass="results">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="ID"/>
-                </f:facet>
-                <h:outputText value="#{row.id}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="ユーザー名"/>
-                </f:facet>
-                <h:outputText value="#{row.username}"/>
-            </h:column>
-        </h:dataTable>
-        <h:messages id="userListSection" globalOnly="true" styleClass="messages"/>
-    </h:panelGroup>
-                        
         
-    </div>
-
-
     
     <div class="seleniumMain">
     <!-- seleniumテスト用ページ-->
@@ -264,63 +159,189 @@
                     <tr>
                         <td>
                         <!-- 注册按钮和结果显示区域 -->
-                    
+                    <h:form id="signupForm">
+                        <!-- <td>Text input Field:<br/>
+                            <label for="myTextInput" class="form-label">【新規ユーザ名を設定】</label>
+                        </td>
+                        <td>
+
+                            <div class="input-section">
+                                <p for="myTextInput">【入力イベントハンドラー】</p>
+                                <h:inputText id="myTextInput" 
+                                       value="#{userBean.username}"
+                                       oninput="handleInputChange(this)" 
+                                       placeholder="テキストを入力して関数を呼び出す..."
+                                       required="true"
+                                       requiredMessage="ユーザー名を入力してください">
+                                </h:inputText>
+                                <span class="description">
+                                    ・ユーザーが入力フィールドに文字を入力すると、oninputイベントがトリガーされ、script.jsのhandleInputChange()関数が呼び出される
+                                </span>
+                            </div>
+                        </td>
+                        <td>Textarea:<br/>
+                            <label for="myTextarea" class="form-label">【パスワードを設定】</label>
+                        </td>
+                        <td>
+                        -->
+
+                            <!-- サイズ調整可能なテキストエリア -->
+                            <!-- <div class="textarea-section">
+                                <p for="myTextarea">【サイズ調整可能なテキストエリア】</p>
+                                <h:inputTextarea id="myTextarea" 
+                                         value="#{userBean.password}"
+                                         name="textareaName" 
+                                         class="textareaClass area1" 
+                                         rows="2" 
+                                         cols="28" 
+                                         placeholder="サイズ調整可能なテキストエリア..."
+                                         required="true"
+                                         requiredMessage="パスワードを入力してください"></h:inputTextarea>
+                                <span class="description">
+                                    ・右下のハンドルでテキストエリアのサイズを調整可能
+                                </span>
+                            </div>  -->
+                            
+                            
+                                <div class="input-section">
+                                    <h:outputLabel for="username" value="ユーザー名:" styleClass="form-label"/>
+                                    <h:inputText id="username" 
+                                                value="#{userBean.username}"
+                                                required="true"
+                                                requiredMessage="ユーザー名を入力してください"
+                                                validatorMessage="ユーザー名は3-50文字で入力してください">
+                                        <f:validateLength minimum="3" maximum="50"/>
+                                    </h:inputText>
+                                    <h:message for="username" styleClass="error-message"/>
+                                </div>
+
+                                <div class="textarea-section">
+                                    <h:outputLabel for="password" value="パスワード:" styleClass="form-label"/>
+                                    <h:inputSecret id="password"
+                                                  value="#{userBean.password}"
+                                                  required="true"
+                                                  requiredMessage="パスワードを入力してください"
+                                                  validatorMessage="パスワードは6-100文字で入力してください">
+                                        <f:validateLength minimum="6" maximum="100"/>
+                                    </h:inputSecret>
+                                    <h:message for="password" styleClass="error-message"/>
+                                </div>
+
+                            
+                                
+                                
+                                <!-- 注册按钮 -->
+                                <h:commandButton value="新規ユーザー追加" id="signupButton">
+                                    <f:ajax execute="username password" 
+                                            render="resultSection"
+                                            listener="#{userBean.signup}"/>
+                                </h:commandButton>
+                                
+                                <!-- 结果显示区域 -->
+                                <h:panelGroup id="resultSection">
+                                    <!-- 消息显示 -->
+                                    <h:messages id="signupMessages" 
+                                            globalOnly="true" 
+                                            styleClass="messages"/>
+                                    
+                                    <!-- 用户信息显示 -->
+                                    <h:panelGroup rendered="#{userBean.newUser != null}" 
+                                                styleClass="user-info">
+                                        <h4><h:outputText value="登録完了"/></h4>
+                                        <p><h:outputText value="ユーザー情報："/></p>
+                                        <div class="user-details">
+                                            <p>ID: <h:outputText value="#{userBean.newUser.id}" /></p>
+                                            <p>ユーザー名: <h:outputText value="#{userBean.newUser.username}" /></p>
+                                        </div>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            
+                        
+                                <h:panelGroup id="outputGroup" layout="block">
+                                    <h2><h:outputText value="ユーザーリスト"/></h2>
+                                    <h:dataTable id="userTable" value="#{userBean.allUsers}" var="row" 
+                                                title="ユーザーリスト" styleClass="results">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="ID"/>
+                                            </f:facet>
+                                            <h:outputText value="#{row.id}"/>
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="ユーザー名"/>
+                                            </f:facet>
+                                            <h:outputText value="#{row.username}"/>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:messages id="messages" globalOnly="true" styleClass="messages"/>
+                                </h:panelGroup>
+                        
+                    </h:form>
                         </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel value="Pre-Filled Text Field:"/> <br/>
-                            <h:outputLabel for="myTextInput2">【事前入力テキストフィールド】</h:outputLabel>
+                        <td>Pre-Filled Text Field:<br/>
+                            <p for="myTextInput2">【事前入力テキストフィールド】</p>
                         </td>
                         <td>
                             <!-- 事前入力テキストフールド -->
                             <div class="pre-filled-input-section">
-                                <h:inputText value="Text....." 
+                                <input type="text" 
+                                       value="Text....." 
                                        id="myTextInput2" 
                                        name="pre-filledTest2"/>
-                                <h:outputLabel value="・value属性で事前にテキストを設定可能"/>  
+                                <span class="description">
+                                    ・value属性で事前にテキストを設定可能
+                                </span>
                             </div>
                         </td>
                         <td class="function-show1">button　⇓</td>
                         <td class="function-show1">
-                            <h:commandButton value="click me (change color to red)" 
+                            <button onclick="buttonFuction1()" 
                                     id="myButton" 
                                     type="button"
-                                    style="color: rgb(44, 85, 48);"
-                                    onclick="buttonFuction1()">
-                                    <h:outputText value=" click me (change color to red)"/>
-                            </h:commandButton>
-                            <h:outputLabel value="・onclickイベントでscript.jsのbuttonFuction1()関数を呼び出し"/>  
+                                    style="color: rgb(44, 85, 48);">click me (change color to red)</button>
+                            <span class="description">
+                                ・onclickイベントでscript.jsのbuttonFuction1()関数を呼び出し
+                            </span>
                         </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel value="placeholder Text Field:"/></td>
+                        <td>placeholder Text Field:</td>
                         <td>
 
                             <div class="input-section">
-                                <h:outputLabel for="placeholderTextInput">【プレースホルダー入力欄】</h:outputLabel>
-                                <h:inputText id="placeholderTextInput"
+                                <p for="placeholderTextInput">【プレースホルダー入力欄】</p>
+                                <input type="text"
                                        id="placeholderTextInput"
                                        placeholder="テキストを入力してください..."/>
-                                <h:outputLabel value="・placeholder属性で、テキストが空の時にヒントを表示"/>  
+                                <span class="description">
+                                    ・placeholder属性で、テキストが空の時にヒントを表示
+                                </span>
                             </div>
                         </td>
-                        <td class="function-show1"><h:outputLabel value="Read-Only Text Field:"/>　⇑</td>
+                        <td class="function-show1">Read-Only Text Field:　⇑</td>
                         <td class="function-show1">
                           
-                            <!-- 読み取り専用テキスト入力例 -->
+                            <!-- 読み取り専用テキス��入力例 -->
                             <div class="input-section">
-                                <h:outputLabel for="readOnlyInput">【読み取り専用入力欄】</h:outputLabel>
-                                <h:inputText id="readOnlyInput"
+                                <p for="readOnlyInput">【読み取り専用入力欄】</p>
+                                <input type="text"
+                                       id="readOnlyInput"
                                        value="このテキストは読み取り専用です"
                                        readonly="readonly"/>
-                                <h:outputText value="・readonly属性を使用して、テキストボックスの内容を変更できないようにする"/>
-                                <h:outputText value="・script.jsの上部のボタンのbuttonFuction1()関数を使用してテキストの色を変更"/>  
+                                <span class="description">
+                                    ・readonly属性を使用して、テキストボックスの内容を変更できないようにする<br/>
+                                    ・script.jsの上部のボタンのbuttonFuction1()関数を使用してテキストの色を変更
+                                </span>
                             </div>
                         </td>
                     </tr>
                     <tr>
 
-                        <td><h:outputLabel value="HTML SVG with rect:"/></td>
+                        <td>HTML SVG with rect:　</td>
                         <td>
                             <!-- SVGアニメーション例 -->
                             <div class="svg-section">
@@ -355,31 +376,38 @@
                                                  fill="freeze"/>
                                     </rect>
                                 </svg>
-                                <h:outputLabel value="・SVG矩形要素のアニメーショントリガー：<br/>
+                                <span class="description">
+
+                                    ・SVG矩形要素のアニメーショントリガー：<br/>
                                     1. mouseover: マウスが矩形要素上に重なった時に色を変更<br/>
                                     2. mouseout: マウスが矩形要素から離れた時に色を元に戻す<br/>
                                     3. click: （初回）クリック時に枠線の幅を増加<br/>
-                                    4. JavaScript制御: （クリックトリガー）handleSVGClick()関数を使用して色を変更"/>  
+                                    4. JavaScript制御: （クリックトリガー）handleSVGClick()関数を使用して色を変更
+                                </span>
                             </div>
                         </td>
-                        <td class="function-show1"><h:outputLabel value="Paragraph with Text:"/>　⇑</td>
+                        <td class="function-show1"><p>Paragraph with Text:　⇑</p></td>
                         <td class="function-show1">
                             <p id="pText" style="color: rgb(44, 85, 48); font-size: 16px;">This Text is Green</p>
-                            <h:outputLabel value="・p要素:テキストを追加<br/>
+                            <span class="description">
+                                ・p要素:テキストを追加<br/>
                                 ・style属性:テキストの色、フォントサイズなどを変更<br/>
-                                ・script.jsの上部のボタンのbuttonFuction1()関数を使用してキストの色を変更"/>  
+                                ・script.jsの上部のボタンのbuttonFuction1()関数を使用してキストの色を変更
+                            </span>
                         </td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="function-show2"><h:outputLabel value="Progress Bar: (50%)"/>　⇒</td>
+                        <td class="function-show2"><label id="progressLabel" for="progressBar">Progress Bar: (50%)　⇒</label></td>
                         <td class="function-show2">
                             <progress id="progressBar" value="50" style="width: 94%;" max="100" />
-                            <h:outputLabel value="・progress要素:進捗バー<br/>
+                            <span class="description">
+                                ・progress要素:進捗バー<br/>
                                 ・value属性:進捗バーの初期値を50%に設定<br/>
                                 ・max属性:進捗バーの最大値を100に設定<br/>
                                 ・style属性:進捗バーの幅を設定<br/>
-                                ・script.jsの後方のslider要素のoninputとonclickイベントを使用して、進捗バーの値をリアルタイムで更新"/>
+                                ・script.jsの後方のslider要素のoninputとonclickイベントを使用して、進捗バーの値をリアルタイムで更新<br/>
+                            </span>
                         </td>
                         <td class="function-show2">⇐　Input Slider Control:</td>
                         <td class="function-show2">
@@ -394,7 +422,9 @@
                         onmouseout="sliderMouseOutFuction()"
                         onfocus="sliderFocusFuction()"
                         onblur="sliderBlurFuction()" ></input>
-                            <h:outputLabel value="・oninput: スライダーをドラッグ時にsliderInputFuction()をリアルタイムで呼び出し<br/>
+                            <span class="description">
+
+                                ・oninput: スライダーをドラッグ時にsliderInputFuction()をリアルタイムで呼び出し<br/>
 
                                 ・onclick: クリックでsliderClickFuction()を呼び出し<br/>
                                 ・onchange: 値が変され、ユーザーの作が完了した時にsliderChangeFuction()を呼び出し<br/>
@@ -403,17 +433,20 @@
                                 ・onmouseout: マウスアウトでsliderMouseOutFuction()を呼び出し、値表示を削除し不透明度を下げる<br/>
 
                                 ・onfocus: つまみをクリックでsliderFocusFuction()を呼び出し、深緑色に変更<br/>
-                                ・onblur: フォーカスを失うとsliderBlurFuction()を呼び出し、デフォルト色に戻す"/>
+                                ・onblur: フォーカスを失うとsliderBlurFuction()を呼び出し、デフォルト色に戻す<br/>
+                            </span>
                         </td>
                     </tr>
                     <tr>
                         <td class="function-show3"><label id="meterLabel" for="meterBar">HTML Meter: (25%)　⇒</label></td>
                         <td class="function-show3">
                             <meter id="meterBar" value="0.25" style="width: 94%;"></meter>
-                            <h:outputLabel value="・meter要素：メーター<br/>
+                            <span class="description">
+                                ・meter要素：メーター<br/>
                                 ・value属性：メーターの初期値を0.25に設定<br/>
                                 ・style属性：メーターの幅を設定<br/>
-                                ・後方のselect要素のonchangeイベントを使用して、メーターの値をリアルタイムで更新"/>
+                                ・後方のselect要素のonchangeイベントを使用して、メーターの値をリアルタイムで更新<br/>
+                            </span>
                         </td>
                         <td class="function-show3">⇐　Select Dropdown</td>
                         <td class="function-show3">
@@ -426,9 +459,11 @@
                                 <option value="75%">Option 3:set to 75%</option>
                                 <option value="100%">Option 4:set to 100%</option>
                             </select>
-                            <h:outputLabel value="・現在のSelect機能：異なるオプションを選択して前方のメーターの値を更新<br/>
+                            <span class="description">
+                                ・現在のSelect機能：異なるオプションを選択して前方のメーターの値を更新<br/>
                                 ・select要素：ドロップダウンメニュー<br/>
-                                ・onchangeイベント：異なるオプションを選択時にselectChangeFuction1()を呼び出してメーターを更新"/>
+                                ・onchangeイベント：異なるオプションを選択時にselectChangeFuction1()を呼び出してメーターを更新<br/>
+                            </span>
                         </td>   
                     </tr>
                     <tr>
@@ -442,10 +477,11 @@
                                     scrolling="no" 
                                     src="data:text/html,&lt;body style='background-color:%23F2F6F8;'&gt;&lt;h4&gt;iFrame Text&lt;/h4&gt;&lt;/body&gt;">
                             </iframe>
-                            <h:outputLabel value="・iframe要素：埋め込みフレーム<br/>
+                            <span class="description">
+                                ・iframe要素：埋め込みフレーム<br/>
                                 ・scrolling属性：スクロール方式を無効に設定<br/>
-                                ・src属性：フレームのソースURLを設定"/>
-                            </h:outputLabel>
+                                ・src属性：フレームのソースURLを設定<br/>
+                            </span>
                            
                         </td>
                         <td style="padding: 4px 4px 3px 4px;">
@@ -454,7 +490,9 @@
                                     class="iframeClass1" 
                                     scrolling="no" 
                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="></iframe>
-                            <h:outputLabel value="・base64エンコードされた画像データを追加"/>
+                            <span class="description">
+                                ・base64エンコードされた画像データを追加<br/>   
+                            </span>
                         </td>
                         <td style="padding: 4px 4px 3px 4px;">
                             <iframe id="myIframe3" 
@@ -463,42 +501,34 @@
                             scrolling="no"
                             src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
                             </iframe>
-                            <h:outputLabel value="・iframe要素：Googleロゴ画像を埋め込む<br/>
-                                ・src属性：画像のURLアドレスを設定"/>
-                            </h:outputLabel>
+                            <span class="description">
+                                ・iframe要素：Googleロゴ画像を埋め込む<br/>
+                                ・src属性：画像のURLアドレスを設定<br/>
+                            </span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="function-show4"><h:outputLabel value="RadioButton"/></td>
-                        <td class="function-show4">
-                            <h:outputLabel value="RadioButton 1:"/>
-                            <input type="radio" id="radioButton1" name="radioGroup1" class="radioClass1" style="width: 30px;" />
-                        </td>
-                        <td class="function-show4">
-                            <h:outputLabel value="RadioButton 2:"/>
-                            <input type="radio" id="radioButton2" name="radioGroup1" class="radioClass1" style="width: 30px;" />
-                        </td>
-                        <td class="function-show4">
-                            <h:outputLabel value="RadioButton 3:"/>
-                            <input type="radio" id="radioButton3" name="radioGroup1" class="radioClass1" style="width: 30px;" />
-                        </td>
-                        <h:outputLabel value="・radio要素：ラジオボタン<br/>
-                            ・name属性：同じグループのラジオボタンを定義するには、同じname属性値を使用する"/>
-                        </h:outputLabel>
+                        <td class="function-show4">RadioButton</td>
+                        <td class="function-show4">RadioButton 1:<input type="radio" id="radioButton1" name="radioGroup1" class="radioClass1" style="width: 30px;" /></td>
+                        <td class="function-show4">RadioButton 2:<input type="radio" id="radioButton2" name="radioGroup1" class="radioClass1" style="width: 30px;"/></td>
+                        <td class="function-show4">RadioButton 3:<input type="radio" id="radioButton3" name="radioGroup1" class="radioClass1" style="width: 30px;"/>
+                        <span class="description">
+                            ・radio要素：ラジオボタン<br/>
+                            ・name属性：同じグループのラジオボタンを定義するには、同じname属性値を使用する<br/>
+                        </span>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 150px;">
-                            <h:outputLabel value="CheckBoxes:"/>
-                        </td>
-                        <td>  
-                            <input type="checkbox" id="checkBox1" name="checkBoxGroup2" class="checkBoxClassB" value="猫" />
+                            CheckBoxes:</td>
+                            <td>
+                            <input type="checkbox" id="checkBox1" name="checkBoxGroup2" class="checkBoxClassB" value="猫" />猫
                             <input type="checkbox" id="checkBox2" name="checkBoxGroup2" class="checkBoxClassB" value="犬" />犬
                             <input type="checkbox" id="checkBox3" name="checkBoxGroup2" class="checkBoxClassB" value="金魚" />金魚
-                            <h:outputLabel value="・checkbox要素：チェックボックス<br/>
+                            <span class="description">
                                 ・checkbox要素：チェックボックス<br/>
                                 ・name属性：同じグループのチェックボックスを定義するには、同じname属性値を使用する<br/>
-                            </h:outputLabel>
+                            </span>
                         </td>
                         <td style="padding: 3px 3px 7px 9px; height: 38px;" >
                             CheckBox in iFrame:&nbsp;&nbsp;</td>
@@ -516,10 +546,11 @@
                                              %3C/body%3E
                                          %3C/html%3E">
                             </iframe>
-                            <h:outputLabel value="・iframeにチェックボックスを埋め込む<br/>
+                            <span class="description">
+                                ・iframeにチェックボックスを埋め込む<br/>
                                 ・data:text/htmlで直接HTMLコンテンツを埋め込む<br/>
                                 ・scrolling='no'でスクロールバーを無効化<br/>
-                            </h:outputLabel>
+                            </span>
                         </td>
                     </tr>
                 </tbody>

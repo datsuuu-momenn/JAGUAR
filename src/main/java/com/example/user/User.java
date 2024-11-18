@@ -1,9 +1,12 @@
 package com.example.user;
 
+import com.example.task.Task;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,8 +19,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+@NamedQuery(name = User.FIND_ALLUsers, query = "SELECT u FROM User u")
 public class User {
     
+    public static final String FIND_ALLUsers = "demo.jsf.User.ALL";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

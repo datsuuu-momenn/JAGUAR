@@ -1,11 +1,20 @@
 package com.example.user;
 
-import jakarta.ejb.Stateless;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
 
-@Stateless
+import java.util.List;
+
+import jakarta.ejb.EJBException;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import jakarta.enterprise.context.RequestScoped;
+
+
+@Transactional
+@RequestScoped
 public class UserController {
     
     @PersistenceContext
@@ -13,7 +22,9 @@ public class UserController {
     
     public User createUser(@Valid String username, @Valid String password) {
         User user = new User(username, password);
-        em.persist(user);
+        this.em.persist(user);
+        this.em.flush();
+        this.em.refresh(user);
         System.out.println("User created: " + user);
         return user;
     }
@@ -34,5 +45,24 @@ public class UserController {
             System.out.println("User not found: " + e.getMessage());
             return null;
         }
+    }
+
+    public User update(Long id, String username, String password) {
+        try {
+            final User ref = this.em.getReference(User.class, id);
+            ref.setUsername(username);
+            ref.setPassword(password);
+            return this.em.merge(ref);
+        } catch (EntityNotFoundException enf) {
+            throw new EJBException(enf);
+        }
+    }
+
+    public List<User> loadAllUsers() {
+        System.out.println("loadAllUsers method called in controller");
+
+        List<User> users = em.createNamedQuery(User.FIND_ALLUsers).getResultList();
+
+        return users;
     }
 } 
