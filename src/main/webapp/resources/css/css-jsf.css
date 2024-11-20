@@ -1,0 +1,298 @@
+/* 全体のレイアウト */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 20px;
+    background-color: #F2F6F8;
+    background-image: url("#{resource['images/black-forest.jpg']}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #2c3e50;
+}
+
+/* メインコンテナ */
+.seleniumMain {
+    width: 95%;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(221, 221, 221, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* テーブルスタイル */
+#seleniumTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px;
+    margin: 25px 0;
+    table-layout: fixed;
+}
+
+#seleniumTable td {
+    padding: 15px;
+    vertical-align: top;
+    background-color: rgba(255, 255, 255, 0.85);
+    word-wrap: break-word;
+    white-space: pre-line;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#seleniumTable td:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* カラムヘッダー */
+.column-header {
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1.1em;
+    padding: 10px 0;
+    border-bottom: 2px solid #3498db;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* 機能グループの色分け */
+.function-show1, .function-show2, .function-show3, .function-show4 {
+    background-color: rgba(242, 246, 248, 0.9) !important;
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    transition: all 0.3s ease;
+}
+
+.function-show1:hover, .function-show2:hover, 
+.function-show3:hover, .function-show4:hover {
+    background-color: rgba(242, 246, 248, 0.95) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* コンポーネントのスタイル */
+/* ドロップダウン */
+.ui-selectonemenu {
+    min-width: 200px;
+    margin: 8px 0;
+    padding: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+.ui-selectonemenu:hover {
+    border-color: #3498db;
+}
+
+/* スライダー */
+input[type="range"] {
+    width: 90%;
+    margin: 15px 0;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* プログレスバー */
+#progressBar {
+    width: 95%;
+    height: 22px;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+/* ラベルスタイル */
+.h\:outputLabel {
+    display: block;
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #34495e;
+    font-size: 0.95em;
+    padding-left: 5px;
+    border-left: 3px solid #3498db;
+}
+
+/* 説明テキスト */
+.description {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin: 8px 0;
+    padding: 8px;
+    background-color: rgba(236, 240, 241, 0.5);
+    border-radius: 4px;
+    line-height: 1.5;
+}
+
+/* 見出し */
+h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3498db;
+}
+
+h2 {
+    font-size: 22px;
+    color: #34495e;
+    margin: 15px 0;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.seleniumMain {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .seleniumMain {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #seleniumTable {
+        border-spacing: 4px;
+    }
+
+    .ui-selectonemenu {
+        min-width: 150px;
+    }
+}
+
+/* プログレスバーコンテナ */
+.progress-container {
+    margin: 20px 0;
+    padding: 10px;
+}
+
+/* プログレスバー */
+.progress-bar {
+    width: 94%;
+    height: 22px;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* プログレスバーの塗りつぶし部分 */
+#progressFill {
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+/* プログレス値のテキスト */
+.progress-text {
+    display: block;
+    margin-top: 8px;
+    color: #2c3e50;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* スライダーコンテナ */
+.slider-container {
+    margin: 20px 0;
+    padding: 10px;
+}
+
+/* スライダー */
+input[type="range"].slider {
+    -webkit-appearance: none;
+    width: 94%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* スライダーのつまみ */
+input[type="range"].slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="range"].slider::-webkit-slider-thumb:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+
+/* Firefox用のスライダースタイル */
+input[type="range"].slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #3498db;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="range"].slider::-moz-range-thumb:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+ 
+#sliderForm,
+#checkboxForm,
+#dropdownForm,
+#buttonForm,
+#outputForm,
+#radioForm{
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#sliderProgressDiv {
+    background-color: rgba(193, 233, 179, 0.7);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* point文字のスタイル */
+.point-label {
+    font-weight: bold;
+}
+
+.point-label-title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* 関連性を示すタイトル */
+.relation-title {
+    text-align: center;
+    display: block;
+    font-size: 60px;
+    color: #2c503d;
+    margin: 10px auto;
+    width: 100%;
+}

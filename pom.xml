@@ -105,7 +105,33 @@
             <version>3.0.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-web-api -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>11.0.0-M4</version>
+            <scope>provided</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-api</artifactId>
+            <version>2.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-client-api</artifactId>
+            <version>2.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>4.0.1</version>
+        </dependency>
 
         <!-- Junit5 -->
         <dependency>
@@ -193,6 +219,13 @@
             <artifactId>narayana-jta</artifactId>
             <version>${version.narayana}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>13.0.0</version>
+            <classifier>jakarta</classifier>
         </dependency>
 
     </dependencies>
