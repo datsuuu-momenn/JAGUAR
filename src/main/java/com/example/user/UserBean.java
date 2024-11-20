@@ -5,8 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-
-import com.example.task.Task;
+import java.util.ArrayList;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.annotation.PostConstruct;
@@ -14,6 +13,7 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Random;
 
 @Named
 @ViewScoped
@@ -21,14 +21,18 @@ public class UserBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
-    private List<User> allUsers;    
+    private List<User> allUsers;
+
+    private List<User> newAddedUsersThisTime = new ArrayList<>();
     
     @Inject
     private UserController controller;
     
+    // 事前入力テキストフィールド としてランダムなユーザー名を設定 
     @Getter
     @Setter
-    private String username;
+    private String username  = randomUserName();
+
     @Getter
     @Setter
     private String password;
@@ -86,6 +90,8 @@ public class UserBean implements Serializable {
                 System.out.println("Creating user: " + username + " " + password);
                 user = controller.createUser(username, password);
                 session.setAttribute("user", user); 
+                newAddedUsersThisTime.add(user);
+                session.setAttribute("newAddedUsersThisTime", newAddedUsersThisTime);
                     // 添加成功消息
                 System.out.println("User created: " + user);
                 FacesContext.getCurrentInstance().addMessage(null, 
@@ -109,15 +115,7 @@ public class UserBean implements Serializable {
         id = null;
     }
 
-    // public boolean isRegistrationSuccessful() {
-    //     System.out.println("isRegistrationSuccessful method called"); 
-    //     user = (User) session.getAttribute("user");
-    //     System.out.println("user: " + user);
-    //     newUser = controller.findUserByUsername(user.getUsername());
-    //     System.out.println("newUser: " + newUser);
-    //     return newUser != null;
-    // }
-
+    // refreshメソッド：DBからすべてのユーザーを取得
     public void refresh() {
         System.out.println("refresh method called");
         this.allUsers = controller.loadAllUsers();
@@ -128,7 +126,22 @@ public class UserBean implements Serializable {
         return allUsers;
     }
 
+    public List<User> getNewAddedUsersThisTime() {
+        System.out.println("getNewAddedUsersThisTime method called in UserBean");
+        return newAddedUsersThisTime;
+    }
+
     private void addMessage(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
+    }
+
+    // ランダムなユーザー名を生成
+    private String randomUserName() {
+        String[] names = {"モクロー", "owl", "ふくろう", "梟", "アチャモ", "ミズゴロウ","ジラーチ", 
+                        "ポッチャマ", "ヒノアラシ", "ワニノコ", "ゼニガメ", "ヒトカゲ", "フシギダネ"}; 
+        Random random = new Random();
+        int index = random.nextInt(names.length);
+        this.username = names[index];
+        return username;
     }
 } 

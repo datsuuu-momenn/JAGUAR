@@ -12,46 +12,173 @@
 </h:head>
 <h:body>
     <!-- メインコンテンツ -->
-    <div class="seleniumMain">
-        
-            <h1><h:outputText value="seleniumテスト用ページ"/></h1>
-            <h2><h:outputText value="開発作業支援システム"/></h2>
-            <p style="text-align: right;text-decoration: underline;font-weight: bold;">
-                <h:outputText value="point:相互作用するモジュールは同じ色で表示される"/>
-            </p>
-            
+    <div class="seleniumMain">  
+        <h1><h:outputText value="seleniumテスト用ページ"/></h1>
+        <h2><h:outputText value="開発作業支援システム"/></h2>
+        <p style="text-align: right;text-decoration: underline;font-weight: bold;">
+            <h:outputText value="point：相互作用するモジュールは同じ色で表示される"/>
+        </p>
 
+        <div id="signupDiv">
+            <h:form id="signupForm">
+                <div id="pre-filledTextDiv">  
+                    <h2><h:outputText value="Pre-Filled Text Field:"/></h2>
+                    <h:outputLabel for="myTextInput1" value="【新規ユーザ名を設定】"/>
+                    <!-- 事前入力テキストフィールド -->
+                    <div class="pre-filled-input-section">
+                        <h:inputText value="#{userBean.username}" 
+                                    id="myTextInput1" 
+                                    name="pre-filledTest" 
+                                    required="true"
+                                    requiredMessage="ユーザー名を入力してください"
+                                    validatorMessage="ユーザー名は3-50文字で入力してください">
+                            <f:validateLength minimum="3" maximum="50"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+                <h:outputText value="・h:inputText要素：テキストフィールド" styleClass="point-label"/><br/>
+                <h:outputText value="・value属性：事前に入力されていたテキストを設定可能"/><br/>
+                <div id="placeholderTextInputDiv">
+                    <h2><h:outputText value="placeholder Text Input:"/></h2>
+                    <h:outputLabel for="placeholderTextInput" value="【パスワードを設定】"/>
+                    <!-- プレースホルダー入力欄 -->
+                    <h:inputText id="placeholderTextInput"
+                                value="#{userBean.password}"
+                                placeholder="パスワードを入力してください..."
+                                required="true"
+                                requiredMessage="パスワードを入力してください"
+                                validatorMessage="パスワードは6-100文字で入力してください"/>
+                        <br/>
+                </div>
+                <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+                <h:outputText value="・placeholder属性：テキストが空の時にヒントを表示" styleClass="description"/><br/>
+                <div id="signupButtonDiv">
+                    <h2><h:outputText value="Button with action and result:"/></h2>
+                    <h:commandButton value="新規ユーザー追加" id="signupButton">
+                        <f:ajax execute="myTextInput1 placeholderTextInput" 
+                                render="resultSection"
+                                listener="#{userBean.signup}"/>
+                    </h:commandButton>
+                </div>
+                <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+                <h:outputText value="・f:ajax要素：ボタンをクリックした時に、指定したメソッドを非同期で呼び出し、指定した部分を更新します。" styleClass="point-label"/><br/>
+                <h:outputText value="・execute属性：指定されたコンポーネント（ID）を更新する前に、フォーム内のデータを処理するために使用されます。ここでは、'username' と 'password' の入力値がサーバーに送信されます。" styleClass="description"/><br/>
+                <h:outputText value="・render属性：指定されたコンポーネント（ID）を更新します。ここでは、'resultSection' 部分が更新されます。" styleClass="description" /><br/>
+                <h:outputText value="・listener属性：ボタンをクリックした際に呼び出されるバックエンドメソッドを指定します。この場合、'userBean.signup' メソッドが呼び出されます。" styleClass="description"/><br/>
+                <h:outputText value="・resultSection：更新される部分のIDです。この場合、クリック後にこの部分が再描画されます。" styleClass="description"/><br/>
+            </h:form>
+            <div id="signupResultDiv">
+                <h:panelGroup id="resultSection" layout="block">
+                    <h2><h:outputText value="DataTable："/></h2>
+                    <h:outputText value="【新規ユーザー追加結果】"/>
+                    <h:dataTable id="userTable" value="#{userBean.newAddedUsersThisTime}" var="row" 
+                                title="ユーザーリスト" styleClass="results">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{row.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ユーザー名"/>
+                            </f:facet>
+                            <h:outputText value="#{row.username}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+                <h:outputText value="・h:dataTable要素：リストや配列のデータを表形式で表示するためのJSFコンポーネントを指定" styleClass="point-label"/><br/>
+                <h:outputText value="・value属性：データを繰り返し処理するためのソースを指定" styleClass="description"/><br/>
+                <h:outputText value="・var属性：リストの各行を参照するための変数名を定義" styleClass="description"/><br/>
+            </div>
+        </div>
+
+
+
+
+
+
+
+            <div>
+                <h:form id="dropdown-javascriptForm">
+                    <h:panelGroup layout="block" styleClass="dropdown">
+                        <h2><h:outputText value="javascript関数呼び出し｜CSSによるドロップダウンメニュー定義:"/></h2>
+                        <!-- ドロップダウンボタン -->
+                        <h:outputText id="myDropdown" 
+                                    value="【ドロップダウンボタン】マウスポインターがデフォルトに変更" 
+                                    styleClass="dropbtn" 
+                                    style="cursor: default;" 
+                                    onclick="ClickDropdownFunction()" 
+                                    onmousemove="hoverDropdownFunction()" />
+
+                        <!-- ドロップダウンコンテンツ -->
+                        <h:panelGroup styleClass="dropdown-content" style="cursor: pointer;">
+                            <!-- ドロップダウン内容 -->
+                            <h:outputLink id="dropOption1" value="#" 
+                                        onclick="ClickLink1()">クリックでClickLink1()関数を呼び出し</h:outputLink><br />
+                            <h:outputLink id="dropOption2" value="#" 
+                                        onclick="ClickLink2()">クリックでClickLink2()関数を呼び出し</h:outputLink><br />
+                            <h:outputLink id="dropOption3" value="#" 
+                                        onclick="ClickLink3()">クリックでClickLink3()関数を呼び出し</h:outputLink><br />
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:form>
+                <br/>
+                <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+                <h:outputText value="・ドロップダウンボタンとコンテンツ、マウスポインターがデフォルトと手型に変更" styleClass="description"/><br />
+                <h:outputText value="・onclickイベント：script.jsのClickDropdownFunction()関数を呼び出し" styleClass="description"/><br />
+                <h:outputText value="・onmousemoveイベント：script.jsのhoverDropdownFunction()関数を呼び出し" styleClass="description"/><br />  
+                <h:outputText value="・styleClass属性：css-jsf.cssのdropdown-contentのスタイルを指定により、ドロップダウンコンテンツを表示" styleClass="description"/><br />
+                <h:outputText value="・cursor属性：手型に変更" styleClass="description"/><br />
+                <h:outputText value="・h:outputLink要素：ドロップダウンのオプションを指定" styleClass="point-label"/><br />
+                <h:outputText value="・onclickイベント：script.jsのClickLink1()関数を呼び出し" styleClass="description"/>
+        </div>
+            
+        <div id="dropdownMeterDiv">
             <!-- ドロップダウン関連 -->
             <h:form id="dropdownForm">  
                 <h:panelGroup layout="block" styleClass="function-table">
-                    <h2><h:outputText value="ドロップダウンメニュー:"/></h2>
+                    <h2><h:outputText value="Select Dropdown Menu:"/></h2>
                     <div>
-                        <h:selectOneMenu id="myDropdown" value="#{jsfBean.dropdownValue}">
+                        <h:selectOneMenu id="myDropdown" value="#{jsfBean.dropdownValue}" onchange="selectChangeFuction1()">
                             <f:selectItem itemLabel="Option 1:set to 25%" itemValue="25%"/>
                             <f:selectItem itemLabel="Option 2:set to 50%" itemValue="50%"/>
                             <f:selectItem itemLabel="Option 3:set to 75%" itemValue="75%"/>
                             <f:selectItem itemLabel="Option 4:set to 100%" itemValue="100%"/>
                             <f:ajax event="change" 
-                                    listener="#{jsfBean.handleDropdownChange}"
-                                    render="progressText progressFill slider"/>
+                                    execute="myDropdown"
+                                    listener="#{jsfBean.handleMeterChange}"
+                                    render="meterBar"/>
                         </h:selectOneMenu>
-                        
                     </div>
                 </h:panelGroup>
             </h:form>
             <br/>   
             <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
             <h:outputText value="・ドロップダウンで進捗バーの値を変更"/><br/>
-            <h:outputText value="・h:selectOneMenu要素:ドロップダウン" styleClass="point-label"/><br/>    
-            <h:outputText value="・f:selectItem要素:ドロップダウンのオプションを指定" styleClass="point-label"/><br/>
-            <h:outputText value="・itemLabel属性:ドロップダウンのオプションのラベルを指定"/><br/>
-            <h:outputText value="・itemValue属性:ドロップダウンのオプションの値を指定"/><br/>
-            <h:outputText value="・f:ajax要素:ドロップダウンの値をリアルタイムで更新" styleClass="point-label"/><br/>
-            <h:outputText value="・listener属性:ドロップダウンの値を更新するためのメソッドを指定"/><br/>
-            <h:outputText value="・render属性:ドロップダウンの値を更新するために必要な要素を指定"/>
+            <h:outputText value="・h:selectOneMenu要素：ドロップダウン" styleClass="point-label"/><br/>    
+            <h:outputText value="・f:selectItem要素：ドロップダウンのオプションを指定" styleClass="point-label"/><br/>
+            <h:outputText value="・onchangeイベント：script.jsのselectChangeFuction1()関数を呼び出し" styleClass="description"/><br/>
+            <h:outputText value="・itemLabel属性：ドロップダウンのオプションのラベルを指定" styleClass="description"/><br/>
+            <h:outputText value="・itemValue属性：ドロップダウンのオプションの値を指定" styleClass="description"/><br/>
+            <h:outputText value="・f:ajax要素：ドロップダウンの値をリアルタイムで更新" styleClass="point-label"/><br/>
+            <h:outputText value="・listener属性：ドロップダウンの値を更新するためのメソッドを指定" styleClass="description"/><br/>
+            <h:outputText value="・render属性：ドロップダウンの値を更新するために必要な要素を指定" styleClass="description"/>
                 
-            
-            
+            <h:outputText value="⇓" styleClass="relation-title"/>
+
+            <div id="meterBarDiv">
+                <h:panelGroup layout="block">
+                    <h2><h:outputText value="Output Meter Bar:"/></h2>
+                    <meter id="meterBar" value="#{jsfBean.meterValue}" style="width: 94%;"></meter>
+                </h:panelGroup>
+            </div>
+            <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+            <h:outputText value="・meter要素：HTML5の要素で、進捗や数値の範囲を視覚的に表現" styleClass="point-label"/><br/> 
+            <h:outputText value="・value属性：メーターの現在値を設定し、範囲内での進捗を示す" styleClass="description"/>    
+        </div>    
 
 
             <div id="sliderProgressDiv">   
@@ -75,21 +202,21 @@
                 </h:form>
                 <br/>   
                 <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
-                <h:outputText value="・h:inputText要素:スライダー" styleClass="point-label"/><br/>
-                <h:outputText value="・type属性:range"/><br/>
-                <h:outputText value="・value属性:スライダーの値"/><br/>
-                <h:outputText value="・min属性:スライダーの最小値"/><br/>
-                <h:outputText value="・max属性:スライダーの最大値"/><br/>
-                <h:outputText value="・step属性:スライダーの刻み幅"/><br/>
-                <h:outputText value="・f:ajax要素:スライダーの値をリアルタイムで更新" styleClass="point-label"/><br/>
-                <h:outputText value="・event属性:change"/><br/>
-                <h:outputText value="・listener属性:スライダーの値を更新するためのメソッドを指定"/><br/>
-                <h:outputText value="・render属性:スライダーの値を更新するために必要な要素を指定"/> 
+                <h:outputText value="・h:inputText要素：スライダー" styleClass="point-label"/><br/>
+                <h:outputText value="・type属性：range" styleClass="description"/><br/>
+                <h:outputText value="・value属性：スライダーの値" styleClass="description"/><br/>
+                <h:outputText value="・min属性：スライダーの最小値" styleClass="description"/><br/>
+                <h:outputText value="・max属性：スライダーの最大値" styleClass="description"/><br/>
+                <h:outputText value="・step属性：スライダーの刻み幅" styleClass="description"/><br/>
+                <h:outputText value="・f:ajax要素：スライダーの値をリアルタイムで更新" styleClass="point-label"/><br/>
+                <h:outputText value="・event属性：change" styleClass="description"/><br/>
+                <h:outputText value="・listener属性：スライダーの値を更新するためのメソッドを指定" styleClass="description"/><br/>
+                <h:outputText value="・render属性：スライダーの値を更新するために必要な要素を指定" styleClass="description"/> 
 
-                <h2><h:outputText value="⇓" styleClass="relation-title"/></h2>
+                <h:outputText value="⇓" styleClass="relation-title"/>
                 <!-- プログレスバー関連 --> 
                 <h:panelGroup layout="block" styleClass="function-table">
-                    <h2><h:outputText value="Progress Bar:"/></h2>
+                    <h2><h:outputText value="Output Progress Bar:"/></h2>
                     <div>
                         <h3>
                             <h:outputText id="progressText" 
@@ -102,11 +229,11 @@
                     </div>
                 </h:panelGroup>
                 <h:outputLabel value="point:" styleClass="point-label-title"/> <br/>
-                <h:outputLabel value="・p:progressBar要素:進捗バー" styleClass="point-label"/> <br/>
-                <h:outputLabel value="・value属性:進捗バーの値"/> <br/>
-                <h:outputLabel value="・displayOnly属性:進捗バーの値を表示のみにする"/> <br/>
-                <h:outputLabel value="・styleClass属性:進捗バーの幅を設定"/> <br/>
-                <h:outputLabel value="・jsfBean.javaのprogressValueを使用して、進捗バーの値をリアルタイムで更新"/>
+                <h:outputLabel value="・p:progressBar要素：進捗バー" styleClass="point-label"/> <br/>
+                <h:outputLabel value="・value属性：進捗バーの値" styleClass="description"/> <br/>
+                <h:outputLabel value="・displayOnly属性：進捗バーの値を表示のみにする" styleClass="description"/> <br/>
+                <h:outputLabel value="・styleClass属性：進捗バーの幅を設定" styleClass="description"/> <br/>
+                <h:outputLabel value="・jsfBean.javaのprogressValueを使用して、進捗バーの値をリアルタイムで更新" styleClass="description"/>
             </div>        
                
             
@@ -119,11 +246,11 @@
                     <h2><h:outputText value="Radio Button:"/></h2>
                     <div>
                         <h:panelGroup styleClass="function-show4">
-                            <h:selectOneRadio id="radioGroup" value="#{testBean.selectedRadio}">
+                            <h:selectOneRadio id="radioGroup" value="#{jsfBean.selectedRadio}">
                                 <f:selectItem itemLabel="オプション1" itemValue="1"/>
                                 <f:selectItem itemLabel="オプション2" itemValue="2"/>
                                 <f:selectItem itemLabel="オプション3" itemValue="3"/>
-                                <f:ajax event="change" listener="#{testBean.handleRadioChange}"/>
+                                <f:ajax event="change" listener="#{jsfBean.handleRadioChange}"/>
                             </h:selectOneRadio>
                         </h:panelGroup>
                     </div>
@@ -131,13 +258,13 @@
             </h:form>
             <br/>
             <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
-            <h:outputText value="・h:selectOneRadio要素:ラジオボタン" styleClass="point-label"/><br/>
-            <h:outputText value="・f:selectItem要素:ラジオボタンのオプションを指定" styleClass="point-label"/><br/>
-            <h:outputText value="・itemLabel属性:ラジオボタンのオプションのラベルを指定"/><br/>
-            <h:outputText value="・itemValue属性:ラジオボタンのオプションの値を指定"/><br/>
-            <h:outputText value="・f:ajax要素:ラジオボタンの値をリアルタイムで更新" styleClass="point-label"/><br/>
-            <h:outputText value="・listener属性:ラジオボタンの値を更新するためのメソッドを指定"/><br/>
-            <h:outputText value="・render属性:ラジオボタンの値を更新するために必要な要素を指定"/>
+            <h:outputText value="・h:selectOneRadio要素：ラジオボタン" styleClass="point-label"/><br/>
+            <h:outputText value="・f:selectItem要素：ラジオボタンのオプションを指定" styleClass="point-label"/><br/>
+            <h:outputText value="・itemLabel属性：ラジオボタンのオプションのラベルを指定" styleClass="description"/><br/>
+            <h:outputText value="・itemValue属性：ラジオボタンのオプションの値を指定" styleClass="description"/><br/>
+            <h:outputText value="・f:ajax要素：ラジオボタンの値をリアルタイムで更新" styleClass="point-label"/><br/>
+            <h:outputText value="・listener属性：ラジオボタンの値を更新するためのメソッドを指定" styleClass="description"/><br/>
+            <h:outputText value="・render属性：ラジオボタンの値を更新するために必要な要素を指定" styleClass="description"/>
 
 
             <h:form id="checkboxForm">
@@ -146,11 +273,11 @@
                     <h2><h:outputText value="CheckBox:"/></h2>
                     <div>
                         <h:panelGroup styleClass="function-show4">
-                            <h:selectManyCheckbox id="checkboxGroup" value="#{testBean.selectedCheckboxes}">
+                            <h:selectManyCheckbox id="checkboxGroup" value="#{jsfBean.selectedCheckboxes}">
                                 <f:selectItem itemLabel="猫" itemValue="1"/>
                                 <f:selectItem itemLabel="犬" itemValue="2"/>
                                 <f:selectItem itemLabel="金魚" itemValue="3"/>
-                                <f:ajax event="change" listener="#{testBean.handleCheckboxChange}"/>
+                                <f:ajax event="change" listener="#{jsfBean.handleCheckboxChange}"/>
                             </h:selectManyCheckbox>
                             <br/>
                         </h:panelGroup>
@@ -159,13 +286,13 @@
             </h:form>
             <br/>
             <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
-            <h:outputText value="・h:selectManyCheckbox要素:チェックボックス" styleClass="point-label"/><br/>
-            <h:outputText value="・f:selectItem要素:チェックボックスのオプションを指定" styleClass="point-label"/><br/>
-            <h:outputText value="・itemLabel属性:チェックボックスのオプションのラベルを指定"/><br/>
-            <h:outputText value="・itemValue属性:チェックボックスのオプションの値を指定"/><br/>
-            <h:outputText value="・f:ajax要素:チェックボックスの値をリアルタイムで更新" styleClass="point-label"/><br/>
-            <h:outputText value="・listener属性:チェックボックスの値を更新するためのメソッドを指定"/><br/>
-            <h:outputText value="・render属性:チェックボックスの値を更新するために必要な要素を指定"/>
+            <h:outputText value="・h:selectManyCheckbox要素：チェックボックス" styleClass="point-label"/><br/>
+            <h:outputText value="・f:selectItem要素：チェックボックスのオプションを指定" styleClass="point-label"/><br/>
+            <h:outputText value="・itemLabel属性：チェックボックスのオプションのラベルを指定" styleClass="description"/><br/>
+            <h:outputText value="・itemValue属性：チェックボックスのオプションの値を指定" styleClass="description"/><br/>
+            <h:outputText value="・f:ajax要素：チェックボックスの値をリアルタイムで更新" styleClass="point-label"/><br/>
+            <h:outputText value="・listener属性：チェックボックスの値を更新するためのメソッドを指定" styleClass="description"/><br/>
+            <h:outputText value="・render属性：チェックボックスの値を更新するために必要な要素を指定" styleClass="description"/>
     </div>
 </h:body>
 </html> 
