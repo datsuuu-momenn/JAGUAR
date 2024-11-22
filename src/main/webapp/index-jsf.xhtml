@@ -4,7 +4,8 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 <h:head>
     <title>JSF開発作業支援システム</title>
     <h:outputStylesheet library="css" name="css-jsf.css"/>
@@ -31,7 +32,7 @@
                                     name="pre-filledTest" 
                                     required="true"
                                     requiredMessage="ユーザー名を入力してください"
-                                    validatorMessage="ユーザー名は3-50文字で入力してください">
+                                    validatorMessage="ユザー名は3-50文字で入力してください">
                             <f:validateLength minimum="3" maximum="50"/>
                         </h:inputText>
                     </div>
@@ -113,7 +114,7 @@
                                     onclick="ClickDropdownFunction()" 
                                     onmousemove="hoverDropdownFunction()" />
 
-                        <!-- ドロップダウンコンテンツ -->
+                        <!-- ドロップダウンコ -->
                         <h:panelGroup styleClass="dropdown-content" style="cursor: pointer;">
                             <!-- ドロップダウン内容 -->
                             <h:outputLink id="dropOption1" value="#" 
@@ -133,7 +134,7 @@
                 <h:outputText value="・styleClass属性：css-jsf.cssのdropdown-contentのスタイルを指定により、ドロップダウンコンテンツを表示" styleClass="description"/><br />
                 <h:outputText value="・cursor属性：手型に変更" styleClass="description"/><br />
                 <h:outputText value="・h:outputLink要素：ドロップダウンのオプションを指定" styleClass="point-label"/><br />
-                <h:outputText value="・onclickイベント：script.jsのClickLink1()関数を呼び出し" styleClass="description"/>
+                <h:outputText value="・onclick��ベント：script.jsのClickLink1()関数を呼び出し" styleClass="description"/>
         </div>
             
         <div id="dropdownMeterDiv">
@@ -205,7 +206,7 @@
                 <h:outputText value="・h:inputText要素：スライダー" styleClass="point-label"/><br/>
                 <h:outputText value="・type属性：range" styleClass="description"/><br/>
                 <h:outputText value="・value属性：スライダーの値" styleClass="description"/><br/>
-                <h:outputText value="・min属性：スライダーの最小値" styleClass="description"/><br/>
+                <h:outputText value="・min属性：スライダの最小値" styleClass="description"/><br/>
                 <h:outputText value="・max属性：スライダーの最大値" styleClass="description"/><br/>
                 <h:outputText value="・step属性：スライダーの刻み幅" styleClass="description"/><br/>
                 <h:outputText value="・f:ajax要素：スライダーの値をリアルタイムで更新" styleClass="point-label"/><br/>
@@ -294,5 +295,67 @@
             <h:outputText value="・listener属性：チェックボックスの値を更新するためのメソッドを指定" styleClass="description"/><br/>
             <h:outputText value="・render属性：チェックボックスの値を更新するために必要な要素を指定" styleClass="description"/>
     </div>
+
+    <div id="fightDiv">
+        <h:form id="fightForm">
+            <h2><h:outputText value="バトルシステム"/></h2>
+            <div id="selectFightDiv">
+                <!-- 敵選択 -->
+                <h4><h:outputText value="あなたの敵を選択してください"/></h4>  
+                <div id="opponentDiv">
+                    <f:ajax event="change" render="skill" listener="#{fightBean.changeSkillList()}">
+                        <h:selectOneMenu value="#{fightBean.selectedOpponent}">
+                            <f:selectItems value="#{fightBean.opponentsList}" />
+                        </h:selectOneMenu>
+                    </f:ajax>
+                </div>
+                
+                <!-- スキル選択 -->
+                <div id="skillDiv">
+                    <h4><h:outputText value="あなたが受けたい技を選択してください"/></h4>  
+                    <h:selectOneMenu id="skill" value="#{fightBean.selectedSkill}">
+                        <f:selectItems value="#{fightBean.skillList}" />
+                    </h:selectOneMenu>
+                </div>
+                
+                <!-- 戦闘ボタン -->
+                <h:commandButton value="Fight" action="#{fightBean.fight}">
+                    <f:ajax execute="@form" render="hpMeter hpValue battleResult"/>
+                </h:commandButton>
+            </div>
+
+            <!-- HP表示 -->
+            <div id="hpDiv">
+                <h:panelGroup id="hpValue">
+                    <h:outputText value="HP: #{fightBean.currentHp}/120"/>
+                </h:panelGroup>
+                
+                <h:panelGroup id="hpMeter">
+                    <meter id="meterBar" 
+                           value="#{fightBean.hpRatio}"
+                           min="0"
+                           max="1"
+                           style="width: 94%;"
+                           low="0.3"
+                           high="0.7"
+                           optimum="1.0">
+                    </meter>
+                </h:panelGroup>
+                <br/>
+                <!-- 戦闘結果表示 -->
+                <h:panelGroup id="battleResult">
+                    <h:outputText value="#{fightBean.battleResult}" 
+                                rendered="#{not empty fightBean.battleResult}"
+                                style="font-weight: bold;"/>
+                </h:panelGroup>
+                
+                <!-- HPリセットボタン -->
+                <h:commandButton value="復活ボタン" action="#{fightBean.resetHp}">
+                    <f:ajax execute="@this" render="hpMeter hpValue battleResult"/>
+                </h:commandButton>
+            </div>
+        </h:form>
+    </div>
+
 </h:body>
 </html> 
