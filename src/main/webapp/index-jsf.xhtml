@@ -32,8 +32,8 @@
                                     name="pre-filledTest" 
                                     required="true"
                                     requiredMessage="ユーザー名を入力してください"
-                                    validatorMessage="ユザー名は3-50文字で入力してください">
-                            <f:validateLength minimum="3" maximum="50"/>
+                                    validatorMessage="ユザー名は1-50文字で入力してください">
+                            <f:validateLength minimum="1" maximum="50"/>
                         </h:inputText>
                     </div>
                 </div>
@@ -49,7 +49,9 @@
                                 placeholder="パスワードを入力してください..."
                                 required="true"
                                 requiredMessage="パスワードを入力してください"
-                                validatorMessage="パスワードは6-100文字で入力してください"/>
+                                validatorMessage="パスワードは1-100文字で入力してください">
+                            <f:validateLength minimum="1" maximum="100"/>
+                        </h:inputText>
                         <br/>
                 </div>
                 <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
@@ -58,7 +60,7 @@
                     <h2><h:outputText value="Button with action and result:"/></h2>
                     <h:commandButton value="新規ユーザー追加" id="signupButton">
                         <f:ajax execute="myTextInput1 placeholderTextInput" 
-                                render="resultSection"
+                                render="resultSection hpMeter hpValue battleResult meterBar"
                                 listener="#{userBean.signup}"/>
                     </h:commandButton>
                 </div>
@@ -134,7 +136,7 @@
                 <h:outputText value="・styleClass属性：css-jsf.cssのdropdown-contentのスタイルを指定により、ドロップダウンコンテンツを表示" styleClass="description"/><br />
                 <h:outputText value="・cursor属性：手型に変更" styleClass="description"/><br />
                 <h:outputText value="・h:outputLink要素：ドロップダウンのオプションを指定" styleClass="point-label"/><br />
-                <h:outputText value="・onclick��ベント：script.jsのClickLink1()関数を呼び出し" styleClass="description"/>
+                <h:outputText value="・onclickベント：script.jsのClickLink1()関数を呼び出し" styleClass="description"/>
         </div>
             
         <div id="dropdownMeterDiv">
@@ -143,30 +145,26 @@
                 <h:panelGroup layout="block" styleClass="function-table">
                     <h2><h:outputText value="Select Dropdown Menu:"/></h2>
                     <div>
-                        <h:selectOneMenu id="myDropdown" value="#{jsfBean.dropdownValue}" onchange="selectChangeFuction1()">
+                        <h:selectOneMenu id="myDropdown" value="#{jsfBean.dropdownValue}" valueChangeListener="#{jsfBean.handleMeterChange}" onchange="submit()">
+                            <f:selectItem itemLabel="Option 1:set to 10%" itemValue="10%"/>
                             <f:selectItem itemLabel="Option 1:set to 25%" itemValue="25%"/>
                             <f:selectItem itemLabel="Option 2:set to 50%" itemValue="50%"/>
                             <f:selectItem itemLabel="Option 3:set to 75%" itemValue="75%"/>
+                            <f:selectItem itemLabel="Option 1:set to 90%" itemValue="90%"/>
                             <f:selectItem itemLabel="Option 4:set to 100%" itemValue="100%"/>
-                            <f:ajax event="change" 
-                                    execute="myDropdown"
-                                    listener="#{jsfBean.handleMeterChange}"
-                                    render="meterBar"/>
                         </h:selectOneMenu>
                     </div>
                 </h:panelGroup>
             </h:form>
             <br/>   
             <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
-            <h:outputText value="・ドロップダウンで進捗バーの値を変更"/><br/>
+            <h:outputText value="・ドロップダウンでmeterBarの進捗バーの値を変更"/><br/>
             <h:outputText value="・h:selectOneMenu要素：ドロップダウン" styleClass="point-label"/><br/>    
+            <h:outputText value="・valueChangeListener属性：ドロップダウンの値をリアルタイムで更新するためのメソッドを指定" styleClass="point-label"/><br/>
+            <h:outputText value="・onchangeイベント：submit()はoptionが変わるたびにフォームを送信する" styleClass="description"/><br/>
             <h:outputText value="・f:selectItem要素：ドロップダウンのオプションを指定" styleClass="point-label"/><br/>
-            <h:outputText value="・onchangeイベント：script.jsのselectChangeFuction1()関数を呼び出し" styleClass="description"/><br/>
             <h:outputText value="・itemLabel属性：ドロップダウンのオプションのラベルを指定" styleClass="description"/><br/>
             <h:outputText value="・itemValue属性：ドロップダウンのオプションの値を指定" styleClass="description"/><br/>
-            <h:outputText value="・f:ajax要素：ドロップダウンの値をリアルタイムで更新" styleClass="point-label"/><br/>
-            <h:outputText value="・listener属性：ドロップダウンの値を更新するためのメソッドを指定" styleClass="description"/><br/>
-            <h:outputText value="・render属性：ドロップダウンの値を更新するために必要な要素を指定" styleClass="description"/>
                 
             <h:outputText value="⇓" styleClass="relation-title"/>
 
@@ -178,7 +176,7 @@
             </div>
             <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
             <h:outputText value="・meter要素：HTML5の要素で、進捗や数値の範囲を視覚的に表現" styleClass="point-label"/><br/> 
-            <h:outputText value="・value属性：メーターの現在値を設定し、範囲内での進捗を示す" styleClass="description"/>    
+            <h:outputText value="・value属性：メーターの現在値を設定し、範囲内での進捗を示す" styleClass="description"/>   
         </div>    
 
 
@@ -294,68 +292,80 @@
             <h:outputText value="・f:ajax要素：チェックボックスの値をリアルタイムで更新" styleClass="point-label"/><br/>
             <h:outputText value="・listener属性：チェックボックスの値を更新するためのメソッドを指定" styleClass="description"/><br/>
             <h:outputText value="・render属性：チェックボックスの値を更新するために必要な要素を指定" styleClass="description"/>
-    </div>
 
-    <div id="fightDiv">
-        <h:form id="fightForm">
-            <h2><h:outputText value="バトルシステム"/></h2>
-            <div id="selectFightDiv">
-                <!-- 敵選択 -->
-                <h4><h:outputText value="あなたの敵を選択してください"/></h4>  
-                <div id="opponentDiv">
-                    <f:ajax event="change" render="skill" listener="#{fightBean.changeSkillList()}">
-                        <h:selectOneMenu value="#{fightBean.selectedOpponent}">
-                            <f:selectItems value="#{fightBean.opponentsList}" />
+
+        <div id="fightDiv">
+            <h:form id="fightForm">
+                <h2><h:outputText value="バトルシステム"/></h2>
+                <div id="selectFightDiv">
+                    <!-- 敵選択 -->
+                    <h4><h:outputText value="step1：あなたの敵を選択してください"/></h4>  
+                    <div id="opponentDiv">
+                        <f:ajax event="change" render="skill" listener="#{fightBean.changeSkillList()}">
+                            <h:selectOneMenu value="#{fightBean.selectedOpponent}">
+                                <f:selectItems value="#{fightBean.opponentsList}" />
+                            </h:selectOneMenu>
+                        </f:ajax>
+                    </div>
+                    
+                    <!-- スキル選択 -->
+                    <div id="skillDiv">
+                        <h4><h:outputText value="step2：あなたが受けたい技を選択してください"/></h4>  
+                        <h:selectOneMenu id="skill" value="#{fightBean.selectedSkill}">
+                            <f:selectItems value="#{fightBean.skillList}" />
                         </h:selectOneMenu>
-                    </f:ajax>
+                    </div>
                 </div>
-                
-                <!-- スキル選択 -->
-                <div id="skillDiv">
-                    <h4><h:outputText value="あなたが受けたい技を選択してください"/></h4>  
-                    <h:selectOneMenu id="skill" value="#{fightBean.selectedSkill}">
-                        <f:selectItems value="#{fightBean.skillList}" />
-                    </h:selectOneMenu>
+                <br/>   
+                <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+                <h:outputText value="・f:ajax要素：ドロップダウンの値をリアルタイムで更新(選択された敵によって二番目のドロップダウンのスキルが変わる)" styleClass="point-label"/><br/>
+                <h:outputText value="・listener属性：ドロップダウンの値を更新するためのメソッドを指定" styleClass="description"/><br/>
+                <h:outputText value="・render属性：ドロップダウンの値を更新する箇所に必要な要素を指定" styleClass="description"/><br/>
+                <h:outputText value="・h:selectOneMenu要素：ドロップダウン" styleClass="point-label"/><br/>
+                <h:outputText value="・value属性：FightBean.javaで定義したselectedSkillを指定" styleClass="description"/><br/>
+                <h:outputText value="・f:selectItems要素：FightBean.javaでselectItemsの中身を定義" styleClass="description"/><br/>
+                    
+                <div id="fightButtonDiv">
+                    <!-- 戦闘ボタン -->
+                    <h4><h:outputText value="step3：ボタンを押すとダメージを受けるようになりますが、大丈夫ですか？"/></h4>
+                    <h5><h:outputText value="（もしHPが0になったら、復活してください。）"/></h5>
+                    <h:commandButton value="ダメージを受ける" action="#{fightBean.fight}">
+                        <f:ajax execute="@form" render="hpMeter hpValue battleResult"/>
+                    </h:commandButton>
                 </div>
-                
-                <!-- 戦闘ボタン -->
-                <h:commandButton value="Fight" action="#{fightBean.fight}">
-                    <f:ajax execute="@form" render="hpMeter hpValue battleResult"/>
-                </h:commandButton>
-            </div>
 
-            <!-- HP表示 -->
-            <div id="hpDiv">
-                <h:panelGroup id="hpValue">
-                    <h:outputText value="HP: #{fightBean.currentHp}/120"/>
-                </h:panelGroup>
-                
-                <h:panelGroup id="hpMeter">
-                    <meter id="meterBar" 
-                           value="#{fightBean.hpRatio}"
-                           min="0"
-                           max="1"
-                           style="width: 94%;"
-                           low="0.3"
-                           high="0.7"
-                           optimum="1.0">
-                    </meter>
-                </h:panelGroup>
-                <br/>
-                <!-- 戦闘結果表示 -->
-                <h:panelGroup id="battleResult">
-                    <h:outputText value="#{fightBean.battleResult}" 
-                                rendered="#{not empty fightBean.battleResult}"
-                                style="font-weight: bold;"/>
-                </h:panelGroup>
-                
-                <!-- HPリセットボタン -->
-                <h:commandButton value="復活ボタン" action="#{fightBean.resetHp}">
-                    <f:ajax execute="@this" render="hpMeter hpValue battleResult"/>
-                </h:commandButton>
-            </div>
-        </h:form>
+                <!-- HP表示 -->
+                <div id="hpDiv">
+                    <h:panelGroup id="hpValue">
+                        <h:outputText value="HP: #{fightBean.currentHp}/#{fightBean.maxHp}"/>
+                    </h:panelGroup>
+                    
+                    <h:panelGroup id="hpMeter">
+                        <meter id="meterBar" 
+                            value="#{fightBean.hpRatio}"
+                            min="0"
+                            max="1"
+                            style="width: 94%;"
+                            low="0.3"
+                            high="0.7"
+                            optimum="1.0">
+                        </meter>
+                    </h:panelGroup>
+                    <br/>
+                    <!-- 戦闘結果表示 -->
+                    <h:panelGroup id="battleResult">
+                        <h:outputText value="#{fightBean.battleResult}" 
+                                    rendered="#{not empty fightBean.battleResult}"
+                                    style="font-weight: bold;"/>
+                    </h:panelGroup>
+                    
+                    <!-- HPリセットボタン -->
+                    <h:commandButton value="復活ボタン" action="#{fightBean.resetHp}">
+                        <f:ajax execute="@this" render="hpMeter hpValue battleResult"/>
+                    </h:commandButton>
+                </div>
+            </h:form>
+        </div>
     </div>
-
 </h:body>
 </html> 

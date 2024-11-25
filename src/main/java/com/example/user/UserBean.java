@@ -15,6 +15,8 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Random;
 
+import com.example.fightSystem.FightBean;
+
 @Named
 @ViewScoped
 public class UserBean implements Serializable {
@@ -27,6 +29,9 @@ public class UserBean implements Serializable {
     
     @Inject
     private UserController controller;
+    
+    @Inject
+    private FightBean fightBean;  // FightBeanを注入
     
     // 事前入力テキストフィールド としてランダムなユーザー名を設定 
     @Getter
@@ -87,18 +92,26 @@ public class UserBean implements Serializable {
             // 5. 创建新用户
             try {
                 // 处理提交的数据
-                System.out.println("Creating user: " + username + " " + password);
+                System.out.println("let's create user: " + username + " " + password);
                 user = controller.createUser(username, password);
                 session.setAttribute("user", user); 
                 newAddedUsersThisTime.add(user);
                 session.setAttribute("newAddedUsersThisTime", newAddedUsersThisTime);
                     // 添加成功消息
-                System.out.println("User created: " + user);
+                System.out.println("User already created: " + user);
                 FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage("成功", "ユーザーが追加されました"));
                     
                  //DB確認：DBからユーザーを取得
                 System.out.println("refresh method called in signup");
+                refresh();
+                
+                // 新規ユーザー作成後、HPをランダムに設定
+                fightBean.randomizeMaxHp();
+                
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage("成功", "ユーザーが追加され、新しいHPが設定されました"));
+                    
                 refresh();
             } catch (Exception e) {
                 System.err.println("Error: " + e.getMessage());

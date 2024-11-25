@@ -1,11 +1,11 @@
-package com.example.progressbar;
+package com.example.bean;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
-import java.io.Serializable;
-import java.util.Random;
+import jakarta.faces.event.ValueChangeEvent;
 
 @Named
 @SessionScoped
@@ -13,7 +13,6 @@ public class JsfBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private final Random random = new Random();
     
     @Getter
     @Setter
@@ -47,21 +46,25 @@ public class JsfBean implements Serializable {
         this.progressValue = this.sliderValue;
     }
 
-    public void handleDropdownChange() {
-        // ドロップダウンの値から%を除去して数値に変換
-        String numericValue = dropdownValue.replace("%", "");
-        this.progressValue = Integer.parseInt(numericValue);
-        System.out.println("progressValue: " + this.progressValue);
-        System.out.println("dropdownValue: " + dropdownValue);
+ 
 
-        this.sliderValue = this.progressValue;
+    public void handleMeterChange(ValueChangeEvent event) {
+        String newValue = event.getNewValue().toString();
+        System.out.println("New value selected: " + newValue);
+        this.dropdownValue = newValue;
+
+        // 移除百分比符号并解析为数字
+        String numberOnly = newValue.replaceAll("[^0-9]", "");
+        try {
+            this.meterValue = Double.parseDouble(numberOnly) / 100.0;
+            System.out.println("Meter value set to: " + this.meterValue);
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing value: " + newValue);
+            this.meterValue = 0.5; // 设置默认值
+        }
     }
 
-    public void handleMeterChange() {
-        System.out.println("meterValue: " + this.meterValue);
-        System.out.println("get meterBar same to dropdownValue: " + Double.parseDouble(dropdownValue) / 100.0);
-        this.meterValue = Double.parseDouble(dropdownValue.replace("%", "")) / 100.0;
-    }
+
 
     public void handleRadioChange() {
         System.out.println("Selected radio: " + selectedRadio);

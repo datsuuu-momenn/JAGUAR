@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,9 +26,36 @@ import lombok.Setter;
 public class FightBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
-    private static final int MAX_HP = 120;
-
-    	/*** 本来DB等から拾って来るデータ ***************************************************/
+    private static final int[] HP_VALUES = {120, 160, 180, 200, 210, 230, 250, 270, 300};
+    
+    @Getter
+    @Setter
+    private int maxHp = 120; // デフォルト値
+    
+    @Getter
+    @Setter
+    private int currentHp = maxHp;
+    
+    // HPの比率を計算（進捗バー用）
+    public double getHpRatio() {
+        return (double) currentHp / maxHp;
+    }
+    
+    // 新規ユーザー追加時にHPをランダムに設定
+    public void randomizeMaxHp() {
+        Random random = new Random();
+        maxHp = HP_VALUES[random.nextInt(HP_VALUES.length)];
+        currentHp = maxHp; // 新しい最大値で現在のHPを初期化
+        System.out.println("New max HP set to: " + maxHp);
+    }
+    
+    // HP回復メソッド（既存のresetHp()を修正）
+    public void resetHp() {
+        currentHp = maxHp;
+        battleResult = "HPが全回復しました！";
+    }
+    
+    /*** 本来DB等から拾って来るデータ ***************************************************/
 	//従業員マスタ
 	static List<SelectItem> OPPONENTS_LIST;
 	static {
@@ -127,16 +155,7 @@ public class FightBean implements Serializable {
     
     @Getter
     @Setter
-    private int currentHp = MAX_HP;
-    
-    @Getter
-    @Setter
     private String battleResult;
-    
-    // 血条値を0-1の範囲で返す
-    public double getHpRatio() {
-        return (double) currentHp / MAX_HP;
-    }
     
     // 戦闘実行メソッド
     @Transactional
@@ -236,11 +255,5 @@ public class FightBean implements Serializable {
         if (currentHp == 0) {
             battleResult += "　戦闘不能！";
         }
-    }
-    
-    // HPをリセット
-    public void resetHp() {
-        currentHp = MAX_HP;
-        battleResult = "HPが全回復しました！";
     }
 }
