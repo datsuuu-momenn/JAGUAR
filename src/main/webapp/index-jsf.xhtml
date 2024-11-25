@@ -366,6 +366,64 @@
                 </div>
             </h:form>
         </div>
+
+        <!-- 画像iframe -->
+            <div id="iFrameDiv1">
+            <h3><h:outputText value="iFrameに画像を埋め込む："/></h3>
+            <iframe id="myIframe1" 
+                    class="iframeClass1" 
+                    scrolling="no" 
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
+            </iframe>
+        </div>
+        <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+        <h:outputText value="・iframe要素：" styleClass="point-label"/><br/>
+        <h:outputText value="・src属性：base64エンコードされた画像データを指定" styleClass="description"/>
+        <h:outputText value="・scrolling属性：スクロールを無効にする" styleClass="description"/>
+
+        <!-- テキストiframe -->
+        <div id="iFrameDiv2">
+            <h3><h:outputText value="iFrameにテキストを埋め込む："/></h3>
+            <iframe id="myIframe2" 
+                    class="iframeClass2" 
+                    scrolling="no" 
+                    src="data:text/html,&lt;body style='background-color:%23F2F6F8;'&gt;&lt;h4&gt;iFrame Text&lt;/h4&gt;&lt;/body&gt;">
+            </iframe>
+        </div>
+        <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+        <h:outputText value="・iframe要素：" styleClass="point-label"/><br/>
+        <h:outputText value="・src属性：jsfBean.javaで定義したdynamicSrcを指定" styleClass="description"/>
+
+        <!-- Googleロゴ画像iframe -->
+        <div id="iFrameDiv3">
+            <h3><h:outputText value="iFrameにGoogleロゴ画像を埋め込む："/></h3>
+            <iframe id="myIframe3" 
+                    class="iframeClass3" 
+                    scrolling="no" 
+                    src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+            </iframe>
+        </div>
+        <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+        <h:outputText value="・iframe要素：" styleClass="point-label"/><br/>
+        <h:outputText value="・src属性：Googleロゴ画像のURLを指定" styleClass="description"/>
+
+        <div id="iFrameDiv4">
+            <h3><h:outputText value="iFrameにチェックボックスを埋め込む："/></h3>
+            <iframe id="myIframe4" 
+                    class="iframeClass4" 
+                    scrolling="no"
+                    src="data:text/html,
+                        %3Chtml%3E
+                            %3Cbody%3E
+                                %3Cinput type='checkbox' id='frameCheckbox'%3E 
+                                %3Clabel for='frameCheckbox'%3E checkbox in iFrame %3C/label%3E
+                            %3C/body%3E
+                        %3C/html%3E">
+            </iframe>
+        </div>
+        <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
+        <h:outputText value="・iframe要素：" styleClass="point-label"/><br/>    
+        <h:outputText value="・src属性：data:text/htmlで直接HTMLコンテンツを埋め込む" styleClass="description"/>
     </div>
 </h:body>
 </html> 

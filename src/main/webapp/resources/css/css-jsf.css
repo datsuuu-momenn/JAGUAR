@@ -248,6 +248,10 @@ input[type="range"].slider::-moz-range-thumb:hover {
 #selectFightDiv,
 #hpDiv,
 #fightButtonDiv,
+#iFrameDiv1,
+#iFrameDiv2,
+#iFrameDiv3,
+#iFrameDiv4,
 #signupResultDiv {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 8px;

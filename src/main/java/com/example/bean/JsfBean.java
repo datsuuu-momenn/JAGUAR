@@ -77,4 +77,8 @@ public class JsfBean implements Serializable {
             }
         }
     }
+
+    public String getDynamicSrc() {
+        return "data:text/html,&lt;body style='background-color:%23F2F6F8;'&gt;&lt;h4&gt;iFrame Text&lt;/h4&gt;&lt;/body&gt;";
+    }
 } 
