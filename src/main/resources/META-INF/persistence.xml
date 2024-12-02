@@ -16,6 +16,10 @@
             <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+            <property name="eclipselink.logging.level.sql" value="FINE" />
+            <property name="eclipselink.logging.parameters" value="true" />
         </properties>
     </persistence-unit>
 </persistence>

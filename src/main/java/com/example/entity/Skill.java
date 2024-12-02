@@ -1,4 +1,4 @@
-package com.example.fightSystem.entity;
+package com.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

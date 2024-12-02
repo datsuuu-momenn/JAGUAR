@@ -138,7 +138,11 @@
                 <h:outputText value="・h:outputLink要素：ドロップダウンのオプションを指定" styleClass="point-label"/><br />
                 <h:outputText value="・onclickベント：script.jsのClickLink1()関数を呼び出し" styleClass="description"/>
         </div>
-            
+  
+        
+
+
+
         <div id="dropdownMeterDiv">
             <!-- ドロップダウン関連 -->
             <h:form id="dropdownForm">  
@@ -180,6 +184,14 @@
         </div>    
 
 
+
+
+
+
+
+
+
+
             <div id="sliderProgressDiv">   
                 <!-- スライダー関連 -->
                 <h:form id="sliderForm">    
@@ -193,7 +205,7 @@
                                     min="0" max="100" step="10">
                                 <f:ajax event="change" 
                                         listener="#{jsfBean.handleSliderChange}"
-                                        render="progressBar progressText"/>
+                                        render="progressBar progressText changeHistorySection"/>
                             </h:inputText>
                         </div>
                         
@@ -233,7 +245,34 @@
                 <h:outputLabel value="・displayOnly属性：進捗バーの値を表示のみにする" styleClass="description"/> <br/>
                 <h:outputLabel value="・styleClass属性：進捗バーの幅を設定" styleClass="description"/> <br/>
                 <h:outputLabel value="・jsfBean.javaのprogressValueを使用して、進捗バーの値をリアルタイムで更新" styleClass="description"/>
-            </div>        
+            </div>   
+            <div id="changeHistoryDiv">
+                <h:panelGroup id="changeHistorySection" layout="block">
+                    <h2><h:outputText value="DataTable："/></h2>
+                    <h:outputText value="【操作履歴】"/>
+                    <h:dataTable id="operationTable" value="#{jsfBean.getOperationHistory()}" var="row" 
+                                title="操作履歴" styleClass="results">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="操作時間"/>
+                            </f:facet>
+                            <h:outputText value="#{row.operationTime}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="操作種別"/>
+                            </f:facet>
+                            <h:outputText value="#{row.operationType}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="操作値"/>
+                            </f:facet>
+                            <h:outputText value="#{row.operationValue}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </div>     
                
             
 
@@ -266,19 +305,32 @@
             <h:outputText value="・render属性：ラジオボタンの値を更新するために必要な要素を指定" styleClass="description"/>
 
 
-            <h:form id="checkboxForm">
+            <h:form id="checkboxForm" prependId="false">
                 <!-- チェックボックス関連 -->
                 <h:panelGroup layout="block" styleClass="function-table">
                     <h2><h:outputText value="CheckBox:"/></h2>
                     <div>
                         <h:panelGroup styleClass="function-show4">
-                            <h:selectManyCheckbox id="checkboxGroup" value="#{jsfBean.selectedCheckboxes}">
-                                <f:selectItem itemLabel="猫" itemValue="1"/>
-                                <f:selectItem itemLabel="犬" itemValue="2"/>
-                                <f:selectItem itemLabel="金魚" itemValue="3"/>
-                                <f:ajax event="change" listener="#{jsfBean.handleCheckboxChange}"/>
-                            </h:selectManyCheckbox>
+                            <p:selectManyCheckbox id="checkboxGroup" value="#{jsfBean.selectedCheckboxes}">
+                                <f:selectItem itemLabel="アメリカーノ" itemValue="Americano"/>
+                                <f:selectItem itemLabel="カフェラテ" itemValue="Latte"/>
+                                <f:selectItem itemLabel="カプチーノ" itemValue="Cappuccino"/>
+
+                                <f:selectItem itemLabel="エスプレッソ" itemValue="Espresso"/>
+                                <f:selectItem itemLabel="モカ" itemValue="Mocha"/>
+                                <f:selectItem itemLabel="キャラメルマキアート" itemValue="Caramel_Macchiato"/>
+
+                                <f:selectItem itemLabel="フラペチーノ" itemValue="Frappuccino"/>
+                                <f:selectItem itemLabel="コールドブリュー" itemValue="Cold_Brew"/>
+                                <f:selectItem itemLabel="フラットホワイト" itemValue="Flat_White"/>
+
+                                <f:selectItem itemLabel="ドリップコーヒー" itemValue="Brewed_Coffee"/>
+                                <f:selectItem itemLabel="マキアート" itemValue="Macchiato"/>
+                                <f:selectItem itemLabel="抹茶ラテ" itemValue="Matcha_Latte"/>
+                                
+                            </p:selectManyCheckbox>
                             <br/>
+                            <h:commandButton value="送信しておすすめのコーヒーを見る" action="#{facesContext.externalContext.dispatch('storePreferences')}"/>
                         </h:panelGroup>
                     </div>
                 </h:panelGroup>
@@ -292,6 +344,11 @@
             <h:outputText value="・f:ajax要素：チェックボックスの値をリアルタイムで更新" styleClass="point-label"/><br/>
             <h:outputText value="・listener属性：チェックボックスの値を更新するためのメソッドを指定" styleClass="description"/><br/>
             <h:outputText value="・render属性：チェックボックスの値を更新するために必要な要素を指定" styleClass="description"/>
+
+
+
+
+
 
 
         <div id="fightDiv">
@@ -405,7 +462,7 @@
         </div>
         <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
         <h:outputText value="・iframe要素：" styleClass="point-label"/><br/>
-        <h:outputText value="・src属性：Googleロゴ画像のURLを指定" styleClass="description"/>
+        <h:outputText value="・src属性：Google���ゴ画像のURLを指定" styleClass="description"/>
 
         <div id="iFrameDiv4">
             <h3><h:outputText value="iFrameにチェックボックスを埋め込む："/></h3>

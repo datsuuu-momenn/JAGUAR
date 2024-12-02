@@ -1,4 +1,4 @@
-package com.example.user;
+package com.example.entity;
 
 import com.example.task.Task;
 

@@ -1,4 +1,4 @@
-package com.example.fightSystem.entity;
+package com.example.entity;
 
 public enum SkillType {
     GRASS("草"),    // 草タイプ

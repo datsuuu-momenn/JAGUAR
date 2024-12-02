@@ -22,7 +22,7 @@ body {
 }
 
 /* 機能グループの色分け */
-.function-show1, .function-show2, .function-show3, .function-show4 {
+.function-show1, .function-show2, .function-show3 {
     background-color: rgba(242, 246, 248, 0.9) !important;
     padding: 18px;
     border-radius: 8px;
@@ -32,7 +32,7 @@ body {
 }
 
 .function-show1:hover, .function-show2:hover, 
-.function-show3:hover, .function-show4:hover {
+.function-show3:hover {
     background-color: rgba(242, 246, 248, 0.95) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
@@ -252,6 +252,7 @@ input[type="range"].slider::-moz-range-thumb:hover {
 #iFrameDiv2,
 #iFrameDiv3,
 #iFrameDiv4,
+#changeHistoryDiv,
 #signupResultDiv {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 8px;
@@ -368,3 +369,72 @@ input[type="range"].slider::-moz-range-thumb:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.recommendations {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.recommendations ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recommendations li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.coffee-card {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.coffee-card h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.recommendation {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #2ecc71;
+    border-radius: 4px;
+}
+
+.bean-name {
+    color: #e67e22;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}

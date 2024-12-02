@@ -1,4 +1,4 @@
-package com.example.user;
+package com.example.controller;
 
 
 import jakarta.persistence.EntityManager;
@@ -6,6 +6,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
 
 import java.util.List;
+
+import com.example.entity.User;
 
 import jakarta.ejb.EJBException;
 import jakarta.persistence.EntityNotFoundException;
@@ -60,9 +62,7 @@ public class UserController {
 
     public List<User> loadAllUsers() {
         System.out.println("loadAllUsers method called in controller");
-
         List<User> users = em.createNamedQuery(User.FIND_ALLUsers).getResultList();
-
         return users;
     }
 } 

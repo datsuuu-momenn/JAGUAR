@@ -1,4 +1,4 @@
-package com.example.user;
+package com.example.bean;
 
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -15,7 +15,8 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Random;
 
-import com.example.fightSystem.FightBean;
+import com.example.controller.UserController;
+import com.example.entity.User;
 
 @Named
 @ViewScoped
@@ -112,7 +113,6 @@ public class UserBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage("成功", "ユーザーが追加され、新しいHPが設定されました"));
                     
-                refresh();
             } catch (Exception e) {
                 System.err.println("Error: " + e.getMessage());
                     // 添加错误消息
@@ -136,6 +136,7 @@ public class UserBean implements Serializable {
     
     public List<User> getAllUsers() {
         System.out.println("getAllUsers method called in UserBean");
+        List<User> allUsers = controller.loadAllUsers();
         return allUsers;
     }
 

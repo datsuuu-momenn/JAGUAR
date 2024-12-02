@@ -1,4 +1,4 @@
-package com.example.fightSystem;
+package com.example.bean;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
@@ -8,9 +8,10 @@ import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import com.example.fightSystem.entity.Skill;
-import com.example.fightSystem.repository.SkillRepository;
-import com.example.fightSystem.controller.FightController;
+
+import com.example.controller.FightController;
+import com.example.repository.SkillRepository;
+import com.example.entity.Skill;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ public class FightBean implements Serializable {
     
     @Getter
     @Setter
-    private String battleResult;
+    private String battleResult; 
     
     // 戦闘実行メソッド
     @Transactional
