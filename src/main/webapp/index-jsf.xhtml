@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <title>JSF開発作業支援システム</title>
     <h:outputStylesheet library="css" name="css-jsf.css"/>
@@ -282,15 +283,83 @@
                 <!-- ラジオボタン関連 -->
                 <h:panelGroup layout="block" styleClass="function-table">
                     <h2><h:outputText value="Radio Button:"/></h2>
-                    <div>
-                        <h:panelGroup styleClass="function-show4">
-                            <h:selectOneRadio id="radioGroup" value="#{jsfBean.selectedRadio}">
-                                <f:selectItem itemLabel="オプション1" itemValue="1"/>
-                                <f:selectItem itemLabel="オプション2" itemValue="2"/>
-                                <f:selectItem itemLabel="オプション3" itemValue="3"/>
-                                <f:ajax event="change" listener="#{jsfBean.handleRadioChange}"/>
-                            </h:selectOneRadio>
+                    <!-- ゲーム説明 -->
+                    <div class="game-description">
+                        <h2>ゲームの説明</h2>
+                        <p>
+                            あなたは囚人のジレンマゲームのプレイヤーAです。各ラウンドで「努力 (C)」または「怠ける (D)」を選択できます。
+                            あなたの選択は収益に影響を与えます。同時に、プレイヤーBは最適な戦略を自動的に選択します。
+                        </p>
+                        <p>
+                            努力はスキルを向上させ、長期的な利益をもたらしますが、高いコストを必要とします。
+                            一方で怠けると短期的な快適さが得られますが、将来的な利益はありません。
+                        </p>
+                        <h3>現在のラウンド利得表</h3>
+                        <h:panelGroup id="payoffTablePanel">
+                            <h:panelGrid columns="3" styleClass="payoff-table">
+                                <h:outputText value="" />
+                                <h:outputText value="努力 (C)" />
+                                <h:outputText value="怠ける (D)" />
+                                
+                                <h:outputText value="努力 (C)" />
+                                <h:outputText value="(#{gameBean.payoffCC[0]}, #{gameBean.payoffCC[1]})" />
+                                <h:outputText value="(#{gameBean.payoffCD[0]}, #{gameBean.payoffCD[1]})" />
+                                
+                                <h:outputText value="怠ける (D)" />
+                                <h:outputText value="(#{gameBean.payoffDC[0]}, #{gameBean.payoffDC[1]})" />
+                                <h:outputText value="(#{gameBean.payoffDD[0]}, #{gameBean.payoffDD[1]})" />
+                            </h:panelGrid>
                         </h:panelGroup>
+                    </div>
+                    <div>
+                        <!-- 戦略選択 -->
+                        <h:panelGrid columns="2">
+                            <label for="choiceA">戦略を選択してください：</label>
+                            <h:selectOneRadio id="choiceA" value="#{gameBean.playerAChoice}">
+                                    <f:selectItem itemValue="C" itemLabel="努力 (C)" />
+                                    <f:selectItem itemValue="D" itemLabel="怠ける (D)" />
+                                    <f:ajax event="change" listener="#{gameBean.play}" render="resultPanel" />
+                    </h:selectOneRadio>
+                        </h:panelGrid>
+                    </div>
+                    <!-- 結果表示エリア -->
+                    <h:panelGroup id="gameresultPanel" class="result-section" rendered="#{not empty gameBean.playerBChoice}">
+                        <h2>ラウンドの結果</h2>
+                        <p><strong>あなたの選択：</strong> #{gameBean.playerAChoice}</p>
+                        <p><strong>プレイヤーBの戦略：</strong> #{gameBean.playerBChoice}</p>
+                        <p><strong>あなたの収益：</strong> #{gameBean.playerAPayoff}</p>
+                        <p><strong>プレイヤーBの収益：</strong> #{gameBean.playerBPayoff}</p>
+                    </h:panelGroup>
+                    <div class="container">
+                        <!-- 累計収益 -->
+                        <div>
+                            <h2>累計収益</h2>
+                            <p>プレイヤーAの累計収益：#{gameBean.totalAPayoff}</p>
+                            <p>プレイヤーBの累計収益：#{gameBean.totalBPayoff}</p>
+                        </div>
+                    
+                        <!-- ラウンド履歴 -->
+                        <div>
+                            <h2>ラウンド履歴</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ラウンド</th>
+                                        <th>プレイヤーAの選択</th>
+                                        <th>プレイヤーBの選択</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat value="#{gameBean.roundHistory}" var="history" varStatus="loop">
+                                        <tr>
+                                            <td>#{loop.index + 1}</td>
+                                            <td>#{history.split(',')[0]}</td>
+                                            <td>#{history.split(',')[1]}</td>
+                                        </tr>
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </h:panelGroup>
             </h:form>
@@ -462,7 +531,7 @@
         </div>
         <h:outputLabel value="point:" styleClass="point-label-title"/><br/>
         <h:outputText value="・iframe要素：" styleClass="point-label"/><br/>
-        <h:outputText value="・src属性：Google���ゴ画像のURLを指定" styleClass="description"/>
+        <h:outputText value="・src属性：Googleゴ画像のURLを指定" styleClass="description"/>
 
         <div id="iFrameDiv4">
             <h3><h:outputText value="iFrameにチェックボックスを埋め込む："/></h3>

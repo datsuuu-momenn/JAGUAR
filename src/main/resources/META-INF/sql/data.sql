@@ -1,3 +1,49 @@
+-- ?Œš”˜?›ów’èš•„W
+CREATE DATABASE IF NOT EXISTS your_database_name CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- g—pV?Œš“I”˜?
+USE your_database_name;
+
+-- ?Œš tasks •\›ów’èš•„W
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- ?Œš users •\›ów’èš•„W
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    password VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- ?Œš skills •\›ów’èš•„W
+CREATE TABLE skills (
+    skill_id INT PRIMARY KEY,
+    skill_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    damage INT NOT NULL,
+    accuracy INT NOT NULL,
+    critical_rate INT NOT NULL,
+    skill_type VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    description TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- ?Œš JSF_OPERATIONS •\›ów’èš•„W
+CREATE TABLE JSF_OPERATIONS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    operation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    operation_type VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    operation_value VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- ?Œš coffee_recommendation •\›ów’èš•„W
+CREATE TABLE coffee_recommendation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    coffee_type VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    recommended_bean VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    bean_description TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 
 INSERT INTO tasks (title) VALUES ('This is the task-1');
 INSERT INTO tasks (title) VALUES ('This is the task-2');
@@ -8,26 +54,26 @@ INSERT INTO tasks (title) VALUES ('This is the task-5');
 
 INSERT INTO users (username, password) VALUES ('admin', 'admin123');
 
--- ã‚¹ã‚­ãƒ«ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
-INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (1, 'ãƒªãƒ¼ãƒ•ãƒ–ãƒ¬ãƒ¼ãƒ‰', 70, 95, 10, 'GRASS', '');
-INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (2, 'ãƒ–ãƒ¬ã‚¤ãƒ–ãƒãƒ¼ãƒ‰', 120, 85, 15, 'FLYING', '');
-INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (3, 'ã¯ã£ã±ã‚«ãƒƒã‚¿ãƒ¼', 55, 100, 5, 'GRASS', '');
-INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (4, 'ãƒãƒ’ãƒ«ãƒãƒ„ãƒ¡', 65, 95, 10, 'NORMAL', '');
+-- ƒXƒLƒ‹ƒf[ƒ^‚Ì‰Šú‰»
+INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (1, 'ƒŠ[ƒtƒuƒŒ[ƒh', 70, 95, 10, 'GRASS', '');
+INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (2, 'ƒuƒŒƒCƒuƒo[ƒh', 120, 85, 15, 'FLYING', '');
+INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (3, '‚Í‚Á‚ÏƒJƒbƒ^[', 55, 100, 5, 'GRASS', '');
+INSERT INTO skills (skill_id, skill_name, damage, accuracy, critical_rate, skill_type, description) VALUES (4, 'ƒ}ƒqƒ‹ƒmƒcƒ', 65, 95, 10, 'NORMAL', '');
 
 
--- åˆæœŸãƒ‡ãƒ¼ã‚¿ã®æŒ¿å…¥ï¼ˆå¿…è¦ãªå ´åˆï¼‰
+-- ‰Šúƒf[ƒ^‚Ì‘}“üi•K—v‚Èê‡j
 INSERT INTO JSF_OPERATIONS (operation_time, operation_type, operation_value) VALUES (CURRENT_TIMESTAMP, 'DROPDOWN_CHANGE', '50%');
 INSERT INTO JSF_OPERATIONS (operation_time, operation_type, operation_value) VALUES (CURRENT_TIMESTAMP, 'SLIDER_CHANGE', '75');
 
 
--- æ’å…¥å’–å•¡æ¨èæ•°æ®
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Latte', 'ã‚«ãƒ•ã‚§ ãƒ™ãƒ­ãƒŠï¼ˆCaffÃ¨ Veronaï¼‰', 'é»’ã‚³ã‚³ã‚¢ã®ã‚ˆã†ãªæ¿ƒåšãªé¢¨å‘³ãŒç‰¹å¾´ã§ã€ãƒŸãƒ«ã‚¯ã¨ç›¸æ€§æŠœç¾¤ã€‚ãƒ©ãƒ†ã®ã‚¯ãƒªãƒ¼ãƒŸãƒ¼ã•ã¨èª¿å’Œã—ã€ç”˜ãæ»‘ã‚‰ã‹ãªå‘³ã‚ã„ã‚’å¼•ãç«‹ã¦ã¾ã™ã€‚');  
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Cappuccino', 'ã‚¨ã‚¹ãƒ—ãƒ¬ãƒƒã‚½ ãƒ­ãƒ¼ã‚¹ãƒˆï¼ˆEspresso Roastï¼‰', 'ç„¦ãŒã—ã‚­ãƒ£ãƒ©ãƒ¡ãƒ«ã®ç”˜ã¿ã¨æ¿ƒåšãªé¢¨å‘³ãŒç‰¹å¾´ã€‚ãƒ•ã‚©ãƒ¼ãƒ ãƒŸãƒ«ã‚¯ã¨åˆã‚ã›ã‚‹ã¨ã€ã‚³ãƒ¼ãƒ’ãƒ¼ã®ã‚¢ãƒ­ãƒãŒéš›ç«‹ã¡ã¾ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Americano', 'ã‚±ãƒ‹ã‚¢ï¼ˆKenyaï¼‰', 'ãƒ•ãƒ«ãƒ¼ãƒ†ã‚£ãƒ¼ã§é…¸å‘³ãŒå¼·ã„ã‚±ãƒ‹ã‚¢è±†ã¯ã€ã‚·ãƒ³ãƒ—ãƒ«ã§ã‚¯ãƒªã‚¢ãªå‘³ã‚ã„ã®ã‚¢ãƒ¡ãƒªã‚«ãƒ¼ãƒã«ã´ã£ãŸã‚Šã§ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Mocha', 'ã‚¨ã‚¹ãƒ—ãƒ¬ãƒƒã‚½ ãƒ­ãƒ¼ã‚¹ãƒˆï¼ˆEspresso Roastï¼‰', 'æ¿ƒåšã§é¦™ã°ã—ã„ã‚³ãƒ¼ãƒ’ãƒ¼ã®é¢¨å‘³ãŒãƒãƒ§ã‚³ãƒ¬ãƒ¼ãƒˆã®ç”˜ã•ã‚’å¼•ãç«‹ã¦ã€ãƒãƒ©ãƒ³ã‚¹ã®è‰¯ã„ãƒ¢ã‚«ã‚’æ¥½ã—ã‚ã¾ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Caramel_Macchiato', 'ãƒ‘ã‚¤ã‚¯ãƒ—ãƒ¬ã‚¤ã‚¹ ãƒ­ãƒ¼ã‚¹ãƒˆï¼ˆPike Place Roastï¼‰', 'ãƒãƒ©ãƒ³ã‚¹ã®è‰¯ã„é¢¨å‘³ã§ã€ã‚­ãƒ£ãƒ©ãƒ¡ãƒ«ã®ç”˜ã•ã‚’é‚ªé­”ã›ãšã€ã‚„ã•ã—ã„ã‚³ãƒ¼ãƒ’ãƒ¼æ„Ÿã‚’æä¾›ã—ã¾ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Frappuccino', 'ãƒ–ãƒ­ãƒ³ãƒ‰ ãƒ­ãƒ¼ã‚¹ãƒˆï¼ˆBlonde Roastï¼‰', 'è»½ã‚„ã‹ã§é£²ã¿ã‚„ã™ã„ãƒ•ãƒ©ãƒšãƒãƒ¼ãƒã«ã´ã£ãŸã‚Šã®å„ªã—ã„å‘³ã‚ã„ã®ã‚³ãƒ¼ãƒ’ãƒ¼è±†ã§ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Cold_Brew', 'ã‚¹ãƒãƒˆãƒ©ï¼ˆSumatraï¼‰', 'ä½é…¸ã§ã‚³ã‚¯ã®ã‚ã‚‹ã‚¹ãƒãƒˆãƒ©è±†ã¯ã€é•·æ™‚é–“æŠ½å‡ºã™ã‚‹ã‚³ãƒ¼ãƒ«ãƒ‰ãƒ–ãƒªãƒ¥ãƒ¼ã«é©ã—ã¦ãŠã‚Šã€ã‚¹ãƒ‘ã‚¤ã‚·ãƒ¼ã§æ¿ƒåšãªé¢¨å‘³ã‚’æ¥½ã—ã‚ã¾ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Flat_White', 'ã‚¨ã‚¹ãƒ—ãƒ¬ãƒƒã‚½ ãƒ­ãƒ¼ã‚¹ãƒˆï¼ˆEspresso Roastï¼‰', 'æ¿ƒåšãªã‚¨ã‚¹ãƒ—ãƒ¬ãƒƒã‚½ã«å¾®ç´°ãªã‚¹ãƒãƒ¼ãƒ ãƒŸãƒ«ã‚¯ãŒåŠ ã‚ã‚‹ãƒ•ãƒ©ãƒƒãƒˆãƒ›ãƒ¯ã‚¤ãƒˆã«ã¯ã€æ·±ã„ç„™ç…ã®è±†ãŒãƒ™ã‚¹ãƒˆã§ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Brewed_Coffee', 'ã‚°ã‚¢ãƒ†ãƒãƒ© ã‚¢ãƒ³ãƒ†ã‚£ã‚°ã‚¢ï¼ˆGuatemala Antiguaï¼‰', 'ãƒãƒ§ã‚³ãƒ¬ãƒ¼ãƒˆã®ã‚ˆã†ãªå£å½“ãŸã‚Šã¨ã‚¹ãƒ‘ã‚¤ã‚¹ã®é¢¨å‘³ãŒã‚ã‚Šã€ã‚·ãƒ³ãƒ—ãƒ«ãªãƒ‰ãƒªãƒƒãƒ—ã‚³ãƒ¼ãƒ’ãƒ¼ã¨ã—ã¦æ¥½ã—ã‚ã¾ã™ã€‚');
-INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Matcha_Latte', 'ã‚¨ãƒã‚ªãƒ”ã‚¢ï¼ˆEthiopiaï¼‰', 'ãƒ•ãƒ­ãƒ¼ãƒ©ãƒ«ã§ã‚„ã‚ã‚‰ã‹ãªé¢¨å‘³ãŒæŠ¹èŒ¶ã®ã»ã‚è‹¦ã•ã‚’å¼•ãç«‹ã¦ã€çµ¶å¦™ãªãƒãƒ©ãƒ³ã‚¹ã‚’ä¿ã¡ã¾ã™ã€‚');
+-- ‡“ü??„ä¦”˜
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Latte', 'ƒJƒtƒF ƒxƒƒiiCaff? Veronaj', '•ƒRƒRƒA‚Ì‚æ‚¤‚È”ZŒú‚È•—–¡‚ª“Á’¥‚ÅAƒ~ƒ‹ƒN‚Æ‘Š«”²ŒQBƒ‰ƒe‚ÌƒNƒŠ[ƒ~[‚³‚Æ’²˜a‚µAŠÃ‚­ŠŠ‚ç‚©‚È–¡‚í‚¢‚ğˆø‚«—§‚Ä‚Ü‚·B');  
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Cappuccino', 'ƒGƒXƒvƒŒƒbƒ\ ƒ[ƒXƒgiEspresso Roastj', 'Å‚ª‚µƒLƒƒƒ‰ƒƒ‹‚ÌŠÃ‚İ‚Æ”ZŒú‚È•—–¡‚ª“Á’¥BƒtƒH[ƒ€ƒ~ƒ‹ƒN‚Æ‡‚í‚¹‚é‚ÆAƒR[ƒq[‚ÌƒAƒƒ}‚ªÛ—§‚¿‚Ü‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Americano', 'ƒPƒjƒAiKenyaj', 'ƒtƒ‹[ƒeƒB[‚Å_–¡‚ª‹­‚¢ƒPƒjƒA“¤‚ÍAƒVƒ“ƒvƒ‹‚ÅƒNƒŠƒA‚È–¡‚í‚¢‚ÌƒAƒƒŠƒJ[ƒm‚É‚Ò‚Á‚½‚è‚Å‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Mocha', 'ƒGƒXƒvƒŒƒbƒ\ ƒ[ƒXƒgiEspresso Roastj', '”ZŒú‚Å‚Î‚µ‚¢ƒR[ƒq[‚Ì•—–¡‚ªƒ`ƒ‡ƒRƒŒ[ƒg‚ÌŠÃ‚³‚ğˆø‚«—§‚ÄAƒoƒ‰ƒ“ƒX‚Ì—Ç‚¢ƒ‚ƒJ‚ğŠy‚µ‚ß‚Ü‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Caramel_Macchiato', 'ƒpƒCƒNƒvƒŒƒCƒX ƒ[ƒXƒgiPike Place Roastj', 'ƒoƒ‰ƒ“ƒX‚Ì—Ç‚¢•—–¡‚ÅAƒLƒƒƒ‰ƒƒ‹‚ÌŠÃ‚³‚ğ×–‚‚¹‚¸A‚â‚³‚µ‚¢ƒR[ƒq[Š´‚ğ’ñ‹Ÿ‚µ‚Ü‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Frappuccino', 'ƒuƒƒ“ƒh ƒ[ƒXƒgiBlonde Roastj', 'Œy‚â‚©‚Åˆù‚İ‚â‚·‚¢ƒtƒ‰ƒyƒ`[ƒm‚É‚Ò‚Á‚½‚è‚Ì—D‚µ‚¢–¡‚í‚¢‚ÌƒR[ƒq[“¤‚Å‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Cold_Brew', 'ƒXƒ}ƒgƒ‰iSumatraj', '’á_‚ÅƒRƒN‚Ì‚ ‚éƒXƒ}ƒgƒ‰“¤‚ÍA’·ŠÔ’Šo‚·‚éƒR[ƒ‹ƒhƒuƒŠƒ…[‚É“K‚µ‚Ä‚¨‚èAƒXƒpƒCƒV[‚Å”ZŒú‚È•—–¡‚ğŠy‚µ‚ß‚Ü‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Flat_White', 'ƒGƒXƒvƒŒƒbƒ\ ƒ[ƒXƒgiEspresso Roastj', '”ZŒú‚ÈƒGƒXƒvƒŒƒbƒ\‚É”÷×‚ÈƒXƒ`[ƒ€ƒ~ƒ‹ƒN‚ª‰Á‚í‚éƒtƒ‰ƒbƒgƒzƒƒCƒg‚É‚ÍA[‚¢à„÷‚Ì“¤‚ªƒxƒXƒg‚Å‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Brewed_Coffee', 'ƒOƒAƒeƒ}ƒ‰ ƒAƒ“ƒeƒBƒOƒAiGuatemala Antiguaj', 'ƒ`ƒ‡ƒRƒŒ[ƒg‚Ì‚æ‚¤‚ÈŒû“–‚½‚è‚ÆƒXƒpƒCƒX‚Ì•—–¡‚ª‚ ‚èAƒVƒ“ƒvƒ‹‚ÈƒhƒŠƒbƒvƒR[ƒq[‚Æ‚µ‚ÄŠy‚µ‚ß‚Ü‚·B');
+INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Matcha_Latte', 'ƒGƒ`ƒIƒsƒAiEthiopiaj', 'ƒtƒ[ƒ‰ƒ‹‚Å‚â‚í‚ç‚©‚È•—–¡‚ª–•’ƒ‚Ì‚Ù‚ë‹ê‚³‚ğˆø‚«—§‚ÄAâ–­‚Èƒoƒ‰ƒ“ƒX‚ğ•Û‚¿‚Ü‚·B');
