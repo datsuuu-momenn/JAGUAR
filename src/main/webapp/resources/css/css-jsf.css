@@ -561,3 +561,21 @@ input[type="range"].slider::-moz-range-thumb:hover {
     display: flex;
     gap: 20px;
 }
+
+
+
+
+
+.game-theory-explanation {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    border-left: 4px solid #007bff;
+}
+
+.game-theory-explanation h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+}

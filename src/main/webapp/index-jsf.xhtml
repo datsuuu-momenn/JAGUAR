@@ -297,7 +297,7 @@
                         <h3>現在のラウンド利得表</h3>
                         <h:panelGroup id="payoffTablePanel">
                             <h:panelGrid columns="3" styleClass="payoff-table">
-                                <h:outputText value="" />
+                                <h:outputText value="玩家A ＼ 玩家B" />
                                 <h:outputText value="努力 (C)" />
                                 <h:outputText value="怠ける (D)" />
                                 
@@ -318,7 +318,7 @@
                             <h:selectOneRadio id="choiceA" value="#{gameBean.playerAChoice}">
                                     <f:selectItem itemValue="C" itemLabel="努力 (C)" />
                                     <f:selectItem itemValue="D" itemLabel="怠ける (D)" />
-                                    <f:ajax event="change" listener="#{gameBean.play}" render="resultPanel" />
+                                    <f:ajax event="click" listener="#{gameBean.play}" render="resultPanel" />
                     </h:selectOneRadio>
                         </h:panelGrid>
                     </div>
@@ -359,6 +359,31 @@
                                     </ui:repeat>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <!-- ゲーム理論分析 -->
+                        <div class="game-theory-explanation">
+                            <h3>ゲーム理論分析</h3>
+                            <p>
+                                表の横方向はあなたの戦略，縦方向は相手の戦略です．表の数字は各プレーヤーの利得（あなたの利得，相手の利得）を表しています．
+                            </p>
+                            <h:panelGroup id="previousPayoffTablePanel">
+                                <h:panelGrid columns="3" styleClass="payoff-table" title="前回のラウンド利得表">
+                                    <h:outputText value="あなた（A） ＼ プレイヤーB" />
+                                    <h:outputText value="努力 (C)" />
+                                    <h:outputText value="怠ける (D)" />
+                                    
+                                    <h:outputText value="努力 (C)" />
+                                    <h:outputText value="(#{gameBean.previousPayoffCC[0]}, #{gameBean.previousPayoffCC[1]})" />
+                                    <h:outputText value="(#{gameBean.previousPayoffCD[0]}, #{gameBean.previousPayoffCD[1]})" />
+                                    
+                                    <h:outputText value="怠ける (D)" />
+                                    <h:outputText value="(#{gameBean.previousPayoffDC[0]}, #{gameBean.previousPayoffDC[1]})" />
+                                    <h:outputText value="(#{gameBean.previousPayoffDD[0]}, #{gameBean.previousPayoffDD[1]})" />
+                                </h:panelGrid>
+                            </h:panelGroup>
+                            <h:outputText value="#{gameBean.gameTheoryExplanation}" escape="false" 
+                                    style="white-space: pre-line;"/>
                         </div>
                     </div>
                 </h:panelGroup>
