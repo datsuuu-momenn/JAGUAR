@@ -77,3 +77,7 @@ INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_descripti
 INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Flat_White', 'エスプレッソ ロースト（Espresso Roast）', '濃厚なエスプレッソに微細なスチームミルクが加わるフラットホワイトには、深い焙煎の豆がベストです。');
 INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Brewed_Coffee', 'グアテマラ アンティグア（Guatemala Antigua）', 'チョコレートのような口当たりとスパイスの風味があり、シンプルなドリップコーヒーとして楽しめます。');
 INSERT INTO coffee_recommendation (coffee_type, recommended_bean, bean_description) VALUES ('Matcha_Latte', 'エチオピア（Ethiopia）', 'フローラルでやわらかな風味が抹茶のほろ苦さを引き立て、絶妙なバランスを保ちます。');
+
+-- 初始努力?
+INSERT INTO player_efforts (player_id, effort_value, round, total_effort) VALUES ('A', 5.0, 0, 0);
+INSERT INTO player_efforts (player_id, effort_value, round, total_effort) VALUES ('B', 5.0, 0, 0);

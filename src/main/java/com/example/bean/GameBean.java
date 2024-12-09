@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.internal.log.SubSystemLogging;
+import jakarta.inject.Inject;
+import com.example.repository.EffortRepository;
 
 /**
  * GameBean - 囚人のジレンマゲームのロジックを管理するManaged Bean
@@ -58,13 +60,24 @@ public class GameBean implements Serializable {
     private double[] previousPayoffDC = {0, 0}; // 前回の利得表：怠ける - 努力
     private double[] previousPayoffDD = {0, 0}; // 前回の利得表：怠ける - 怠ける
 
+    // 基本報酬の設定
+    double effortRewardA = BASE_EFFORT;
+    double effortRewardB = BASE_EFFORT;
+
+    // 添加新的成员变量来保存努力值
+    private double savedEffortA = BASE_EFFORT;
+    private double savedEffortB = BASE_EFFORT;
+
+    @Inject
+    private EffortRepository effortRepository; // 注入Repository
+
     /**
      * プレイヤーAの選択に基づき、プレイヤーBの戦略を調整。
      */
     public void play() {
         // 履歴に基づくプレイヤーBの選択調整
         int cooperateCount = (int) roundHistory.stream().filter(choice -> choice.startsWith("C")).count();
-        if (cooperateCount > round / 2) {
+        if (cooperateCount > round / 0.5) {
             playerBChoice = "C"; // プレイヤーAが努力を多く選んだ場合、プレイヤーBも努力を選ぶ
         } else {
             playerBChoice = "D"; // プレイヤーAが怠けるを多く選んだ場合、プレイヤーBは怠けるを選ぶ
@@ -117,7 +130,7 @@ public class GameBean implements Serializable {
      * 利得表の更新。
      */
     public void updatePayoffTable() {
-          // 現在の利得表を前回の利得表として保存
+        // 保存当前利得表
         previousPayoffCC = Arrays.copyOf(payoffCC, 2);
         previousPayoffCD = Arrays.copyOf(payoffCD, 2);
         previousPayoffDC = Arrays.copyOf(payoffDC, 2);
@@ -131,22 +144,33 @@ public class GameBean implements Serializable {
 
 
         DecimalFormat df = new DecimalFormat("#.##");
-        
-        // 基本報酬の設定
-        double effortRewardA = BASE_EFFORT;
-        double effortRewardB = BASE_EFFORT;
+
+        // 从数据库中获取最新的努力值   
+        savedEffortA = effortRepository.getLatestEffort("A");
+        savedEffortB = effortRepository.getLatestEffort("B");
+
+        // 使用保存的努力值作为基础
+        double effortRewardA = savedEffortA;
+        double effortRewardB = savedEffortB;
+
 
         // プレイヤーAが努力を選択した場合のスキル向上計算
         if (playerAChoice.equals("C")) {
             totalEffortA++;
-            effortRewardA = BASE_EFFORT + EFFORT_INCREMENT * Math.log(1 + totalEffortA);
+            effortRewardA = savedEffortA + EFFORT_INCREMENT * Math.log(1 + totalEffortA);
+            savedEffortA = effortRewardA; // 保存新的努力值
+            // 保存到数据库
+            effortRepository.savePlayerEffort("A", savedEffortA, round, totalEffortA);
         }
         effortRewardA = Double.parseDouble(df.format(effortRewardA));
 
         // プレイヤーBが努力を選択した場合のスキル向上計算
         if (playerBChoice.equals("C")) {
             totalEffortB++;
-            effortRewardB = BASE_EFFORT + EFFORT_INCREMENT * Math.log(1 + totalEffortB);
+            effortRewardB = savedEffortB + EFFORT_INCREMENT * Math.log(1 + totalEffortB);
+            savedEffortB = effortRewardB; // 保存新的努力值
+            // 保存到数据库
+            effortRepository.savePlayerEffort("B", savedEffortB, round, totalEffortB);
         }
         effortRewardB = Double.parseDouble(df.format(effortRewardB));
         
