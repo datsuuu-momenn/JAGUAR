@@ -1,74 +1,85 @@
 package com.example.resource;
 
-import jakarta.inject.Inject;
-import jakarta.persistence.PersistenceException;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Response;
-import com.example.repository.UserRepository;
 import com.example.entity.User;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
-import java.lang.invoke.MethodHandles;
+import java.net.URI;
 import java.util.List;
-import java.util.logging.Logger;
 
-@Path("users")
+@Path("/users")
+@RequestScoped
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
-    private final Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 
-    @Inject
-    private UserRepository userRepository;
+    @PersistenceContext
+    EntityManager em;
+
+    @Context
+    UriInfo uriInfo;
 
     @GET
-    @Path("{id}")
-    @Produces("application/json")
-    public User findUser(@PathParam("id") Long id) {
-        logger.info("获取用户 ID: " + id);
-        return userRepository.findById(id)
-            .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
+    public Response getAllUsers() {
+        List<User> users = em.createNamedQuery(User.FIND_ALLUsers, User.class)
+                .getResultList();
+        return Response.ok(users).build();
     }
 
     @GET
-    @Produces("application/json")
-    public List<User> findAll() {
-        logger.info("获取所有用户");
-        return userRepository.findAll();
+    @Path("/{id}")
+    public Response getUserById(@PathParam("id") Long id) {
+        User user = em.find(User.class, id);
+        if (user == null) {
+            throw new NotFoundException("用户ID " + id + " 未找到");
+        }
+        return Response.ok(user).build();
     }
 
     @POST
-    @Consumes("application/json")
-    @Produces("application/json")
-    public User create(User user) {
-        logger.info("创建用户: " + user.getUsername());
-        try {
-            return userRepository.create(user);
-        } catch (PersistenceException ex) {
-            logger.info("创建用户失败: " + user.getUsername());
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void delete(@PathParam("id") Long id) {
-        logger.info("删除用户 ID: " + id);
-        try {
-            userRepository.delete(id);
-        } catch (IllegalArgumentException e) {
-            logger.info("删除用户失败 ID: " + id);
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
+    @Transactional
+    public Response createUser(@Valid User user) {
+        em.persist(user);
+        
+        URI location = uriInfo.getBaseUriBuilder()
+                .path(UserResource.class)
+                .path(user.getId().toString())
+                .build();
+                
+        return Response.created(location)
+                .entity(user)
+                .build();
     }
 
     @PUT
-    @Consumes("application/json")
-    @Produces("application/json")
-    public User update(User user) {
-        logger.info("更新用户: " + user.getUsername());
-        try {
-            return userRepository.update(user);
-        } catch (PersistenceException ex) {
-            logger.info("更新用户失败: " + user.getUsername());
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+    @Path("/{id}")
+    @Transactional
+    public Response updateUser(@PathParam("id") Long id, @Valid User user) {
+        User existingUser = em.find(User.class, id);
+        if (existingUser == null) {
+            throw new NotFoundException("用户ID " + id + " 未找到");
         }
+        
+        existingUser.setUsername(user.getUsername());
+        existingUser.setPassword(user.getPassword());
+        
+        return Response.ok(existingUser).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Transactional
+    public Response deleteUser(@PathParam("id") Long id) {
+        User user = em.find(User.class, id);
+        if (user == null) {
+            throw new NotFoundException("用户ID " + id + " 未找到");
+        }
+        em.remove(user);
+        return Response.noContent().build();
     }
 }

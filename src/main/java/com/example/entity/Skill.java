@@ -30,4 +30,34 @@ public class Skill {
 
     @Column(name = "description")
     private String description;
+
+    
+    // 默认构造函数（JPA需要）
+    public Skill() {
+    }
+
+    // 带参数的构造函数
+    public Skill(int skillId, String skillName, int damage, int accuracy, int criticalRate, SkillType skillType, String description) {
+        validateSkillParameters(damage, accuracy, criticalRate);
+        
+        this.skillId = skillId;
+        this.skillName = skillName;
+        this.damage = damage;
+        this.accuracy = accuracy;
+        this.criticalRate = criticalRate;
+        this.skillType = skillType.toString();
+        this.description = description;
+    }
+
+    private void validateSkillParameters(int damage, int accuracy, int criticalRate) {
+        if (damage < 0) {
+            throw new IllegalArgumentException("伤害值不能为负数");
+        }
+        if (accuracy < 0 || accuracy > 100) {
+            throw new IllegalArgumentException("命中率必须在0-100之间");
+        }
+        if (criticalRate < 0) {
+            throw new IllegalArgumentException("暴击率不能为负数");
+        }
+    }
 } 

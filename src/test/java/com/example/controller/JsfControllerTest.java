@@ -9,81 +9,112 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
+import org.mockito.junit.jupiter.MockitoSettings;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-
 
 import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
 import com.example.bean.JsfBean;
 import com.example.entity.JsfOperation;
+import com.example.repository.JsfOperationRepository;
+import com.example.entity.OperationType;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class JsfControllerTest {
 
-    // @Mock
-    // private EntityManager entityManager;
+    @Mock
+    private JsfOperationRepository jsfOperationRepository;
 
-    // @Mock
-    // private JsfBean jsfBean;
+    @Mock
+    private JsfBean jsfBean;
 
-    // @InjectMocks
-    // private JsfController jsfController;
+    @InjectMocks
+    private JsfController jsfController;
 
-    // @Mock
-    // private TypedQuery<JsfOperation> typedQuery;
+    @BeforeEach
+    void setUp() {
+        // 如果没有通用的 mock 设置，可以删除整个方法
+    }
 
+    @Test
+    void testSaveSliderOperation() {
+        // 実行
+        jsfController.saveSliderOperation("75");
 
-    // @BeforeEach
-    // void setUp() {
-    //     when(jsfBean.getSliderValue()).thenReturn(75);
-    //     when(jsfBean.getDropdownValue()).thenReturn("50%");
-    // }
+        // 検証
+        verify(jsfOperationRepository).save(argThat(operation -> {
+            return operation.getOperationType() == OperationType.SLIDER_CHANGE
+                && operation.getOperationValue().equals("75")
+                && operation.getOperationTime() != null;
+        }));
+    }
 
-    // @Test
-    // void testSaveSliderOperation() {
-    //     jsfController.saveSliderOperation();
+    @Test
+    void testSaveDropdownOperation() {
+        // 実行
+        jsfController.saveDropdownOperation("50%");
 
-    //     verify(entityManager).persist(any(JsfOperation.class));
-    //     verify(entityManager).flush();
-    // }
+        // 検証
+        verify(jsfOperationRepository).save(argThat(operation -> {
+            return operation.getOperationType() == OperationType.DROPDOWN_CHANGE
+                && operation.getOperationValue().equals("50%")
+                && operation.getOperationTime() != null;
+        }));
+    }
 
-    // @Test
-    // void testSaveDropdownOperation() {
-    //     jsfController.saveDropdownOperation();
+    @Test
+    void testFindAllOperations() {
+        // テストデータの準備
+        List<JsfOperation> expectedOperations = Arrays.asList(
+            createTestOperation(OperationType.SLIDER_CHANGE, "75"),
+            createTestOperation(OperationType.DROPDOWN_CHANGE, "50%")
+        );
 
-    //     verify(entityManager).persist(any(JsfOperation.class));
-    //     verify(entityManager).flush();
-    // }
+        // モックの設定
+        when(jsfOperationRepository.findAll()).thenReturn(expectedOperations);
 
-    // @Test
-    // void testFindAllOperations() {
-    //     List<JsfOperation> expectedOperations = Arrays.asList(
-    //         createTestOperation("SLIDER_CHANGE", "75"),
-    //         createTestOperation("DROPDOWN_CHANGE", "50%")
-    //     );
+        // 実行
+        List<JsfOperation> actualOperations = jsfController.findAllOperations();
 
-    //     when(entityManager.createQuery("SELECT o FROM JsfOperation o", JsfOperation.class))
-    //         .thenReturn(typedQuery);
-    //     when(typedQuery.getResultList()).thenReturn(expectedOperations);
+        // 検証
+        assertNotNull(actualOperations);
+        assertEquals(2, actualOperations.size());
+        assertEquals(OperationType.SLIDER_CHANGE, actualOperations.get(0).getOperationType());
+        assertEquals("75", actualOperations.get(0).getOperationValue());
+        assertEquals(OperationType.DROPDOWN_CHANGE, actualOperations.get(1).getOperationType());
+        assertEquals("50%", actualOperations.get(1).getOperationValue());
+    }
 
-    //     List<JsfOperation> actualOperations = jsfController.findAllOperations();
+    @Test
+    void testLoadAllOperations() {
+        // テストデータの準備
+        List<JsfOperation> expectedOperations = Arrays.asList(
+            createTestOperation(OperationType.SLIDER_CHANGE, "75"),
+            createTestOperation(OperationType.DROPDOWN_CHANGE, "50%")
+        );
 
-    //     assertNotNull(actualOperations);
-    //     assertEquals(2, actualOperations.size());
-    //     assertEquals("SLIDER_CHANGE", actualOperations.get(0).getOperationType());
-    //     assertEquals("75", actualOperations.get(0).getValue());
-    //     assertEquals("DROPDOWN_CHANGE", actualOperations.get(1).getOperationType());
-    //     assertEquals("50%", actualOperations.get(1).getValue());
-    // }
+        // モックの設定
+        when(jsfOperationRepository.findAll()).thenReturn(expectedOperations);
 
-    // private JsfOperation createTestOperation(String operationType, String value) {
-    //     JsfOperation operation = new JsfOperation();
-    //     operation.setOperationType(operationType);
-    //     operation.setValue(value);
-    //     operation.setOperationTime(LocalDateTime.now());
-    //     return operation;
-    // }
+        // 実行
+        List<JsfOperation> actualOperations = jsfController.loadAllOperations();
+
+        // 検証
+        assertNotNull(actualOperations);
+        assertEquals(2, actualOperations.size());
+        verify(jsfOperationRepository).findAll();
+    }
+
+    private JsfOperation createTestOperation(OperationType type, String value) {
+        JsfOperation operation = new JsfOperation();
+        operation.setOperationType(type);
+        operation.setOperationValue(value);
+        operation.setOperationTime(Timestamp.valueOf(LocalDateTime.now()));
+        return operation;
+    }
 } 
